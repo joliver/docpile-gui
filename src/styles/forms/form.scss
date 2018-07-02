@@ -1,0 +1,53 @@
+@import './../main/variables.scss';
+
+.form {
+  color: $dark-grey;
+  margin: 3%;
+}
+
+.form .heading {
+  font-size: 20px;
+}
+
+.form .body {
+  margin-left: 0px;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.form-box {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-box .label {
+  margin-bottom: 10px;
+}
+
+.form-box .input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: $light-grey;
+  color: $med-grey;
+  font-family: sans-serif;
+}
+
+.form-box .textarea {
+  height: 100px;
+  resize: none;
+}
+
+.return-form {
+  margin-top: 0;
+}
+
+.return-form-header {
+  font-weight: bold;
+}
+
+.form .main-img {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}

@@ -1,0 +1,49 @@
+@import './../main/variables.scss';
+
+.logo {
+  float: left;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+.logo-title {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  color: $dark-orange;
+  font-family: $variane;
+  font-size: 3rem;
+}
+
+.logo-title:hover {
+  color: $light-orange;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo-image {
+  float: left;
+  width: 3rem;
+}
+
+.logo-image:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+@media(min-width:576px) {
+  .logo {
+    margin-top: 1rem;
+  }
+  
+  .logo-title {
+    margin-left: 1rem;
+    font-size: 4rem;
+  }
+  
+  .logo-image {
+    margin-top: 1rem;
+    width: 4rem;
+  }
+}

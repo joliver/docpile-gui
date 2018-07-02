@@ -1,0 +1,13 @@
+@import './../main/variables.scss';
+
+/* make responsive */
+
+.footer {
+  background-color: white;
+  color: $dark-orange;
+  font-family: $variane;
+  font-size: 2rem;
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+}

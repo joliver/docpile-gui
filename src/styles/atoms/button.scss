@@ -1,0 +1,37 @@
+@import './../main/variables.scss';
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button-link {
+  color: white;
+  text-decoration: none;
+}
+
+.button.submit {
+  float: left;
+  margin-left: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: $dark-orange;
+  color: white;
+  font-weight: bold;
+}
+
+.button.submit:hover {
+  background-color: $light-orange;
+}
+
+.button.hover-bold:hover {
+  font-weight: bold;
+}
+
+.button.hover-bold .button-label::after { /* protects positioning during hover-bold */
+  display: block;
+  content: attr(content);
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}

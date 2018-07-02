@@ -1,0 +1,164 @@
+@import './../main/variables.scss';
+
+/* Mobile Navbar */
+
+.navbar-custom {
+  background-color: white;
+  height: 6rem;
+}
+
+.navbar-toggler {
+  float: right;
+  width: auto;
+  margin: .5rem;
+}
+
+.nb-toggler-img {
+  box-sizing: content-box;
+  background-color: $violet;
+  width: 3rem;
+  padding: .1rem;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.nb-toggler-img:hover {
+  background-color: $light-violet;
+  cursor: pointer;
+}
+
+
+/* Mobile Dropdown Navigation */
+
+.navbar-list {
+  display: block;
+  width: 100%;
+  background-color: white;
+  color: $teal;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.nav-separator {
+  color: white;
+  background-color: white;
+  content: "";
+  height: 2px;
+}
+
+.nb-mobile-list-item {
+  .navlink {
+    font-family: $sans-serif;
+    background-color: $violet;
+    display: block;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .navlink:hover {
+    background-color: $light-violet;
+    font-weight: bold;
+  }
+
+  .navlink:focus,
+  .navlink:active,
+  .navlink.active {
+    background-color: $light-violet;
+    font-weight: bold;
+  }
+}
+
+.navbar-spread {
+  display: none;
+}
+
+/* Tablet Navbar */
+
+@media(min-width:576px) {
+  .navbar-custom {
+    height: 7rem;
+  }
+  
+  .navbar-toggler {
+    margin-top: 1rem;
+  }
+  
+  .nb-toggler-img {
+    width: 1.6rem;
+    padding: .1rem;
+  }
+
+}
+
+
+/* Desktop and Laptop Navbar */
+
+@media(min-width:1000px) {
+  .navbar-custom {
+    height: 7rem;
+  }
+  
+  .navbar-toggler {
+    display: none;
+  }
+  
+  .navbar-list {
+    display: none;
+  }
+
+  .navbar-spread {
+    display: block;
+    float: right;
+  }
+  
+  .navbar-spread {
+    .navlink {
+      color: $violet;
+      float: right;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      padding: .5rem;
+      margin: .5rem;
+      margin-top: 1rem;
+    }
+    
+    .navlink::after { /* protects positioning during hover-bold */
+      display: block;
+      content: attr(label);
+      font-weight: bold;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
+    
+    .navlink:hover,
+    .navlink:focus {
+      background-color: $light-grey;
+      color: white;
+      font-weight: bold;
+    }
+
+    .navlink:active,
+    .navlink.active {
+      background-color: $violet;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+/*
+@media(min-width:768px) {
+    .navbar-main {
+        background-color: transparent;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        transition: all .3s;
+    }
+    
+    .navbar-main.navbar-shrink {
+        background-color: #222;
+    }
+}
+*/

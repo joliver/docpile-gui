@@ -1,0 +1,39 @@
+@import './../main/variables.scss';
+
+.message-box {
+    border-radius: 5px;
+    padding: 20px;
+    padding-bottom: 40px;
+    margin: 30px;
+    margin-bottom: 40px;
+}
+
+.message-box.error {
+    background-color: $error-light;
+    color: $error-dark;
+}
+
+.message-box.success {
+    background-color: $success-light;
+    color: $success-dark;
+}
+
+.message-box.hidden {
+    display: none;
+}
+
+.message {
+    float: left;
+    padding: 0px;
+}
+
+.message-close-button {
+    float: right;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.message-close-button:hover {
+    cursor: pointer;
+    color: black;
+}

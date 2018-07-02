@@ -1,0 +1,64 @@
+/* Breakpoints */
+
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$sm: 576px;
+
+/* Fonts */
+
+@font-face {
+  font-family: 'Variane';
+  src: url('../../assets/fonts/variane.woff2') format('woff2'),
+       url('../../assets/fonts/variane.woff') format('woff'),
+       url('../../assets/fonts/variane.ttf') format('truetype');
+}
+
+$variane: 'Variane', 'Cambria', serif;
+$serif: 'Cambria', 'Georgia', serif;
+$sans-serif: 'Alef', 'Trebuchet MS', sans-serif;
+
+
+/* Colors */
+
+$teal: #07A3A8;
+$scarlet: #FA5E0A;
+$lime: #AAFA0A;
+$aqua: #15E3EB;
+$violet: #4E0266;
+$light-violet: #760191;
+$blue: #514893;
+$light-blue: #827CAD;
+$dark-orange: #E57B02;
+$light-orange: #F4C127;
+
+$dark-grey: #444;
+$med-grey: #666;
+$light-grey: #ddd;
+
+$success-light: #c5fdae;
+$success-dark: #184804;
+$error-light: #fbccb2;
+$error-dark: red;
+
+
+/* Functional Classes */
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.main-img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.hide {
+  visibility: hidden;
+}
+
