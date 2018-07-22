@@ -6,4 +6,4 @@ A local version of this app can be run by cloning the repository, installing dep
 
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
-### Currently in progress: building out and testing API integration.
+##### Currently in progress: building out and testing API integration.
