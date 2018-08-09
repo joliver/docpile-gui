@@ -15,7 +15,7 @@
 
 .nb-toggler-img {
   box-sizing: content-box;
-  background-color: $violet;
+  background-color: $secondary-nav-main;
   width: 3rem;
   padding: .1rem;
   border: 2px solid white;
@@ -23,7 +23,7 @@
 }
 
 .nb-toggler-img:hover {
-  background-color: $light-violet;
+  background-color: $secondary-nav-highlight;
   cursor: pointer;
 }
 
@@ -34,7 +34,7 @@
   display: block;
   width: 100%;
   background-color: white;
-  color: $teal;
+  color: $ternary;
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -49,7 +49,7 @@
 .nb-mobile-list-item {
   .navlink {
     font-family: $sans-serif;
-    background-color: $violet;
+    background-color: $secondary-nav-main;
     display: block;
     width: 100%;
     padding-top: 1rem;
@@ -57,14 +57,14 @@
   }
 
   .navlink:hover {
-    background-color: $light-violet;
+    background-color: $secondary-nav-highlight;
     font-weight: bold;
   }
 
   .navlink:focus,
   .navlink:active,
   .navlink.active {
-    background-color: $light-violet;
+    background-color: $secondary-nav-highlight;
     font-weight: bold;
   }
 }
@@ -114,7 +114,7 @@
   
   .navbar-spread {
     .navlink {
-      color: $violet;
+      color: $primary-nav-main;
       float: right;
       font-size: 1.2rem;
       border-radius: 5px;
@@ -134,14 +134,14 @@
     
     .navlink:hover,
     .navlink:focus {
-      background-color: $light-grey;
+      background-color: $primary-nav-highlight;
       color: white;
       font-weight: bold;
     }
 
     .navlink:active,
     .navlink.active {
-      background-color: $violet;
+      background-color: $primary-nav-highlight;
       color: white;
       font-weight: bold;
     }

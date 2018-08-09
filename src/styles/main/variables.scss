@@ -21,25 +21,39 @@ $sans-serif: 'Alef', 'Trebuchet MS', sans-serif;
 
 /* Colors */
 
-$teal: #07A3A8;
-$scarlet: #FA5E0A;
-$lime: #AAFA0A;
-$aqua: #15E3EB;
-$violet: #4E0266;
-$light-violet: #760191;
+$salmon: #fac081;
+$yellow: #f8fa81;
+$light-green: #bbfa81;
+$green: #81fa84;
+$med-green: #b4eb81;
+$sage: #a5cc80;
+$seafoam: #81fac0;
+$aqua: #4ce8fa; // #81f8fa
+
+$cause: #81bbfa;
+$periwinkle: #8481fa;
+
+$lime: #dbfa4c;
 $blue: #514893;
 $light-blue: #827CAD;
-$dark-orange: #E57B02;
-$light-orange: #F4C127;
 
 $dark-grey: #444;
 $med-grey: #666;
 $light-grey: #ddd;
 
-$success-light: #c5fdae;
-$success-dark: #184804;
-$error-light: #fbccb2;
-$error-dark: red;
+$primary: $blue;
+$primary-light: $lime;
+$primary-nav-main: $periwinkle;
+$primary-nav-highlight: $cause;
+$secondary-nav-main: $periwinkle;
+$secondary-nav-highlight: $cause;
+$ternary: $blue;
+$ternary-light: $light-blue;
+
+$success-light: $med-green;
+$success-dark: white;
+$error-light: $salmon;
+$error-dark: white;
 
 
 /* Functional Classes */
