@@ -15,13 +15,14 @@ class FormBox extends Component {
   }
   
   render () {
-    let cssLabel = 'input ' + this.props.type
+    let cssClass = this.props.className ? ` ${this.props.className}` : ''
+    let cssLabel = `input ${this.props.type}${cssClass}`
     // does it need to be an HTML input or an HTML textarea?
     let inputBox = ''
-    if (this.props.type === "textarea") {
-      inputBox = <textarea className={cssLabel} placeholder={this.props.placeholder} onChange={this.handleChange} />
+    if (this.props.type === 'textarea') {
+      inputBox = <textarea {...this.props} className={cssLabel} onChange={this.handleChange} />
     } else {
-      inputBox = <input className={cssLabel} type={this.props.type} placeholder={this.props.placeholder} onChange={this.handleChange} />
+      inputBox = <input {...this.props} className={cssLabel} onChange={this.handleChange} />
     }
     
     return (
@@ -36,7 +37,8 @@ class FormBox extends Component {
 FormBox.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  type: PropTypes.oneOf(['text', 'number', 'textarea']),
+  // value
+  type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 }
 

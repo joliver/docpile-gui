@@ -30,9 +30,13 @@ class Form extends Component {
 
   render (props) {
     // displays the inputs for entering data
-    let formboxes = this.props.formboxes.map((formbox, i) => (
-      <FormBox label={formbox.label} type={formbox.type} placeholder={formbox.placeholder} key={i} onChange={this.handleInputChange} />
-    ))
+    const disabled = this.props.disabled ? 'disabled' : ''
+    let formboxes = this.props.formboxes.map((formbox, i) => {
+      let cssLabel = this.props.className ? `${disabled} ${formbox.className}`: disabled
+      return (
+        <FormBox label={formbox.label} type={formbox.type} value={formbox.value} className={cssLabel} placeholder={formbox.placeholder} key={i} onChange={this.handleInputChange} />
+      )
+    })
     
     // displays the submitted data (for development error checking)
     let returnFormHeader = this.state.submitted ? <div className='return-form-header'></div> : ''
@@ -44,13 +48,13 @@ class Form extends Component {
     return (
       <div className='form'>
         <Row>
-          <Col lg="12" md="12" sm="12" xs="12">
+          <Col lg='12' md='12' sm='12' xs='12'>
             <div className='heading'>{this.props.heading}</div>
             <div className='body'>{this.props.body}</div>
             <div className='formboxes'>
               {formboxes}
             </div>
-            <Button cssLabel="submit" label="Submit" onClick={this.handleSubmit} />
+            {!this.props.disabled && <Button cssLabel='submit' label='Submit' onClick={this.handleSubmit} />}
             <div className='return-form'>
               {returnFormHeader}
               {returnForm}
@@ -66,6 +70,7 @@ Form.propTypes = {
   heading: PropTypes.string.isRequired,
   body: PropTypes.string,
   formboxes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  disabled: PropTypes.bool,
   handleSubmit: PropTypes.func.isRequired
 }
 
