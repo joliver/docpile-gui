@@ -5,7 +5,7 @@ import './../../css/atoms/button.css'
 
 const Button = (props) => {
   let cssLabel = props.cssLabel ? 'button ' + props.cssLabel : 'button'
-  let img = props.src ? <img src={props.src} alt={props.alt} width="18" height="18" /> : ""
+  let img = props.src ? <img src={props.src} alt={props.alt} width='18' height='18' /> : ''
   let label = props.link ? <Link className='button-link' to={props.link}>{props.label}</Link> : props.label
   if (props.onClick) {
     return (
