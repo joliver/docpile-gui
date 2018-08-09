@@ -14,7 +14,7 @@ This runs the app locally on a development server with live reloading. To genera
 ### Working Chunks
 
 - [X] Initial UI and Navigation
-- [ ] API integration
+- [X] API integration
 - [ ] Display individual elements metadata
 - [ ] Forms/submission
 - [ ] Uploading assets
