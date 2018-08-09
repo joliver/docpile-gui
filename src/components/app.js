@@ -27,9 +27,10 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="app">
+        <div className='app'>
           <Navbar />
           <Main 
+            match={this.props.match}
             fetcher={this.state.fetcher}
             data={this.state.data}
             message={this.state.message} 

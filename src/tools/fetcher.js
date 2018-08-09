@@ -3,15 +3,9 @@
 
 class Fetcher {
   constructor () {
-    this.url = 'http://docpile-backend.jessann.c9users.io' // local api url
-    this.isError = false
-    this.messages = null
-    this.messageVisible = false
-    this.data = null
+    this.url = 'https://cors-anywhere.herokuapp.com/http://docpile-backend.jessann.c9users.io' // local api url
   }
   
-  // remove stored messages, messageVisible, data ?
-
 
   /* UNIVERSAL METHODS */
   
@@ -31,53 +25,59 @@ class Fetcher {
     } else if (typeof error.data === 'string') {
       messages.push(error.data)
     } else {
-      messages.push(`There was an error with status code ${error.code}.`)
+      if (error.code) {
+        messages.push(`There is an error with status code ${error.code}.`)
+      } else {
+        messages.push(`Something's wrong here.`)
+      }
     }
     return messages
   } // [ 'message' ]
 
 
-  async fetchIt (route, method, body=null) { // route + method are strings, body is an object
+  async fetchIt (route, method, body=null, isFile=false) { // route + method are strings, body is an object
     try {
       let urlRoute = this.url + route
       let response = null
       if (body) {
-        response = await fetch (urlRoute, {
-          method: method.toUpperCase(),
-          headers: {'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
-        })
+        if (isFile) {
+          response = await fetch (urlRoute, {
+            method: method.toUpperCase(),
+            headers: { 'Origin': 'local' },
+            body: body
+          })
+        } else {
+          response = await fetch (urlRoute, {
+            method: method.toUpperCase(),
+            headers: { 'Content-Type': 'application/json' , 'Origin': 'local' },
+            body: JSON.stringify(body)
+          })
+        }
       } else { 
         response = await fetch (urlRoute, {
           method: method.toUpperCase(),
-          headers: {'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json', 'Origin': 'local' }
         })
       }
       let code = response.status
       let data = await response.json()
       
-      // response.status
+      /* eslint-disable no-throw-literal */
       if (code !== 200 && code !== 201) { throw { code, data } }
-      
-      this.isError = false
-      this.messages = null
-      this.messageVisible = false
-      this.data = { success: true, messages: this.messages, data }
-      return this.data // { success: true, messages: null, data: '' }
+      return { success: true, messages: null, data }
+      // { success: true, messages: null, data: { --- } }
              
     } catch (error) {
-      this.isError = true
-      this.messages = this.makeErrMessages(error)
-      this.messageVisible = true
-      this.data = { success: false, status: error.code, messages: this.messages, data: error.data }
-      return this.data // { success: false, status: 000, messages: [ 'message' ], data: [ { fields: [ 'name' ], message: 'error' } ] }
+      const messages = this.makeErrMessages(error)
+      return { success: false, status: error.code, messages, data: error.data }
+      // { success: false, status: 000, messages: [ 'message' ], data: [ { fields: [ 'name' ], message: 'error' } ] }
     }
   }
  
  
   /* Tags Routes */
  
-  async tagList () {
+  async getTags () {
     let data = await this.fetchIt('/tags', 'GET')
     return data // { success: true, messages: null, data: [ { tag_id: 000, timestamp: '', tag_name: '', synonyms: { 'name': 'timestamp' } } ] }
   }
@@ -140,22 +140,19 @@ class Fetcher {
 
   /* Assets Routes */
   
-  async documentList () {
+  async getDocuments () {
     let data = await this.fetchIt('/documents', 'GET')
-    return data // { success: true, messages: null, data: [ { } ] }
+    return data // { success: true, messages: null, data: [ { ---document struct--- } ] }
   }
 
   async getDocument (docId) {
     let route = `/documents/${docId}`
     let data = await this.fetchIt(route, 'GET')
-    return data // { success: true, messages: null, data: { } }
+    return data // { success: true, messages: null, data: { document_id: 000, timestamp: '', asset_id: 000, description: '' ---etc--- } }
   }
 
-  async uploadAsset (body) {
-    let data = await this.fetchIt('/assets', 'PUT', body)
-    
-    // placeholder for adjusting this logic here
-    
+  async uploadAsset (file) {
+    let data = await this.fetchIt('/assets', 'PUT', file, true)
     if (data.success) { 
       data.messages = [ `Asset successfully uploaded.` ]
       data.data = { asset_id: data.data }
@@ -165,9 +162,19 @@ class Fetcher {
 
   async defineDocument (body) {
     let data = await this.fetchIt('/documents', 'PUT', body)
-    
-    // placeholder for adjusting this logic here
-    
+    /* 
+      // example request body, all but asset_id may be omitted
+      {
+      	"asset_id": 000,
+  	    "asset_offset": 0,
+  	    "published": "2012-12-12T00:00:00Z",
+  	    "period_min": "2012-12-12T00:00:00Z",
+      	"period_max": "2012-12-13T00:00:00Z",
+      	"tags": [],
+      	"documents": [],
+      	"description": "testing"
+      }
+    */
     if (data.success) { 
       data.messages = [ `Document successfully defined.` ] 
       data.data = { document_id: data.data }
@@ -178,9 +185,6 @@ class Fetcher {
   async removeDocument (docId) {
     let route = `/documents/${docId}`
     let data = await this.fetchIt(route, 'DELETE')
-    
-    // placeholder for adjusting this logic here
-    
     if (data.success) { 
       data.messages = [ `Document successfully deleted.` ] 
       data.data = null
@@ -188,13 +192,11 @@ class Fetcher {
     return data // { success: true, messages: [ 'success' ], data: null }
   }
 
+
   /* Search Routes */
   
   async searchDocuments (string) {
-    
-    // placeholder for adjusting this logic here
-    
-    let data = await this.fetchIt('/search/documents', 'POST', { string })
+    let data = await this.fetchIt('/search/documents', 'POST', { text: string })
     return data // { success: true, messages: null, data: [ ] }
   }
 
