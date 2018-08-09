@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import './../../css/navigation/message.css'
 
 const MessageBox = (props) => {
-  let isError = props.isError ? " error" : " success"
-  let messageVisible = props.messageVisible ? "message-box" : "message-box hidden"
+  let isError = props.isError ? ' error' : ' success'
+  let messageVisible = props.messageVisible ? 'message-box' : 'message-box hidden'
   let cssLabel = messageVisible + isError
   return (
     <div className={cssLabel}>

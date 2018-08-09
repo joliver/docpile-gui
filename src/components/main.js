@@ -9,14 +9,19 @@ import Home from './../views/home'
 import Side from './../views/side'
 import NotYet from './../views/notyet'
 
+import DocumentList from './../views/documentList'
+import Document from './../views/document'
+
 const Main = (props) => (
-  <div className="main">
+  <div className='main'>
     <MessageBox {...props} />
     <Switch>
-      <Route exact path="/" render={() => <Home {...props} />} />
-      <Route exact path="/option" render={() => <Side {...props} />} />
-      <Route exact path="/upload" render={() => <NotYet {...props} />} />
-      <Route exact path="/tags" render={() => <NotYet {...props} />} />
+      <Route exact path='/' render={({ match }) => <Home {...props} match={match} />} />
+      <Route exact path='/option' render={({ match }) => <Side {...props} match={match} />} />
+      <Route exact path='/upload' render={({ match }) => <NotYet {...props} match={match} />} />
+      <Route exact path='/tags' render={({ match }) => <NotYet {...props} match={match} />} />
+      <Route exact path='/documents' render={({ match }) => <DocumentList {...props} match={match} />} />
+      <Route exact path='/documents/:id' render={({ match }) => <Document {...props} match={match} />} />
     </Switch>
   </div>
 )
