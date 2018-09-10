@@ -34,7 +34,17 @@ class Form extends Component {
     let formboxes = this.props.formboxes.map((formbox, i) => {
       let cssLabel = this.props.className ? `${disabled} ${formbox.className}`: disabled
       return (
-        <FormBox label={formbox.label} type={formbox.type} value={formbox.value} className={cssLabel} placeholder={formbox.placeholder} key={i} onChange={this.handleInputChange} />
+        <FormBox 
+          label={formbox.label}
+          type={formbox.type}
+          value={formbox.value}
+          className={cssLabel}
+          placeholder={formbox.placeholder} 
+          editing={formbox.editing ? formbox.editing : false}
+          path={formbox.path}
+          key={i} 
+          onChange={this.handleInputChange} 
+        />
       )
     })
     

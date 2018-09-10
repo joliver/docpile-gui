@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import LinkFormBox from './linkFormBox'
 import './../../css/forms/form.css'
 
 class FormBox extends Component {
@@ -17,9 +18,11 @@ class FormBox extends Component {
   render () {
     let cssClass = this.props.className ? ` ${this.props.className}` : ''
     let cssLabel = `input ${this.props.type}${cssClass}`
-    // does it need to be an HTML input or an HTML textarea?
     let inputBox = ''
-    if (this.props.type === 'textarea') {
+    if (this.props.type === 'linkbox') {
+      inputBox = <LinkFormBox {...this.props} />
+    }
+    else if (this.props.type === 'textarea') {
       inputBox = <textarea {...this.props} className={cssLabel} onChange={this.handleChange} />
     } else {
       inputBox = <input {...this.props} className={cssLabel} onChange={this.handleChange} />

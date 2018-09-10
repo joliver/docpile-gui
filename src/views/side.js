@@ -5,7 +5,7 @@ import plane from './../assets/icons/flying-plane-lg.png'
 import './../css/views/view.css'
 
 const Side = () => (
-  <div id='side' class='view'>
+  <div id='side' className='view'>
     <Row>
       <Col xl='3' lg='3' md='12' sm='12'>
         <img className='option-img' src={plane} alt='paper airplane' />
