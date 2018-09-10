@@ -57,8 +57,8 @@ class Document extends Component {
                     { label: 'starts at page', type: 'number', value: document.asset_offset, placeholder: 'no page offset given' }, 
                     { label: 'start date', type: 'datetime-local', value: moment(document.period_min).format(dateFmt), placeholder: 'no start date given' }, 
                     { label: 'end date', type: 'datetime-local', value: moment(document.period_max).format(dateFmt), placeholder: 'no end date given' }, 
-                    { label: 'list of tags', type: 'textarea', value: document.tags, placeholder: 'no tags added' }, 
-                    { label: 'list of subdocuments', type: 'textarea', value: document.documents, placeholder: 'no subdocuments specified' }, 
+                    { label: 'list of tags', type: 'linkbox', value: document.tags, placeholder: 'no tags added', path: '../tags' }, 
+                    { label: 'list of subdocuments', type: 'linkbox', value: document.documents, placeholder: 'no subdocuments specified', path: '../documents' }, 
                   ]}
                   disabled={true}
                   handleSubmit={ () => {} }
