@@ -15,12 +15,12 @@ This runs the app locally on a development server with live reloading. To genera
 
 - [X] Initial UI and Navigation
 - [X] API integration
-- [ ] Display individual elements metadata
-- [ ] Forms/submission
-- [ ] Uploading assets
-- [ ] List/table view
-- [ ] Interactive tag manager
-- [ ] Universal search UI
+- [ ] Display individual elements metadata _(Oct 7, 2018)_
+- [ ] List/table view _(Oct 7, 2018)_
+- [ ] Forms/submission _(Oct 21, 2018)_
+- [ ] Uploading assets _(Nov 4, 2018)_
+- [ ] Interactive tag manager _(Nov 18, 2018)_
+- [ ] Universal search UI _(Dec 9, 2018)_
 
 
 
