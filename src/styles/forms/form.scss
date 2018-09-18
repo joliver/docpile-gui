@@ -52,3 +52,15 @@
   margin-top: 1rem;
   margin-right: 1rem;
 }
+
+.form a {
+  color: $blue;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.form a:hover {
+  color: $teal;
+  text-decoration: none;
+  cursor: pointer;
+}

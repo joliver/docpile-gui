@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Fetcher from './../tools/fetcher'
-import moment from 'moment'
 import { Row, Col } from 'reactstrap'
+import Loader from './../components/atoms/loader'
 import './../css/views/view.css'
 
 class DocumentList extends Component {
   state = {
     documents: null,
-    loading: false,
-    dateFmt: ''
+    loading: false
   }
   
   componentDidMount () {
@@ -28,13 +27,13 @@ class DocumentList extends Component {
   }
   
   render () {
-    const { documents, loading, dateFmt } = this.state
+    const { documents, loading } = this.state
     const loaded = documents ? true : false
     const docs = loaded ? this.state.documents.map((doc, i) => JSON.stringify(doc)) : ''
     return (
       <div className='view'>
         {loading &&
-          <p className='preview-text'>Loading... please wait.</p>
+          <Loader />
         }
         {loaded &&
           <div className='documents'>

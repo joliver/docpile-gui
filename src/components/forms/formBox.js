@@ -3,14 +3,8 @@ import PropTypes from 'prop-types'
 import LinkFormBox from './linkFormBox'
 import './../../css/forms/form.css'
 
-class FormBox extends Component {
-  constructor(props) {
-    super(props)
-    // this.state = { value: '' }
-    this.handleChange = this.handleChange.bind(this)
-  }
-  
-  handleChange (event) {
+class FormBox extends Component {  
+  handleChange = (event) => {
     // this.setState({ value: event.target.value })
     this.props.onChange({ label: this.props.label, value: event.target.value })
   }

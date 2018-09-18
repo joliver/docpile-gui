@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Fetcher from './../tools/fetcher'
-import moment from 'moment'
 import { Row, Col } from 'reactstrap'
 import Form from './../components/forms/form'
+import Loader from '../components/atoms/loader'
+import moment from 'moment'
 import plane from './../assets/icons/flying-plane-lg.png'
 import './../css/views/view.css'
 
@@ -37,7 +38,7 @@ class Document extends Component {
     return (
       <div className='view'>
         {loading &&
-          <p className='preview-text'>Loading... please wait.</p>
+          <Loader /> 
         }
         {loaded &&
           <div className='document'>
