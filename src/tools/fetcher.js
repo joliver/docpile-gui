@@ -1,12 +1,13 @@
 // Singleton class for fetching data from API
 /* global fetch */
+import moment from 'moment'
 
 class Fetcher {
   constructor () {
-    this.url = 'https://cors-anywhere.herokuapp.com/http://docpile-backend.jessann.c9users.io' // local api url
+    this.url = 'http://localhost:8888'
   }
   
-
+  
   /* UNIVERSAL METHODS */
   
   makeErrMessages (error) { // [ { fields: [ 'name' ], message: 'message' } ] OR 'message' OR empty
@@ -79,7 +80,7 @@ class Fetcher {
  
   async getTags () {
     let data = await this.fetchIt('/tags', 'GET')
-    return data // { success: true, messages: null, data: [ { tag_id: 000, timestamp: '', tag_name: '', synonyms: { 'name': 'timestamp' } } ] }
+    return data // { success: true, messages: null, data: [ { ---tag object--- }, ... ] }
   }
 
   async getTag (tagId) {
@@ -142,7 +143,7 @@ class Fetcher {
   
   async getDocuments () {
     let data = await this.fetchIt('/documents', 'GET')
-    return data // { success: true, messages: null, data: [ { ---document struct--- } ] }
+    return data // { success: true, messages: null, data: [ { ---document object--- }, ... ] }
   }
 
   async getDocument (docId) {
@@ -195,17 +196,34 @@ class Fetcher {
 
   /* Search Routes */
   
-  async searchDocuments (string) {
-    let data = await this.fetchIt('/search/documents', 'POST', { text: string })
-    return data // { success: true, messages: null, data: [ ] }
+  async searchDocuments (string, limiters) { // limiters is an array of key, value pairs
+    const body = {
+      text: string
+    }
+    // possible date limiter keys include: published_min, published_max, period_min, period_max
+    limiters.forEach(limiter => {
+      body[limiter.key] = limiter.value
+    })
+    // at least one date limiter is required
+    if (limiters.length === 0) {
+      body["published_max"] = moment(moment(), 'YYYY-MM-DDTHH:mm:ss')
+    }
+    let data = await this.fetchIt('/search/documents', 'POST', body)
+    return data // { success: true, messages: null, data: [ { ---document object--- }, ... ] }
   }
 
   async searchTags (string) {
-    
-    // placeholder for adjusting this logic here
-    
-    let data = await this.fetchIt('/search/tags', 'POST', { string })
-    return data // { success: true, messages: null, data: [ ] }
+    let data = await this.fetchIt('/search/tags', 'POST', { text: string })
+    /*
+      // example response tag object
+      {
+        "tag_id": 000,
+        "text": "the tag's name",
+        "synonym": false,
+        "indexes": [ 0, 1, 2, 3 ] // where in the text it matches up
+      }
+    */
+    return data // { success: true, messages: null, data: [ { ---tag search object--- }, ... ] }
   }
 }
 

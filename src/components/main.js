@@ -21,7 +21,7 @@ const Main = (props) => (
       <Route exact path='/upload' render={({ match }) => <NotYet {...props} match={match} />} />
       <Route exact path='/tags' render={({ match }) => <NotYet {...props} match={match} />} />
       <Route exact path='/documents' render={({ match }) => <DocumentList {...props} match={match} />} />
-      <Route exact path='/documents/:id' render={({ match }) => <Document {...props} match={match} />} />
+      <Route path='/documents/:id' render={({ match }) => <Document {...props} match={match} />} />
     </Switch>
   </div>
 )

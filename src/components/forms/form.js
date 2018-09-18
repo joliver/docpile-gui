@@ -5,18 +5,14 @@ import FormBox from './formBox'
 import Button from './../atoms/button'
 import './../../css/forms/form.css'
 
+// const form(Component)
 class Form extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { values: [] }
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+  state = { values: [] }
   
   // handles continuously updating the entered data
-  handleInputChange (eventObj) {
-    let valuesArray = this.state.values.filter((value) => value.label !== eventObj.label )
-    valuesArray.push({ label: eventObj.label, value: eventObj.value })
+  onChange = (e) => {
+    let valuesArray = this.state.values.filter((value) => value.label !== e.label )
+    valuesArray.push({ label: e.label, value: e.value })
     this.setState({ submitted: false, values: valuesArray })
   }
   
@@ -43,7 +39,7 @@ class Form extends Component {
           editing={formbox.editing ? formbox.editing : false}
           path={formbox.path}
           key={i} 
-          onChange={this.handleInputChange} 
+          onChange={this.onChange} 
         />
       )
     })
