@@ -1,22 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
+import config from './../../tools/config'
 import LinkFormBox from './linkFormBox'
 import './../../css/forms/form.css'
 
 class FormBox extends Component {  
   handleChange = (event) => {
-    // this.setState({ value: event.target.value })
-    this.props.onChange({ label: this.props.label, value: event.target.value })
+    let { value } = event.target
+    if (this.props.type === 'datetime-local') {
+      value = moment(value).format(config.dateFormt)
+    }
+    this.props.onChange({ label: this.props.label, value })
   }
   
   render () {
-    let cssClass = this.props.className ? ` ${this.props.className}` : ''
-    let cssLabel = `input ${this.props.type}${cssClass}`
+    const { className, type, label } = this.props
+    let cssClass = className ? ` ${className}` : ''
+    let cssLabel = `input ${type}${cssClass}`
     let inputBox = ''
-    if (this.props.type === 'linkbox') {
+    if (type === 'linkbox') {
       inputBox = <LinkFormBox {...this.props} />
     }
-    else if (this.props.type === 'textarea') {
+    else if (type === 'textarea') {
       inputBox = <textarea {...this.props} className={cssLabel} onChange={this.handleChange} />
     } else {
       inputBox = <input {...this.props} className={cssLabel} onChange={this.handleChange} />
@@ -24,7 +30,7 @@ class FormBox extends Component {
     
     return (
       <div className='form-box' onSubmit={this.handleSubmit}>
-        <div className='label'>{this.props.label}</div>
+        <div className='label'>{label}</div>
         {inputBox}
       </div>
     )

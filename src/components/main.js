@@ -9,6 +9,9 @@ import Home from './../views/home'
 import Side from './../views/side'
 import NotYet from './../views/notyet'
 
+import AssetUpload from './../views/assetUpload'
+import Asset from './../views/asset'
+import DocumentDefine from './../views/documentDefine'
 import DocumentList from './../views/documentList'
 import Document from './../views/document'
 
@@ -18,7 +21,9 @@ const Main = (props) => (
     <Switch>
       <Route exact path='/' render={({ match }) => <Home {...props} match={match} />} />
       <Route exact path='/option' render={({ match }) => <Side {...props} match={match} />} />
-      <Route exact path='/upload' render={({ match }) => <NotYet {...props} match={match} />} />
+      <Route exact path='/upload' render={({ match }) => <AssetUpload {...props} match={match} />} />
+      <Route exact path='/files/:id' render={({ match }) => <Asset {...props} match={match} />} />
+      <Route exact path='/files/:id/add' render={({ match }) => <DocumentDefine {...props} match={match} />} />
       <Route exact path='/tags' render={({ match }) => <NotYet {...props} match={match} />} />
       <Route exact path='/documents' render={({ match }) => <DocumentList {...props} match={match} />} />
       <Route path='/documents/:id' render={({ match }) => <Document {...props} match={match} />} />
