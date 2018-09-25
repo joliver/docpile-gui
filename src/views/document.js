@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Fetcher from './../tools/fetcher'
+import config from '../tools/config'
 import { Row, Col } from 'reactstrap'
 import Form from './../components/forms/form'
 import Loader from '../components/atoms/loader'
@@ -11,9 +12,19 @@ import './../css/views/view.css'
 class Document extends Component {
   state = {
     document: null,
-    loading: false,
-    dateFmt: 'YYYY-MM-DD[T]hh:mm'
+    loading: false
   }
+
+  formboxes = [
+    { label: 'file', type: 'number', value: document.asset_id, placeholder: 'no file specified' },
+    { label: 'date of upload', type: 'datetime-local', value: moment(document.timestamp).format(config.dateFormat), placeholder: 'no date given' },
+    { label: 'date created', type: 'datetime-local', value: moment(document.published).format(config.dateFormat), placeholder: 'no date specified' }, 
+    { label: 'starts at page', type: 'number', value: (document.asset_offset + 1), placeholder: 'no page offset given' }, 
+    { label: 'start date', type: 'datetime-local', value: moment(document.period_min).format(config.dateFormat), placeholder: 'no start date given' }, 
+    { label: 'end date', type: 'datetime-local', value: moment(document.period_max).format(config.dateFormat), placeholder: 'no end date given' }, 
+    { label: 'list of tags', type: 'linkbox', value: document.tags, placeholder: 'no tags added', path: '../tags' }, 
+    { label: 'list of subdocuments', type: 'linkbox', value: document.documents, placeholder: 'no subdocuments specified', path: '../documents' }
+  ]  
   
   componentDidMount () {
     this.fetchDocument()
@@ -32,7 +43,7 @@ class Document extends Component {
   }
   
   render () {
-    const { document, loading, dateFmt } = this.state
+    const { document, loading } = this.state
     const title = document ? `Document #${document.document_id}` : ''
     const loaded = document ? true : false
     return (
@@ -51,16 +62,7 @@ class Document extends Component {
                 <Form 
                   heading={title}
                   body={document.description}
-                  formboxes={[
-                    { label: 'asset', type: 'number', value: document.asset_id, placeholder: 'no asset given' },
-                    { label: 'date of upload', type: 'datetime-local', value: moment(document.timestamp).format(dateFmt), placeholder: 'no date given' },
-                    { label: 'date created', type: 'datetime-local', value: moment(document.published).format(dateFmt), placeholder: 'no date specified' }, 
-                    { label: 'starts at page', type: 'number', value: document.asset_offset, placeholder: 'no page offset given' }, 
-                    { label: 'start date', type: 'datetime-local', value: moment(document.period_min).format(dateFmt), placeholder: 'no start date given' }, 
-                    { label: 'end date', type: 'datetime-local', value: moment(document.period_max).format(dateFmt), placeholder: 'no end date given' }, 
-                    { label: 'list of tags', type: 'linkbox', value: document.tags, placeholder: 'no tags added', path: '../tags' }, 
-                    { label: 'list of subdocuments', type: 'linkbox', value: document.documents, placeholder: 'no subdocuments specified', path: '../documents' }, 
-                  ]}
+                  formboxes={this.formboxes}
                   disabled={true}
                   handleSubmit={ () => {} }
                 />

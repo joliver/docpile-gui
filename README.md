@@ -7,7 +7,7 @@ A local version of this app can be run by cloning the repository, installing dep
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
 
-#### _Currently in progress: building out and testing API integration and displaying individual elements data._
+#### _Currently in progress: building out forms and submission and displaying individual elements data._
 
 
 
@@ -16,8 +16,8 @@ This runs the app locally on a development server with live reloading. To genera
 - [X] Initial UI and Navigation
 - [X] API integration
 - [ ] Display individual elements metadata _(Oct 7, 2018)_
-- [ ] List/table view _(Oct 7, 2018)_
-- [ ] Forms/submission _(Oct 21, 2018)_
+- [ ] Forms/submission _(Oct 7, 2018)_
+- [ ] List/table view _(Oct 21, 2018)_
 - [ ] Uploading assets _(Nov 4, 2018)_
 - [ ] Interactive tag manager _(Nov 18, 2018)_
 - [ ] Universal search UI _(Dec 9, 2018)_
@@ -27,8 +27,8 @@ This runs the app locally on a development server with live reloading. To genera
 ### User Stories
 
 - Document Definition
-    - I can upload an asset.
-    - I can define documents on the asset.
+    - I can upload a file.
+    - I can define documents on the file.
     - I can add a tag to a document.
     - I can create a tag in order to add it to a document.
     - I can create an alias on a tag in order to add it to a document.
@@ -43,7 +43,7 @@ This runs the app locally on a development server with live reloading. To genera
     - I can view all documents and sort/filter by various fields.
     - I can view all documents filtered by tag(s).
     - I can click to view an individual document's metadata.
-    - I can click on the related asset to download or preview it.
+    - I can click on the related file to download or preview it.
     - I can delete a document.
 
 - Search

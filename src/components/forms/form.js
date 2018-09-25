@@ -5,30 +5,30 @@ import FormBox from './formBox'
 import Button from './../atoms/button'
 import './../../css/forms/form.css'
 
-// const form(Component)
 class Form extends Component {
-  state = { values: [] }
-  
-  // handles continuously updating the entered data
-  onChange = (e) => {
-    let valuesArray = this.state.values.filter((value) => value.label !== e.label )
-    valuesArray.push({ label: e.label, value: e.value })
-    this.setState({ submitted: false, values: valuesArray })
+  state = {
+    submitted: false,
+    values: {}
   }
-  
-  // sends a labels array and a values array up the parent handleSubmit function
+
+  // handles continuously updating the entered data
+  onChange = (eventObj) => {
+    const { values } = this.state
+    values[eventObj.label] = eventObj.value
+    this.setState({ submitted: false, values })
+  }
+
+  // sends values to the parent handleSubmit function
   async handleSubmit () {
     this.setState({ submitted: true })
-    let labelsArray = this.state.values.map((valueObj) => valueObj.label)
-    let valuesArray = this.state.values.map((valueObj) => valueObj.value)
-    await this.props.handleSubmit(labelsArray, valuesArray)
+    await this.props.handleSubmit(this.state.values)
   }
 
   render (props) {
     // displays the inputs for entering data
     const disabled = this.props.disabled ? 'disabled' : ''
-    let formboxes = this.props.formboxes.map((formbox, i) => {
-      let cssLabel = this.props.className ? `${disabled} ${formbox.className}`: disabled
+    const formboxes = this.props.formboxes.map((formbox, i) => {
+      const cssLabel = this.props.className ? `${disabled} ${formbox.className}`: disabled
       return (
         <FormBox 
           label={formbox.label}
@@ -60,7 +60,9 @@ class Form extends Component {
             <div className='formboxes'>
               {formboxes}
             </div>
-            {!this.props.disabled && <Button cssLabel='submit' label='Submit' onClick={this.handleSubmit} />}
+            { !this.props.disabled && 
+              <Button cssLabel='submit' label='Submit' onClick={this.handleSubmit} />
+            }
             <div className='return-form'>
               {returnFormHeader}
               {returnForm}
@@ -71,6 +73,7 @@ class Form extends Component {
     )
   }
 }
+
 
 Form.propTypes = {
   heading: PropTypes.string.isRequired,

@@ -29,7 +29,7 @@ class Fetcher {
       if (error.code) {
         messages.push(`There is an error with status code ${error.code}.`)
       } else {
-        messages.push(`Something's wrong here.`)
+        messages.push('Something\'s wrong here.')
       }
     }
     return messages
@@ -155,7 +155,7 @@ class Fetcher {
   async uploadAsset (file) {
     let data = await this.fetchIt('/assets', 'PUT', file, true)
     if (data.success) { 
-      data.messages = [ `Asset successfully uploaded.` ]
+      data.messages = [ 'File successfully uploaded.' ]
       data.data = { asset_id: data.data }
     }
     return data // { success: true, messages: [ 'success' ], data: { asset_id: 000 } }
@@ -177,7 +177,7 @@ class Fetcher {
       }
     */
     if (data.success) { 
-      data.messages = [ `Document successfully defined.` ] 
+      data.messages = [ 'Document successfully defined.' ] 
       data.data = { document_id: data.data }
     }
     return data // { success: true, messages: [ 'success' ], data: { document_id: 000 } }
@@ -187,7 +187,7 @@ class Fetcher {
     let route = `/documents/${docId}`
     let data = await this.fetchIt(route, 'DELETE')
     if (data.success) { 
-      data.messages = [ `Document successfully deleted.` ] 
+      data.messages = [ 'Document successfully deleted.' ] 
       data.data = null
     }
     return data // { success: true, messages: [ 'success' ], data: null }

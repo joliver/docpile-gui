@@ -3,15 +3,8 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './../../css/forms/form.css'
 
-class LinkFormBox extends Component {
-  constructor(props) {
-    super(props)
-    // this.state = { value: '' }
-    this.handleChange = this.handleChange.bind(this)
-  }
-  
-  handleChange (event) {
-    // this.setState({ value: event.target.value })
+class LinkFormBox extends Component {  
+  handleChange = (event) => {
     this.props.onChange({ label: this.props.label, value: event.target.value })
   }
   
@@ -47,7 +40,7 @@ LinkFormBox.propTypes = {
   editing: PropTypes.bool, // isRequired
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  // value must be an array
+  // value
   path: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired
 }
