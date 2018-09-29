@@ -14,17 +14,6 @@ class Document extends Component {
     document: null,
     loading: false
   }
-
-  formboxes = [
-    { label: 'file', type: 'number', value: document.asset_id, placeholder: 'no file specified' },
-    { label: 'date of upload', type: 'datetime-local', value: moment(document.timestamp).format(config.dateFormat), placeholder: 'no date given' },
-    { label: 'date created', type: 'datetime-local', value: moment(document.published).format(config.dateFormat), placeholder: 'no date specified' }, 
-    { label: 'starts at page', type: 'number', value: (document.asset_offset + 1), placeholder: 'no page offset given' }, 
-    { label: 'start date', type: 'datetime-local', value: moment(document.period_min).format(config.dateFormat), placeholder: 'no start date given' }, 
-    { label: 'end date', type: 'datetime-local', value: moment(document.period_max).format(config.dateFormat), placeholder: 'no end date given' }, 
-    { label: 'list of tags', type: 'linkbox', value: document.tags, placeholder: 'no tags added', path: '../tags' }, 
-    { label: 'list of subdocuments', type: 'linkbox', value: document.documents, placeholder: 'no subdocuments specified', path: '../documents' }
-  ]  
   
   componentDidMount () {
     this.fetchDocument()
@@ -34,6 +23,7 @@ class Document extends Component {
     const { id } = this.props.match.params
     this.setState({ loading: true })
     const data = await this.props.fetcher.getDocument(id)
+    console.log(data)
     if (!data.success) { 
       this.props.sendMessage(data.messages[0], !data.success) 
     }
@@ -46,6 +36,18 @@ class Document extends Component {
     const { document, loading } = this.state
     const title = document ? `Document #${document.document_id}` : ''
     const loaded = document ? true : false
+
+    const formboxes = document ? [
+      { label: 'file', type: 'number', value: document.asset_id, placeholder: 'no file specified' },
+      { label: 'date of upload', type: 'datetime-local', value: moment(document.timestamp).format(config.dateFormat), placeholder: 'no date given' },
+      { label: 'date created', type: 'datetime-local', value: moment(document.published).format(config.dateFormat), placeholder: 'no date specified' }, 
+      { label: 'starts at page', type: 'number', value: (document.asset_offset + 1), placeholder: 'no page offset given' }, 
+      { label: 'start date', type: 'datetime-local', value: moment(document.period_min).format(config.dateFormat), placeholder: 'no start date given' }, 
+      { label: 'end date', type: 'datetime-local', value: moment(document.period_max).format(config.dateFormat), placeholder: 'no end date given' }, 
+      { label: 'list of tags', type: 'linkbox', value: document.tags, placeholder: 'no tags added', path: '../tags' }, 
+      { label: 'list of subdocuments', type: 'linkbox', value: document.documents, placeholder: 'no subdocuments specified', path: '../documents' }
+    ] : []
+  
     return (
       <div className='view'>
         {loading &&
@@ -62,7 +64,7 @@ class Document extends Component {
                 <Form 
                   heading={title}
                   body={document.description}
-                  formboxes={this.formboxes}
+                  formboxes={formboxes}
                   disabled={true}
                   handleSubmit={ () => {} }
                 />

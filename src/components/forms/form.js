@@ -24,7 +24,7 @@ class Form extends Component {
     await this.props.handleSubmit(this.state.values)
   }
 
-  render (props) {
+  render () {
     // displays the inputs for entering data
     const disabled = this.props.disabled ? 'disabled' : ''
     const formboxes = this.props.formboxes.map((formbox, i) => {
@@ -46,9 +46,10 @@ class Form extends Component {
     
     // displays the submitted data (for development error checking)
     let returnFormHeader = this.state.submitted ? <div className='return-form-header'></div> : ''
-    let returnFormData = this.state.values.map((obj, i) => (
-      <div className='return-form-item' key={i}>{obj.label}: {obj.value}</div>
-    ))
+    let returnFormData = []
+    for (let key in this.state.values) {
+      returnFormData.push(<div className='return-form-item' key={key}>{key}: {this.state.values[key]}</div>)
+    }
     let returnForm = this.state.submitted ? returnFormData : ''
 
     return (
@@ -61,7 +62,7 @@ class Form extends Component {
               {formboxes}
             </div>
             { !this.props.disabled && 
-              <Button cssLabel='submit' label='Submit' onClick={this.handleSubmit} />
+              <Button cssLabel='submit' label='Submit' onClick={this.handleSubmit.bind(this)} />
             }
             <div className='return-form'>
               {returnFormHeader}
