@@ -12,7 +12,7 @@ class Form extends Component {
   }
 
   // handles continuously updating the entered data
-  onChange = (eventObj) => {
+  handleChange = (eventObj) => {
     const { values } = this.state
     values[eventObj.label] = eventObj.value
     this.setState({ submitted: false, values })
@@ -25,7 +25,6 @@ class Form extends Component {
   }
 
   render () {
-    // displays the inputs for entering data
     const disabled = this.props.disabled ? 'disabled' : ''
     const formboxes = this.props.formboxes.map((formbox, i) => {
       const cssLabel = this.props.className ? `${disabled} ${formbox.className}`: disabled
@@ -36,10 +35,9 @@ class Form extends Component {
           value={formbox.value}
           className={cssLabel}
           placeholder={formbox.placeholder} 
-          editing={formbox.editing ? formbox.editing : false}
           path={formbox.path}
           key={i} 
-          onChange={this.onChange} 
+          onChange={this.handleChange} 
         />
       )
     })

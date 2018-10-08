@@ -23,7 +23,6 @@ class Document extends Component {
     const { id } = this.props.match.params
     this.setState({ loading: true })
     const data = await this.props.fetcher.getDocument(id)
-    console.log(data)
     if (!data.success) { 
       this.props.sendMessage(data.messages[0], !data.success) 
     }

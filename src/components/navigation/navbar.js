@@ -25,18 +25,16 @@ class Navbar extends Component {
           </div>
           <div className='navbar-spread'>
             <Navlink to='/tags' label='Tags' />
-            <Navlink to='/documents' label='Docs' />
+            <Navlink to='/documents' label='Documents' />
             <Navlink to='/upload' label='Upload' />
-            <Navlink to='/option' label='Side' />
             <Navlink to='/' label='Home' />
           </div>
         </div>
         <div className={this.state.mobCSS}>
           <div className='nav-separator'></div>
           <div className='nb-mobile-list-item'><Navlink to='/' label='Home' /></div>
-          <div className='nb-mobile-list-item'><Navlink to='/option' label='Side' /></div>
           <div className='nb-mobile-list-item'><Navlink to='/upload' label='Upload' /></div>
-          <div className='nb-mobile-list-item'><Navlink to='/documents' label='Docs' /></div>
+          <div className='nb-mobile-list-item'><Navlink to='/documents' label='Documents' /></div>
           <div className='nb-mobile-list-item'><Navlink to='/tags' label='Tags' /></div>
         </div>
       </div>

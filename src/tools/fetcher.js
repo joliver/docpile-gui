@@ -79,14 +79,51 @@ class Fetcher {
   /* Tags Routes */
  
   async getTags () {
-    let data = await this.fetchIt('/tags', 'GET')
+    const data = await this.fetchIt('/tags', 'GET')
+    if (data.success) { 
+      // standardize synonyms to an array of objects
+      data.data.forEach((tag) => {
+        const synonyms = []
+        if (tag.synonyms) {
+          for (let key in tag.synonyms) {
+            synonyms.push( { name: key, timestamp: tag.synonyms[key] } )
+          }
+          tag.synonyms = synonyms
+        }
+      })
+    }
     return data // { success: true, messages: null, data: [ { ---tag object--- }, ... ] }
   }
 
   async getTag (tagId) {
     let route = `/tags/${tagId}`
-    let data = await this.fetchIt(route, 'GET')
-    return data // { success: true, messages: null, data: { tag_id: 000, timestamp: '', tag_name: '', synonyms: { 'name': 'timestamp' } } }
+    const data = await this.fetchIt(route, 'GET')
+    /* 
+      // example tag object
+      {
+        "tag_id": 000,
+        "timestamp": "2012-12-12T00:00:00Z",
+        "tag_name": "tag",
+        "synonyms": {
+          "name": "2012-12-12T00:00:00Z"
+        }
+      }
+    */
+    if (data.success) { 
+      /*
+        // standardize synonyms to an array of objects
+        data.data.synonyms = [
+          { name: "name", timestamp: "2012-12-12T00:00:00Z" },
+          { ... }
+        ]
+      */
+      const synonyms = []
+      for (let key in data.data.synonyms) {
+        synonyms.push( { name: key, timestamp: data.data.synonyms[key] } )
+      }
+      data.data.synonyms = synonyms
+    }
+    return data // { success: true, messages: null, data: { ---tag object--- } }
   }
   
   async addTag (name) {
@@ -149,7 +186,20 @@ class Fetcher {
   async getDocument (docId) {
     let route = `/documents/${docId}`
     let data = await this.fetchIt(route, 'GET')
-    return data // { success: true, messages: null, data: { document_id: 000, timestamp: '', asset_id: 000, description: '' ---etc--- } }
+    /* 
+      // example document object
+      {
+      	"asset_id": 000,
+  	    "asset_offset": 0,
+  	    "published": "2012-12-12T00:00:00Z",
+  	    "period_min": "2012-12-12T00:00:00Z",
+      	"period_max": "2012-12-13T00:00:00Z",
+      	"tags": [ 000, ... ],
+      	"documents": [ 000, ... ],
+      	"description": "testing"
+      }
+    */
+    return data // { success: true, messages: null, data: { ---document object--- } }
   }
 
   async uploadAsset (file) {
@@ -171,8 +221,8 @@ class Fetcher {
   	    "published": "2012-12-12T00:00:00Z",
   	    "period_min": "2012-12-12T00:00:00Z",
       	"period_max": "2012-12-13T00:00:00Z",
-      	"tags": [],
-      	"documents": [],
+      	"tags": [ 000, ... ],
+      	"documents": [ 000, ... ],
       	"description": "testing"
       }
     */
@@ -215,7 +265,7 @@ class Fetcher {
   async searchTags (string) {
     let data = await this.fetchIt('/search/tags', 'POST', { text: string })
     /*
-      // example response tag object
+      // example response object
       {
         "tag_id": 000,
         "text": "the tag's name",
@@ -223,7 +273,7 @@ class Fetcher {
         "indexes": [ 0, 1, 2, 3 ] // where in the text it matches up
       }
     */
-    return data // { success: true, messages: null, data: [ { ---tag search object--- }, ... ] }
+    return data // { success: true, messages: null, data: [ { ---tag search response object--- }, ... ] }
   }
 }
 

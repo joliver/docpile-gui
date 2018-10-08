@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Fetcher from './../tools/fetcher'
 import { Row, Col } from 'reactstrap'
-import Loader from './../components/atoms/loader'
+import Loader from '../components/atoms/loader'
+import plane from './../assets/icons/flying-plane-lg.png'
 import './../css/views/view.css'
 
-class DocumentList extends Component {
+class Documents extends Component {
   state = {
     documents: null,
     loading: false
@@ -29,7 +28,7 @@ class DocumentList extends Component {
   render () {
     const { documents, loading } = this.state
     const loaded = documents ? true : false
-    const docs = loaded ? this.state.documents.map((doc, i) => JSON.stringify(doc)) : ''
+    const docs = loaded ? this.state.documents.map((doc) => JSON.stringify(doc)) : ''
     return (
       <div className='view'>
         {loading &&
@@ -37,13 +36,16 @@ class DocumentList extends Component {
         }
         {loaded &&
           <div className='documents'>
-            <h4 className='title'>Documents</h4>
             <Row>
-              <Col xl='1' lg='1'></Col>
-              <Col xl='8' lg='8' md='12' sm='12'>
+            <Col xl='3' lg='3' md='12' sm='12'>
+              <img className='option-img' src={plane} alt='paper airplane' />
+            </Col>
+            <Col xl='1' lg='1'></Col>
+            <Col xl='8' lg='8' md='12' sm='12'>
+              <h4 className='title'>Documents</h4>
               {docs}
-              </Col>
-            </Row>
+            </Col>
+          </Row>
           </div>
         }
         {!loading && !loaded &&
@@ -54,9 +56,4 @@ class DocumentList extends Component {
   }
 }
 
-DocumentList.propTypes = {
-  fetcher: PropTypes.instanceOf(Fetcher).isRequired,
-  sendMessage: PropTypes.func.isRequired
-}
-
-export default DocumentList
+export default Documents

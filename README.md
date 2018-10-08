@@ -7,7 +7,7 @@ A local version of this app can be run by cloning the repository, installing dep
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
 
-#### _Currently in progress: building out forms and submission and displaying individual elements data._
+#### _Currently in progress: improving visual cohesion, improving forms experience, adding date/time support, adding file preview functionality, improving upload experience, and building list views._
 
 
 
@@ -15,8 +15,8 @@ This runs the app locally on a development server with live reloading. To genera
 
 - [X] Initial UI and Navigation
 - [X] API integration
-- [ ] Display individual elements metadata _(Oct 7, 2018)_
-- [ ] Forms/submission _(Oct 7, 2018)_
+- [X] Display individual elements metadata _(Oct 7, 2018)_
+- [X] Forms/submission _(Oct 7, 2018)_
 - [ ] List/table view _(Oct 21, 2018)_
 - [ ] Uploading assets _(Nov 4, 2018)_
 - [ ] Interactive tag manager _(Nov 18, 2018)_
