@@ -7,16 +7,16 @@ A local version of this app can be run by cloning the repository, installing dep
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
 
-#### _Currently in progress: improving visual cohesion, improving forms experience, adding date/time support, adding file preview functionality, improving upload experience, and building list views._
+_Currently in progress: improving forms experience, adding date/time support, adding file preview functionality, improving visual cohesion, improving upload experience, and building list views._
 
 
 
-### Working Chunks
+### Elements
 
 - [X] Initial UI and Navigation
 - [X] API integration
-- [X] Display individual elements metadata _(Oct 7, 2018)_
-- [X] Forms/submission _(Oct 7, 2018)_
+- [X] Display individual elements metadata
+- [X] Forms/submission
 - [ ] List/table view _(Oct 21, 2018)_
 - [ ] Uploading assets _(Nov 4, 2018)_
 - [ ] Interactive tag manager _(Nov 18, 2018)_
