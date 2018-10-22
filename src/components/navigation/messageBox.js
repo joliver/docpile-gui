@@ -9,7 +9,7 @@ const MessageBox = (props) => {
   return (
     <div className={cssLabel}>
       <div className='message'>{props.message}</div>
-      <div className='message-close-button' onClick={props.handleMessage}>X</div>
+      <div className='message-close-button' onClick={props.handleMessage}>&times;</div>
       <div className='clear'></div>
     </div>
   )

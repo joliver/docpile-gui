@@ -47,10 +47,10 @@ class FileUpload extends Component {
                   placeholder='choose a file'
                 />
                 {!this.state.chosen &&
-                  <Button className='button submit' label='Choose File' onClick={this.chooseFile} />
+                  <Button cssLabel='submit' label='Choose File' onClick={this.chooseFile} />
                 }
                 {this.state.chosen &&
-                  <Button className='button submit' label='Upload File' onClick={this.uploadFile} />
+                  <Button cssLabel='submit' label='Upload File' onClick={this.uploadFile} />
                 }
               </div>
             </Col>

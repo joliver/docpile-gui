@@ -11,11 +11,11 @@ class DocDefine extends Component {
   }
   
   render () {
-    const { saving, fileID } = this.props
+    const { saving, fileId } = this.props
     const title = 'Define a new document.'
     const body = 'Each file can hold one or more documents. Explain a few things about the first document in this file. After that, you can add more documents if needed.'
     const formboxes = [
-      { label: 'file', type: 'number', className: 'disabled', value: fileID },
+      { label: 'file', type: 'number', className: 'disabled', value: fileId },
       { label: 'description', type: 'text', placeholder: 'a description of the document' }, 
       { label: 'page number', type: 'number', placeholder: 'the page it starts' }, 
       { label: 'date published', type: 'datetime-local', placeholder: 'the date the document was published' }, 

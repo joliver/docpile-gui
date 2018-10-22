@@ -5,22 +5,37 @@
 }
 
 .button-link {
-  color: white;
+  color: inherit !important;
   text-decoration: none;
 }
 
-.button.submit {
+.button-link:hover {
+  color: inherit;
+}
+
+.button.submit, .button.cancel {
   float: left;
   margin-left: 0px;
   padding: 10px;
   border-radius: 5px;
-  background-color: $primary;
   color: white;
   font-weight: bold;
 }
 
+.button.submit {
+  background-color: $primary;
+}
+
 .button.submit:hover {
   background-color: $primary-light;
+}
+
+.button.cancel {
+  background-color: $med-grey;
+}
+
+.button.cancel:hover {
+  background-color: $light-grey;
 }
 
 .button.hover-bold:hover {

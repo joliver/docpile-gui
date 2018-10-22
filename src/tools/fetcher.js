@@ -11,7 +11,7 @@ class Fetcher {
   /* UNIVERSAL METHODS */
   
   makeErrMessages (error) { // [ { fields: [ 'name' ], message: 'message' } ] OR 'message' OR empty
-    let messages = []
+    const messages = []
     if (Array.isArray(error.data)) {
       for (let i=0; i < error.data.length; i++) {
         let msg = 'There was an error with the following fields: '
@@ -38,7 +38,7 @@ class Fetcher {
 
   async fetchIt (route, method, body=null, isFile=false) { // route + method are strings, body is an object
     try {
-      let urlRoute = this.url + route
+      const urlRoute = this.url + route
       let response = null
       if (body) {
         if (isFile) {
@@ -60,8 +60,8 @@ class Fetcher {
           headers: { 'Content-Type': 'application/json', 'Origin': 'local' }
         })
       }
-      let code = response.status
-      let data = await response.json()
+      const code = response.status
+      const data = await response.json()
       
       /* eslint-disable no-throw-literal */
       if (code !== 200 && code !== 201) { throw { code, data } }
@@ -96,7 +96,7 @@ class Fetcher {
   }
 
   async getTag (tagId) {
-    let route = `/tags/${tagId}`
+    const route = `/tags/${tagId}`
     const data = await this.fetchIt(route, 'GET')
     /* 
       // example tag object
@@ -127,7 +127,7 @@ class Fetcher {
   }
   
   async addTag (name) {
-    let data = await this.fetchIt('/tags', 'PUT', { name })
+    const data = await this.fetchIt('/tags', 'PUT', { name })
     if (data.success) { 
       data.messages = [ `Tag ${name} successfully created.` ]
       data.data = { tag_id: data.data }
@@ -136,8 +136,8 @@ class Fetcher {
   }
   
   async renameTag (tagId, newName) {
-    let route = `/tags/${tagId}/name`
-    let data = await this.fetchIt(route, 'POST', { name: newName })
+    const route = `/tags/${tagId}/name`
+    const data = await this.fetchIt(route, 'POST', { name: newName })
     if (data.success) { 
       data.messages = [ `Tag successfully renamed to ${newName}.` ] 
       data.data = { tag_id: data.data }
@@ -146,8 +146,8 @@ class Fetcher {
   }
   
   async addTagAlias (tagId, alias) {
-    let route = `/tags/${tagId}/name`
-    let data = await this.fetchIt(route, 'PUT', { name: alias })
+    const route = `/tags/${tagId}/name`
+    const data = await this.fetchIt(route, 'PUT', { name: alias })
     if (data.success) {
       data.messages = [ `Alias ${alias} successfully created.` ]
       data.data = { tag_id: data.data }
@@ -156,8 +156,8 @@ class Fetcher {
   }
   
   async removeTagAlias (tagId, alias) {
-    let route = `/tags/${tagId}/name`
-    let data = await this.fetchIt(route, 'DELETE', { name: alias })
+    const route = `/tags/${tagId}/name`
+    const data = await this.fetchIt(route, 'DELETE', { name: alias })
     if (data.success) {
       data.messages = [ `Alias ${alias} successfully removed.` ]
       data.data = { tag_id: data.data }
@@ -166,8 +166,8 @@ class Fetcher {
   }
   
   async deleteTag (tagId) {
-    let route = `/tags/${tagId}`
-    let data = await this.fetchIt(route, 'DELETE')
+    const route = `/tags/${tagId}`
+    const data = await this.fetchIt(route, 'DELETE')
     if (data.success) { 
       data.messages = [ `Tag ${data.data.tag_name} successfully deleted.` ] 
       data.data = null
@@ -179,13 +179,24 @@ class Fetcher {
   /* Assets Routes */
   
   async getDocuments () {
-    let data = await this.fetchIt('/documents', 'GET')
+    const data = await this.fetchIt('/documents', 'GET')
     return data // { success: true, messages: null, data: [ { ---document object--- }, ... ] }
   }
 
+  async getFileDocuments (fileID) {
+    const data = await this.fetchIt('/documents', 'GET')
+    if (data.success) {
+      const docs = data.data.filter(doc => (
+        doc.asset_id === fileID
+      ))
+      data.data = docs
+    }
+    return data // { success: true, messages: null, data: [ { ---document object from file--- }, ... ] }
+  }
+
   async getDocument (docId) {
-    let route = `/documents/${docId}`
-    let data = await this.fetchIt(route, 'GET')
+    const route = `/documents/${docId}`
+    const data = await this.fetchIt(route, 'GET')
     /* 
       // example document object
       {
@@ -203,7 +214,7 @@ class Fetcher {
   }
 
   async uploadAsset (file) {
-    let data = await this.fetchIt('/assets', 'PUT', file, true)
+    const data = await this.fetchIt('/assets', 'PUT', file, true)
     if (data.success) { 
       data.messages = [ 'File successfully uploaded.' ]
       data.data = { asset_id: data.data }
@@ -212,7 +223,7 @@ class Fetcher {
   }
 
   async defineDocument (body) {
-    let data = await this.fetchIt('/documents', 'PUT', body)
+    const data = await this.fetchIt('/documents', 'PUT', body)
     /* 
       // example request body, all but asset_id may be omitted
       {
@@ -234,8 +245,8 @@ class Fetcher {
   }
 
   async removeDocument (docId) {
-    let route = `/documents/${docId}`
-    let data = await this.fetchIt(route, 'DELETE')
+    const route = `/documents/${docId}`
+    const data = await this.fetchIt(route, 'DELETE')
     if (data.success) { 
       data.messages = [ 'Document successfully deleted.' ] 
       data.data = null
@@ -258,12 +269,12 @@ class Fetcher {
     if (limiters.length === 0) {
       body["published_max"] = moment(moment(), 'YYYY-MM-DDTHH:mm:ss')
     }
-    let data = await this.fetchIt('/search/documents', 'POST', body)
+    const data = await this.fetchIt('/search/documents', 'POST', body)
     return data // { success: true, messages: null, data: [ { ---document object--- }, ... ] }
   }
 
   async searchTags (string) {
-    let data = await this.fetchIt('/search/tags', 'POST', { text: string })
+    const data = await this.fetchIt('/search/tags', 'POST', { text: string })
     /*
       // example response object
       {

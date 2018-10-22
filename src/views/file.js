@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Fetcher from '../tools/fetcher'
 import Loader from '../components/atoms/loader'
 import FilePreview from './filePreview'
-import FileDocuments from './fileDocuments'
+import Documents from './documents'
 import DocDefine from './docDefine'
 import './../css/views/view.css'
 
@@ -29,14 +29,6 @@ class File extends Component {
     this.setState({ loading: false })
   }
 
-  async loadDocuments () {
-    this.setState({ saving: true })
-    
-    // pull the linked documents here
-
-    this.setState({ saving: false })
-  }
-
   async saveDocument (document) {
     this.setState({ saving: true })
     const data = await this.props.fetcher.defineDocument(document)
@@ -54,7 +46,7 @@ class File extends Component {
     
   render () {
     const { id } = this.props.match.params
-    const { file, documents, loading, saving, defining } = this.state
+    const { file, loading, saving, defining } = this.state
     const loaded = file ? true : false
     return (
       <div className='view'>
@@ -63,17 +55,17 @@ class File extends Component {
         }
         {loaded &&
           <div className='file'>
-            <FilePreview fileID={id} file={file} />
+            <FilePreview fileId={id} file={file} />
             {!saving && !defining &&
               <div>
-                <FileDocuments documents={documents} />
-                <div className='add-document' onClick={this.addDocument}>
+                <Documents {...this.props} fileId={id} />
+                <p onClick={this.addDocument}>
                   Click here if you'd like to add another document to this file.
-                </div>
+                </p>
               </div>        
             }
             {!saving && defining && 
-              <DocDefine fileID={id} saving={saving} saveDocument={this.saveDocument.bind(this)} />
+              <DocDefine fileId={id} saving={saving} saveDocument={this.saveDocument.bind(this)} />
             }
             {saving &&
               <Loader /> 

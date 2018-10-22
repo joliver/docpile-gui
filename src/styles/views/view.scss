@@ -6,13 +6,11 @@
 }
 
 .title {
-  font-size: 2rem;
-}
-
-.documents {
-  color: $dark-grey;
-  margin: 10% 8%;
-  line-spacing: 2rem;
+  font-family: $variane;
+  font-size: 4rem;
+  color: $light-grey;
+  text-align: center;
+  margin-bottom: 2%;
 }
 
 .option-img, .highlight-img {
@@ -25,6 +23,75 @@
   color: $light-grey;
   font-size: 3rem;
   margin: 20% 30%;
+}
+
+
+/* ReactTable styles */
+
+.table-view {
+  margin: 3% 5%;
+}
+
+.table-controls {
+  background-color: $light-grey;
+  border-radius: 5px;
+  padding: 2% 3%;
+  margin: 3% 1%;
+}
+
+.table-controls-text {
+  font-family: $sans-serif;
+  font-size: 1.5rem;
+  color: $dark-grey;
+  float: left;
+  margin-right: 3%;
+}
+
+.table-controls-button {
+  margin: 0% 1rem !important;
+}
+
+.ReactTable {
+  border: none !important;
+  font-family: $sans-serif;
+  color: $med-grey;
+  font-size: 1.5rem;
+}
+
+.-pageInfo {
+  color: $med-grey !important;
+}
+
+.-pageJump input {
+  color: $med-grey !important;
+}
+
+.-pageSizeOptions select, .-pageSizeOptions option {
+  color: $med-grey !important;
+}
+
+.table-button {
+  text-align: center;
+}
+
+.table-button img {
+  width: 30px;
+  height: 30px;
+}
+
+.rt-td {
+  text-align: center;
+}
+
+.table-tag {
+  background-color: $primary-light;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.table-tag:hover {
+  text-decoration: none !important;
+  background-color: lighten($primary-light, 20);
 }
 
 @media(min-width:992px) {
