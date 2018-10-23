@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import config from './../../tools/config'
-import LinkFormBox from './linkFormBox'
+import Button from './../atoms/button'
+import TagBox from './tagBox'
 import './../../css/forms/form.css'
 
 class FormBox extends Component {  
@@ -15,34 +15,30 @@ class FormBox extends Component {
   }
   
   render () {
-    const { className, type, label } = this.props
+    let { className, type, label } = this.props
+    label = label ? <div className='label'>{label}</div> : ''
     let cssClass = className ? ` ${className}` : ''
     let cssLabel = `input ${type}${cssClass}`
     let inputBox = ''
-    if (type === 'linkbox') {
-      inputBox = <LinkFormBox {...this.props} />
+    if (type === 'tagbox') {
+      inputBox = <TagBox {...this.props} />
     }
     else if (type === 'textarea') {
       inputBox = <textarea {...this.props} className={cssLabel} onChange={this.handleChange} />
+    } else if (type === 'image-button') {
+      inputBox = <span><Button label={label} src={this.props.src} link={this.props.path} cssLabel={`formbox-button ${className}`} /><div className='clear'></div></span>
+      label = ''
     } else {
       inputBox = <input {...this.props} className={cssLabel} onChange={this.handleChange} />
     }
     
     return (
-      <div className='form-box' onSubmit={this.handleSubmit}>
-        <div className='label'>{label}</div>
+      <div className='form-box'>
+        {label}
         {inputBox}
       </div>
     )
   }
-}
-
-FormBox.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  // value
-  type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
 }
 
 export default FormBox

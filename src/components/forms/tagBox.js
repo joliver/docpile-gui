@@ -1,82 +1,50 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import Tag from './../../components/atoms/tag'
 import './../../css/forms/form.css'
 
 class TagBox extends Component {
-  state = {
-    allTags: [],
-    results: undefined,
-    loading: false
-  }
-
-  componentDidMount () {
-    this.fetchTags()
-  }
-  
-  async fetchTags () {
-    this.setState({ loading: true })
-    const data = await this.props.fetcher.getTags()
-    if (!data.success) { 
-      this.props.sendMessage(data.messages[0], !data.success) 
-    }
-    else { 
-      this.setState({ allTags: data.data, loading: false })
-    }
-  }
-
-  async lookupTag (string) {
-    const data = this.props.fetcher.searchTags(string)
-    if (!data.success) { 
-      this.props.sendMessage(data.messages[0], !data.success) 
-    }
-    else { 
-      this.setState({ results: data.data })
-    }
-  }
-
   handleChange = (event) => {
-    if (event.target.value.length > 2) {
-      this.lookupTag(event.target.value)
-    }
     this.props.onChange({ label: this.props.label, value: event.target.value })
   }
 
-  getTagName = (id) => {
-    let name = ''
-    if (this.state.allTags) {
-      name = this.state.allTags.filter((tag) => tag.tag_id === id)[0].tag_name
-    }
-    return name
-  }
+  getTagObject = id => (
+    this.props.tags ? this.props.tags.filter(tag => (
+      tag.tag_id === id
+    ))[0] : {}
+  )
+
+  getTagName = id => (
+    this.props.tags ? this.getTagObject(id).tag_name : ''
+  )
   
   render () {
-    const { className, value } = this.props
-    const { results, allTags } = this.state
-    return (
-      <div className={`compound-input ${className}`}>
-        <input type='text' placeholder={this.props.placeholder} className='inner-input' onChange={this.handleChange} />
-        <TagExtender className='tag-extender' tags={value} results={results} allTags={allTags} {...this.props} />
-      </div>
-    )
+    const { className, editing, value } = this.props
+    let box = ''
+    if (editing || !value || value.length === 0) {
+      const disabled = value ? value.length === 0 : false
+      box = <textarea {...this.props} className={`input textarea ${className}`} disabled={disabled} onChange={this.handleChange} />
+    } else {
+      box = <Box {...this.props} className={`input textarea ${className}`} tagItems={value} getTagName={this.getTagName} />
+    }
+    return box
   }
 }
 
-// contains a collection of tags
-const TagExtender = (props) => {
-  const box = props.tags.map((tag) => {
+// holds a collection of linked tags
+const Box = (props) => {
+  const aliases = props.tags.length === 0 // if there are no tags in props, these are aliases
+  const tags = props.tagItems.map((tagItem, i) => {
+    let tagName = aliases ? tagItem.name : props.getTagName(tagItem) // tagItem is either an alias object or a tag id
+    let link = aliases ? '#' : `${props.path}/${tagItem}` // if a tag, link; if an alias, don't link
     return (
-      <Tag key={i} label={tag.tag_name}/>
+      <span className="formbox-link" key={i}><Link to={link}>{tagName}</Link></span>
     )
   })
-}
-
-TagBox.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  // value
-  onChange: PropTypes.func.isRequired
+  return (
+    <div {...props}>
+      {tags}
+    </div>
+  )
 }
 
 export default TagBox

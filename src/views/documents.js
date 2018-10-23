@@ -16,7 +16,7 @@ class Documents extends Component {
     tags: null,
     loading: false,
     showModal: false,
-    deleteID: null,
+    deleteId: null,
     relativeDates: false,
     filterDatesBy: 'month'
   }
@@ -33,6 +33,8 @@ class Documents extends Component {
     let data = null
     if (this.props.fileId) {
       data = await this.props.fetcher.getFileDocuments(this.props.fileId)
+    } else if (this.props.tagId) {
+      data = await this.props.fetcher.getTagDocuments(this.props.tagId)
     } else {
       data = await this.props.fetcher.getDocuments()
     }
@@ -66,11 +68,11 @@ class Documents extends Component {
   )
 
   toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal, deleteID: null })
+    this.setState({ showModal: !this.state.showModal, deleteId: null })
   }
 
   showDeleteModal = id => {
-    this.setState({ showModal: true, deleteID: id })
+    this.setState({ showModal: true, deleteId: id })
   }
 
   handleDelete = id => {
@@ -78,7 +80,7 @@ class Documents extends Component {
   }
 
   async deleteDocument (id) {
-    this.setState({ loading: true, showModal: false, deleteID: null })
+    this.setState({ loading: true, showModal: false, deleteId: null })
     const data = await this.props.fetcher.deleteDocument(id)
 
     this.setState({ loading: false })
@@ -161,7 +163,7 @@ class Documents extends Component {
 
   tagsRender = row => (
     row.value.map(tagId => (
-      <Button cssLabel='table-tag' key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} />
+      <Button cssLabel='table-tag' key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} src={null} />
     ))
   )
 
@@ -270,22 +272,37 @@ class Documents extends Component {
     }
   ]
 
+  fileColumns = this.columns.filter(column => (
+    column.Header !== 'File'
+  ))
+
+  tagColumns = this.columns.filter(column => (
+    column.Header !== 'Tags' && column.Header !== 'Delete'
+  ))
+
   closeButton = <Button label='&times;' onClick={this.closeModal} />
   
   render () {
-    const { documents, loading, showModal, deleteID, relativeDates, filterDatesBy } = this.state
+    const { documents, loading, showModal, deleteId, relativeDates, filterDatesBy } = this.state
     const loaded = documents ? true : false
+
+    // set title and columns based on whether this is all documents, documents by file, documents by tag
+    let title = this.props.fileId ? 'Documents in this File' : 'Documents'
+    title = this.props.tagId ? 'Documents with this Tag' : title
+    let columns = this.props.fileId ? this.fileColumns : this.columns
+    columns = this.props.tagId ? this.tagColumns : columns
+
     return (
       <div className='table-view'>
         <Modal isOpen={showModal} toggle={this.toggleModal} backdrop={true} close={this.closeButton}>
           <ModalBody>
             <p>Are you sure you want to delete this document?</p>
-            <Button cssLabel='submit' label='View Document' link={`/documents/${deleteID}`} />
-            <Button cssLabel='submit' label='Delete' onClick={() => this.handleDelete(deleteID)} />
+            <Button cssLabel='submit' label='View Document' link={`/documents/${deleteId}`} />
+            <Button cssLabel='submit' label='Delete' onClick={() => this.handleDelete(deleteId)} />
             <Button cssLabel='cancel' label='Cancel' onClick={this.toggleModal} />
           </ModalBody>
         </Modal>
-        <h4 className='title'>Documents</h4>
+        <h4 className='title'>{title}</h4>
         {loading &&
           <Loader />
         }
@@ -303,11 +320,17 @@ class Documents extends Component {
                 label={filterDatesBy === 'day' ? 'Dates Filtered by Day' : 'Dates Filtered by Month'}
                 onClick={this.toggleDateFilter}
               />
+              {this.props.fileId &&
+                <Button 
+                  cssLabel='submit float-right table-controls-button'
+                  label='Add another document to this file.' 
+                  onClick={this.addDocument} />
+              }
               <div className='clear'></div>
             </div>
             <ReactTable
               data={documents}
-              columns={this.columns}
+              columns={columns}
               minRows={3}
               defaultPageSize={10}
               filterable={true}

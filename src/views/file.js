@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Fetcher from '../tools/fetcher'
 import Loader from '../components/atoms/loader'
 import FilePreview from './filePreview'
 import Documents from './documents'
@@ -49,7 +47,7 @@ class File extends Component {
     const { file, loading, saving, defining } = this.state
     const loaded = file ? true : false
     return (
-      <div className='view'>
+      <div className='table-view'>
         {loading &&
           <Loader /> 
         }
@@ -59,9 +57,6 @@ class File extends Component {
             {!saving && !defining &&
               <div>
                 <Documents {...this.props} fileId={id} />
-                <p onClick={this.addDocument}>
-                  Click here if you'd like to add another document to this file.
-                </p>
               </div>        
             }
             {!saving && defining && 
@@ -78,11 +73,6 @@ class File extends Component {
       </div>
     )
   }
-}
-
-File.propTypes = {
-  fetcher: PropTypes.instanceOf(Fetcher).isRequired,
-  sendMessage: PropTypes.func.isRequired
 }
 
 export default File

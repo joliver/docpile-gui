@@ -10,17 +10,21 @@ class Fetcher {
   
   /* UNIVERSAL METHODS */
   
-  makeErrMessages (error) { // [ { fields: [ 'name' ], message: 'message' } ] OR 'message' OR empty
+  makeErrMessages = error => { // [ { fields: [ 'name' ], message: 'message' } ] OR 'message' OR empty
     const messages = []
     if (Array.isArray(error.data)) {
       for (let i=0; i < error.data.length; i++) {
         let msg = 'There was an error with the following fields: '
         for (let j=0; j < error.data[i].fields.length; j++) {
-          msg += error.data[i].fields[j]
+          let field = error.data[i].fields[j]
+          if (field in this.convertFields) {
+            field = this.convertFields[field]
+          }
+          msg += field // make error on field name more readable in UI
           if (j !== error.data[i].fields.length - 1) { msg += ', ' }
         }
         msg += '. '
-        msg += error.data[i].message
+        msg += this.convertMessageFields(error.data[i].message) // this may still contain server-related field names
         messages.push(msg)
       }
     } else if (typeof error.data === 'string') {
@@ -33,8 +37,38 @@ class Fetcher {
       }
     }
     return messages
-  } // [ 'message' ]
+  } // [ 'message', ... ]
 
+  // alter error message text to be more compatible with UI
+  convertMessageFields = message => {
+    const fields = Object.keys(this.convertFields)
+    fields.forEach(field => {
+      message = message.replace(field, this.convertFields[field])
+    })
+    return message
+  }
+
+  // alter error field names to be more compatible with UI
+  convertFields = {
+    'managed asset filename': 'filename',
+    'managed asset': 'file',
+    'manged asset': 'file',
+    'an max': 'a max',
+    'more tag': 'more tags',
+    storage: 'upload',
+    ID: 'number',
+    asset: 'file',
+    asset_id: 'file',
+    tag_id: 'tag number',
+    synonym: 'alias',
+    synonyms: 'aliases',
+    document_id: 'document number',
+    period_min: 'start date',
+    period_max: 'end date',
+    published_min: 'date published',
+    published_max: 'date published',
+    text: 'search text'
+  }
 
   async fetchIt (route, method, body=null, isFile=false) { // route + method are strings, body is an object
     try {
@@ -183,15 +217,26 @@ class Fetcher {
     return data // { success: true, messages: null, data: [ { ---document object--- }, ... ] }
   }
 
-  async getFileDocuments (fileID) {
+  async getFileDocuments (fileId) {
     const data = await this.fetchIt('/documents', 'GET')
     if (data.success) {
-      const docs = data.data.filter(doc => (
-        doc.asset_id === fileID
-      ))
+      const docs = data.data.filter(doc => {
+        return doc.asset_id.toString() === fileId.toString() // fileId sometimes is passed as a string
+    })
       data.data = docs
     }
     return data // { success: true, messages: null, data: [ { ---document object from file--- }, ... ] }
+  }
+
+  async getTagDocuments (tagId) {
+    const data = await this.fetchIt('/documents', 'GET')
+    if (data.success) {
+      const docs = data.data.filter(doc => {
+        return doc.tags.includes(tagId)
+      })
+      data.data = docs
+    }
+    return data // { success: true, messages: null, data: [ { ---document object labeled by tag--- }, ... ] }
   }
 
   async getDocument (docId) {

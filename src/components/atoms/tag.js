@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import './../../css/atoms/tag.css'
 
 const Tag = (props) => {
@@ -19,14 +18,6 @@ const Tag = (props) => {
       </div>
     )
   }
-}
-
-Tag.propTypes = {
-  cssLabel: PropTypes.string, // to set styling
-  boldedIndex: PropTypes.arrayOf(PropTypes.number), // for bolded letters
-  label: PropTypes.string, // for text
-  link: PropTypes.string, // for a link instead of an action
-  onClick: PropTypes.func // for an action instead of a link
 }
 
 export default Tag

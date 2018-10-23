@@ -5,16 +5,41 @@
   margin: 0 10%;
 }
 
-.title {
+#home.view {
+  margin-bottom: 5%;
+}
+
+.title, .welcome {
   font-family: $variane;
   font-size: 4rem;
   color: $light-grey;
+}
+
+.title {
   text-align: center;
   margin-bottom: 2%;
 }
 
+.welcome {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.header {
+  font-family: $variane;
+  font-size: 3rem;
+  color: $med-grey;
+}
+
+.description {
+  color: $med-grey;
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-top: 1.5rem !important;
+}
+
 .option-img, .highlight-img {
-  margin: 0 30%;
+  margin: 0 20%;
   width: 40%;
 }
 
@@ -32,10 +57,14 @@
   margin: 3% 5%;
 }
 
+.table-view.file-preview {
+  margin: 3% 7%;
+}
+
 .table-controls {
   background-color: $light-grey;
   border-radius: 5px;
-  padding: 2% 3%;
+  padding: 2%;
   margin: 3% 1%;
 }
 
@@ -44,11 +73,15 @@
   font-size: 1.5rem;
   color: $dark-grey;
   float: left;
-  margin-right: 3%;
+  margin-right: 2%;
 }
 
 .table-controls-button {
   margin: 0% 1rem !important;
+}
+
+.table-controls-button.button.float-right {
+  margin-right: 0 !important;
 }
 
 .ReactTable {
@@ -117,8 +150,7 @@
 
 @media(min-width:1200px) {
   .highlight-img {
-    margin: 5% 32%;
-    margin-bottom: 2%;
+    margin: 0 25%;
     margin-left: 35%;
     width: 36%;
   }

@@ -38,14 +38,15 @@ class FileUpload extends Component {
             </Col>
             <Col xl='1' lg='1'></Col>
             <Col xl='8' lg='8' md='12' sm='12'>
-              <div className='form form-box'>
+              <div className='form'>
                 <h3 className='heading'>Select a file to upload.</h3>
-                <input 
+                
+                <span className='form-box'><input 
                   type='text' 
                   className='input'
                   value={this.state.filePath}
                   placeholder='choose a file'
-                />
+                /></span>
                 {!this.state.chosen &&
                   <Button cssLabel='submit' label='Choose File' onClick={this.chooseFile} />
                 }

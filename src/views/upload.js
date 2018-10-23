@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Fetcher from '../tools/fetcher'
 import FileUpload from './fileUpload'
 import DocDefine from './docDefine'
 import DocAdd from './docAdd'
@@ -8,7 +6,7 @@ import './../css/views/view.css'
 
 class Upload extends Component {
   state = {
-    fileID: null,
+    fileId: null,
     uploading: false, // uploading file (to server)
     uploaded: false, // file uploaded
     saving: false, // saving document (to server)
@@ -21,8 +19,8 @@ class Upload extends Component {
 
   testFileUpload = (filePath) => {
     const uploaded = !this.state.uploaded
-    const fileID = this.state.fileID ? null : '123'
-    this.setState({ fileID, uploaded })
+    const fileId = this.state.fileId ? null : '123'
+    this.setState({ fileId, uploaded })
   }
   
   async uploadFile (filePath) {
@@ -31,7 +29,7 @@ class Upload extends Component {
     this.setState({ uploading: false })
     this.props.sendMessage(data.messages[0], !data.success) 
     if (data.success) { 
-      this.setState({ fileID: data.data.asset_id, uploaded: true })
+      this.setState({ fileId: data.data.asset_id, uploaded: true })
     }
   }
 
@@ -50,26 +48,21 @@ class Upload extends Component {
   }
   
   render () {
-    const { uploading, uploaded, saving, saved, fileID } = this.state
+    const { uploading, uploaded, saving, saved, fileId } = this.state
     return (
       <div className='view'>
         {!uploaded && !saved &&
           <FileUpload uploading={uploading} selectFile={this.selectFile} uploadFile={this.testFileUpload} />
         }
         {!saved && uploaded &&
-          <DocDefine fileID={fileID} saving={saving} saveDocument={this.saveDocument.bind(this)} />
+          <DocDefine fileId={fileId} saving={saving} saveDocument={this.saveDocument.bind(this)} />
         }
         {uploaded && saved &&
-          <DocAdd fileID={fileID} addAnother={this.addAnother} />
+          <DocAdd fileId={fileId} addAnother={this.addAnother} />
         }
       </div>
     )
   }
-}
-
-Upload.propTypes = {
-  fetcher: PropTypes.instanceOf(Fetcher).isRequired,
-  sendMessage: PropTypes.func.isRequired
 }
 
 export default Upload

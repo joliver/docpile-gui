@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Row, Col } from 'reactstrap'
 import FormBox from './formBox'
 import Button from './../atoms/button'
@@ -25,9 +24,9 @@ class Form extends Component {
   }
 
   render () {
-    const disabled = this.props.disabled ? 'disabled' : ''
+    const disabled = this.props.disabled && this.props.type !== 'image-button' ? 'disabled' : ''
     const formboxes = this.props.formboxes.map((formbox, i) => {
-      const cssLabel = this.props.className ? `${disabled} ${formbox.className}`: disabled
+      let cssLabel = formbox.className ? `${disabled} ${formbox.className}`: disabled
       return (
         <FormBox 
           label={formbox.label}
@@ -36,8 +35,10 @@ class Form extends Component {
           className={cssLabel}
           placeholder={formbox.placeholder} 
           path={formbox.path}
+          src={formbox.src}
+          tags={formbox.tags}
           key={i} 
-          onChange={this.handleChange} 
+          onChange={this.handleChange}
         />
       )
     })
@@ -71,15 +72,6 @@ class Form extends Component {
       </div>
     )
   }
-}
-
-
-Form.propTypes = {
-  heading: PropTypes.string.isRequired,
-  body: PropTypes.string,
-  formboxes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  disabled: PropTypes.bool,
-  handleSubmit: PropTypes.func.isRequired
 }
 
 export default Form
