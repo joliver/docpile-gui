@@ -15,7 +15,7 @@ class DocDefine extends Component {
     const title = 'Define a new document.'
     const body = 'Each file can hold one or more documents. Explain a few things about the first document in this file. After that, you can add more documents if needed.'
     const formboxes = [
-      { label: 'file', type: 'number', className: 'disabled', value: fileId },
+      { label: 'file number', type: 'number', value: fileId },
       { label: 'description', type: 'text', placeholder: 'a description of the document' }, 
       { label: 'page number', type: 'number', placeholder: 'the page it starts' }, 
       { label: 'date published', type: 'datetime-local', placeholder: 'the date the document was published' }, 
@@ -43,7 +43,10 @@ class DocDefine extends Component {
                   heading={title}
                   body={body}
                   formboxes={formboxes}
+                  cancelable={true}
+                  onCancel={this.props.goBack}
                   handleSubmit={this.handleSubmit}
+                  submitLabel='Add'
                 />
               </Col>
             </Row>

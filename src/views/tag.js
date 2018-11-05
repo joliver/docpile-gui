@@ -32,7 +32,7 @@ class Tag extends Component {
   
   render () {
     const { tag, loading } = this.state
-    const title = tag ? tag.tag_name : ''
+    const title = tag ? `Tag: ${tag.tag_name}` : ''
     const loaded = tag ? true : false
 
     const formboxes = tag ? [
@@ -42,12 +42,16 @@ class Tag extends Component {
     ] : []
   
     return (
-      <div className='table-view'>
+      <div>
         {loading &&
           <Loader /> 
         }
         {loaded &&
-          <div className='tag'>
+          <div>
+            <div className='table-view'>
+              <h4 className='header'>{title}</h4>
+              <p className='description'>View some information about a tag and its documents.</p>
+            </div>
             <Row>
               <Col xl='1' lg='1'></Col>
               <Col xl='2' lg='2' md='12' sm='12'>
@@ -56,8 +60,6 @@ class Tag extends Component {
               <Col xl='1' lg='1'></Col>
               <Col xl='7' lg='7' md='12' sm='12'>
                 <Form 
-                  heading={title}
-                  body={'Here\'s a little more information about this tag.'}
                   formboxes={formboxes}
                   disabled={true}
                   handleSubmit={ () => {} }
@@ -66,7 +68,7 @@ class Tag extends Component {
             </Row>
             <Documents {...this.props} tagId={tag.tag_id} />
           </div>
-}
+        }
         {!loading && !loaded &&
           <p className='preview-text'>This tag could not be displayed.</p>
         }

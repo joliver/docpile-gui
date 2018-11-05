@@ -15,7 +15,13 @@
   height: 30px;
 }
 
+.button-label-img {
+  float: right;
+  padding-top: 4px;
+}
+
 .button-link {
+  display: inline-block;
   color: inherit !important;
   text-decoration: none;
 }
@@ -24,9 +30,9 @@
   color: inherit;
 }
 
-.button.submit, .button.cancel {
+.button.submit, .button.cancel, .button.static {
   float: left;
-  margin-left: 0px;
+  margin-left: 0;
   padding: 10px;
   border-radius: 5px;
   color: white;
@@ -42,10 +48,31 @@
 }
 
 .button.cancel {
+  margin-left: 1rem;
   background-color: $med-grey;
 }
 
 .button.cancel:hover {
+  background-color: $light-grey;
+}
+
+.button.static {
+  background-color: $med-grey;
+}
+
+.button.inline {
+  background-color: $med-grey;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 15px;
+  padding-bottom: 10px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.button.inline:hover {
+  color: white;
   background-color: $light-grey;
 }
 

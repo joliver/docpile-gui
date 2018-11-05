@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { Component } from 'react'
+import FileViewer from 'react-file-viewer'
 import Button from './../components/atoms/button'
 import './../css/views/view.css'
 
-const FilePreview = (props) => {
-  return (
-    <div className='table-view file-preview'>
-      <h4 className='header'>File #{props.fileId}</h4>
-      <p className='description'>View this file and see a list of connected documents.</p>
-      <Button cssLabel='submit' label='Preview File' onClick={() => {}} />
-      <div className='clear'></div>
-    </div>
-  )
+class FilePreview extends Component {
+  state = {
+    preview: true
+  }
+
+  togglePreview = () => {
+    this.setState({ preview: !this.state.preview })
+  }
+
+  render() {
+    const previewClass = this.state.preview ? 'file-preview open' : 'file-preview closed'
+    return (
+      <div className='table-view file-view'>
+        <h4 className='header'>File Preview</h4>
+        <p className='description'>Take a look at a file and see the connected documents.</p>
+        <div className={previewClass}>
+          <Button label='Preview File' onClick={this.togglePreview} />
+          {this.state.preview &&
+            <FileViewer type='png' file={this.props.file} />
+          }
+          <div className='clear'></div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default FilePreview

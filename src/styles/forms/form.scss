@@ -27,24 +27,24 @@
 }
 
 .form-box .button-label {
-  color: $med-grey;
-  font-weight: normal;
   font-size: 1.2rem;
 }
 
-.form-box .button-label:hover {
-  font-weight: bold;
-}
-
 .form-box .button-label .label {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .form-box .button {
   float: left;
-  background-color: $light-grey;
   border-radius: 5px;
   padding: .7rem;
+  padding-top: 1rem;
+  background-color: $primary;
+  color: white;
+}
+
+.form-box .button:hover {
+  background-color: $primary-light;
 }
 
 .form-box .input {

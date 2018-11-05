@@ -11,8 +11,11 @@
 
 .title, .welcome {
   font-family: $variane;
-  font-size: 4rem;
   color: $light-grey;
+}
+
+.title, .welcome {
+  font-size: 4rem;
 }
 
 .title {
@@ -36,9 +39,10 @@
   font-size: 1.5rem;
   font-style: italic;
   margin-top: 1.5rem !important;
+  margin-bottom: 0 !important;
 }
 
-.option-img, .highlight-img {
+.highlight-img, .option-img {
   margin: 0 20%;
   width: 40%;
 }
@@ -51,9 +55,40 @@
 }
 
 
+/* Specific Views */
+
+.file-upload {
+  margin-top: 4rem;
+}
+
+.file-upload .header {
+  margin-bottom: 2rem;
+}
+
+.file-preview {
+  font-family: $sans-serif;
+  background-color: $light-grey;
+  color: white;
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 6rem;
+}
+
+.file-preview .button {
+  margin-bottom: 1rem;
+}
+
+.file-preview.closed .button {
+  margin-bottom: 0;
+}
+
+
 /* ReactTable styles */
 
 .table-view {
+  position: relative;
+  top: 4rem;
   margin: 3% 5%;
 }
 
@@ -142,10 +177,27 @@
   }
 
   .option-img {
-    margin: 50% 10%;
-    margin-top: 55%;
+    margin: 0 10%;
+    margin-top: 6rem;
     width: 100%;
   }
+}
+
+/* File Picker */
+
+.hidden-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+/* File Viewer */
+.pdf-canvas canvas {
+  width: 60%;
+  height: 30%;
 }
 
 @media(min-width:1200px) {

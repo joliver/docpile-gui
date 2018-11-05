@@ -6,6 +6,7 @@ import './../css/views/view.css'
 
 class Upload extends Component {
   state = {
+    file: '',
     fileId: null,
     uploading: false, // uploading file (to server)
     uploaded: false, // file uploaded
@@ -13,6 +14,7 @@ class Upload extends Component {
     saved: false // document saved
   }
 
+  // can remove
   selectFile = (filePath) => {
     this.setState({ file: filePath })
   }
@@ -46,6 +48,10 @@ class Upload extends Component {
   addAnother = () => {
     this.setState({ saved: false })
   }
+
+  goBack = () => {
+    this.setState({ uploaded: false })
+  }
   
   render () {
     const { uploading, uploaded, saving, saved, fileId } = this.state
@@ -55,7 +61,7 @@ class Upload extends Component {
           <FileUpload uploading={uploading} selectFile={this.selectFile} uploadFile={this.testFileUpload} />
         }
         {!saved && uploaded &&
-          <DocDefine fileId={fileId} saving={saving} saveDocument={this.saveDocument.bind(this)} />
+          <DocDefine fileId={fileId} saving={saving} goBack={this.goBack} saveDocument={this.saveDocument.bind(this)} />
         }
         {uploaded && saved &&
           <DocAdd fileId={fileId} addAnother={this.addAnother} />

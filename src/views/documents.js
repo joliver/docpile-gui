@@ -287,10 +287,11 @@ class Documents extends Component {
     const loaded = documents ? true : false
 
     // set title and columns based on whether this is all documents, documents by file, documents by tag
-    let title = this.props.fileId ? 'Documents in this File' : 'Documents'
+    let title = this.props.fileId ? 'Documents in this File' : 'All Documents'
     title = this.props.tagId ? 'Documents with this Tag' : title
     let columns = this.props.fileId ? this.fileColumns : this.columns
     columns = this.props.tagId ? this.tagColumns : columns
+    const titleClass = !this.props.fileId && !this.props.tagId ? 'title' : 'header'
 
     return (
       <div className='table-view'>
@@ -302,7 +303,7 @@ class Documents extends Component {
             <Button cssLabel='cancel' label='Cancel' onClick={this.toggleModal} />
           </ModalBody>
         </Modal>
-        <h4 className='title'>{title}</h4>
+        <h4 className={titleClass}>{title}</h4>
         {loading &&
           <Loader />
         }

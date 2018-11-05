@@ -33,9 +33,8 @@ class Form extends Component {
           type={formbox.type}
           value={formbox.value}
           className={cssLabel}
-          placeholder={formbox.placeholder} 
+          placeholder={formbox.placeholder}
           path={formbox.path}
-          src={formbox.src}
           tags={formbox.tags}
           key={i} 
           onChange={this.handleChange}
@@ -60,8 +59,11 @@ class Form extends Component {
             <div className='formboxes'>
               {formboxes}
             </div>
-            { !this.props.disabled && 
-              <Button cssLabel='submit' label='Submit' onClick={this.handleSubmit.bind(this)} />
+            {!this.props.disabled && 
+              <Button cssLabel='submit' label={this.props.submitLabel || 'Submit'} onClick={this.handleSubmit.bind(this)} />
+            }
+            {this.props.cancelable &&
+              <Button cssLabel='cancel' label='Cancel' onClick={this.props.onCancel} />
             }
             <div className='return-form'>
               {returnFormHeader}

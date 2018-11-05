@@ -55,9 +55,7 @@ class File extends Component {
           <div className='file'>
             <FilePreview fileId={id} file={file} />
             {!saving && !defining &&
-              <div>
-                <Documents {...this.props} fileId={id} />
-              </div>        
+              <Documents {...this.props} fileId={id} />
             }
             {!saving && defining && 
               <DocDefine fileId={id} saving={saving} saveDocument={this.saveDocument.bind(this)} />

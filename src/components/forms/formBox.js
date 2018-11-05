@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import config from './../../tools/config'
-import Button from './../atoms/button'
 import TagBox from './tagBox'
 import './../../css/forms/form.css'
 
@@ -25,9 +24,6 @@ class FormBox extends Component {
     }
     else if (type === 'textarea') {
       inputBox = <textarea {...this.props} className={cssLabel} onChange={this.handleChange} />
-    } else if (type === 'image-button') {
-      inputBox = <span><Button label={label} src={this.props.src} link={this.props.path} cssLabel={`formbox-button ${className}`} /><div className='clear'></div></span>
-      label = ''
     } else {
       inputBox = <input {...this.props} className={cssLabel} onChange={this.handleChange} />
     }
