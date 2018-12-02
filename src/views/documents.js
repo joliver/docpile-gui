@@ -201,51 +201,58 @@ class Documents extends Component {
     {
       Header: 'View',
       accessor: 'document_id',
-      style: { width: '40px' },
       Cell: row => (
         <span className='table-button'><Button src={doc} label='' link={`/documents/${row.value}`} /></span>
       ),
-      filterable: false
+      filterable: false,
+      minWidth: 80
     },
     {
       Header: 'Description',
       accessor: 'description',
-      filterMethod: this.textFilter
+      filterMethod: this.textFilter,
+      minWidth: 200
     },
     {
       Header: 'Page',
       accessor: 'asset_offset',
-      filterMethod: this.numberFilter
+      filterMethod: this.numberFilter,
+      minWidth: 100
     },
     {
       Header: 'Uploaded',
       accessor: 'timestamp',
       Cell: this.dateRender,
-      filterMethod: this.dateFilter
+      filterMethod: this.dateFilter,
+      minWidth: 170
     },
     {
       Header: 'Published',
       accessor: 'published',
       Cell: this.dateRender,
-      filterMethod: this.dateFilter
+      filterMethod: this.dateFilter,
+      minWidth: 170
     },
     {
       Header: 'Start Date',
       accessor: 'period_min',
       Cell: this.dateRender,
-      filterMethod: this.dateFilter
+      filterMethod: this.dateFilter,
+      minWidth: 170
     },
     {
       Header: 'End Date',
       accessor: 'period_max',
       Cell: this.dateRender,
-      filterMethod: this.dateFilter
+      filterMethod: this.dateFilter,
+      minWidth: 170
     },
     {
       Header: 'Tags',
       accessor: 'tags',
       Cell: this.tagsRender,
-      filterMethod: this.tagsFilter
+      filterMethod: this.tagsFilter,
+      minWidth: 150
     },
     // {
     //   Header: 'Documents',
@@ -255,20 +262,20 @@ class Documents extends Component {
     {
       Header: 'File',
       accessor: 'asset_id',
-      style: { width: '40px' },
       Cell: row => (
         <span className='table-button'><Button src={file} label='' link={`/files/${row.value}`} /></span>
       ),
-      filterable: false
+      filterable: false,
+      width: 80
     },
     {
       Header: 'Delete',
       accessor: 'document_id',
-      style: { width: '40px' },
       Cell: row => (
         <span className='table-button'><Button src={deleted} label='' onClick={() => this.showDeleteModal(row.value)} /></span>
       ),
-      filterable: false
+      filterable: false,
+      width: 100
     }
   ]
 
@@ -312,18 +319,18 @@ class Documents extends Component {
             <div className='table-controls'>
               <span className='table-controls-text'>View Options:</span>
               <Button
-                cssLabel='submit table-controls-button'
+                cssLabel='reverse table-controls-button'
                 label={relativeDates ? 'Using Relative Dates' : 'Using Absolute Dates'} 
                 onClick={this.toggleDateRender}
               />
               <Button
-                cssLabel='submit table-controls-button'
+                cssLabel='reverse table-controls-button'
                 label={filterDatesBy === 'day' ? 'Dates Filtered by Day' : 'Dates Filtered by Month'}
                 onClick={this.toggleDateFilter}
               />
               {this.props.fileId &&
                 <Button 
-                  cssLabel='submit float-right table-controls-button'
+                  cssLabel='reverse float-right table-controls-button'
                   label='Add another document to this file.' 
                   onClick={this.addDocument} />
               }
@@ -336,7 +343,7 @@ class Documents extends Component {
               defaultPageSize={10}
               filterable={true}
               noDataText='There are no documents in this list.'
-              className='-striped -highlight'
+              className='-highlight'
             />
           </span>
         }

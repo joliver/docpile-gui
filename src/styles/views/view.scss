@@ -58,6 +58,7 @@
 /* Specific Views */
 
 .file-upload {
+  position: relative;
   margin-top: 4rem;
 }
 
@@ -89,7 +90,7 @@
 .table-view {
   position: relative;
   top: 4rem;
-  margin: 3% 5%;
+  margin: 3% 8%;
 }
 
 .table-view.file-preview {
@@ -97,10 +98,10 @@
 }
 
 .table-controls {
-  background-color: $light-grey;
   border-radius: 5px;
   padding: 2%;
   margin: 3% 1%;
+  margin-bottom: 1%;
 }
 
 .table-controls-text {
@@ -126,6 +127,35 @@
   font-size: 1.5rem;
 }
 
+.rt-thead.-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.rt-td {
+  text-align: center;
+}
+
+.-pagination {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.-pagination input, .-pagination select {
+  border: none !important;
+}
+
+.-pagination .-btn {
+  color: white !important;
+  background-color: $primary-light !important;
+}
+
+.-pagination .-btn:hover {
+  background-color: $primary-light;
+  cursor: pointer;
+}
+
 .-pageInfo {
   color: $med-grey !important;
 }
@@ -145,10 +175,6 @@
 .table-button img {
   width: 30px;
   height: 30px;
-}
-
-.rt-td {
-  text-align: center;
 }
 
 .table-tag {
@@ -206,4 +232,11 @@
     margin-left: 35%;
     width: 36%;
   }
+}
+
+
+@media(max-width:992px) {
+  .table-controls-button {
+    margin: .5rem 1rem !important;
+  }  
 }

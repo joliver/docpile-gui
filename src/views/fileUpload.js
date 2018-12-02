@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'reactstrap'
+import { Transition } from 'react-spring'
 import FileViewer from 'react-file-viewer'
 import Button from './../components/atoms/button'
 import Loader from './../components/atoms/loader'
 import upload from './../assets/icons/upload.svg'
 import success from './../assets/icons/success.svg'
-import plane from './../assets/icons/flying-plane-lg.png'
 import './../css/views/view.css'
 import './../css/forms/form.css'
 
@@ -20,7 +19,7 @@ class FileUpload extends Component {
   }
 
   chooseFile = (event) => {
-    console.log(event.target.files[0])
+    // console.log(event.target.files[0])
     const filePath = event.target.value
     const file = event.target.files[0]
     const fileName = file.name
@@ -42,7 +41,6 @@ class FileUpload extends Component {
         })
     }
     reader.readAsDataURL(file)
-    this.props.selectFile(this.state.filePath)
   }
 
   uploadFile = () => {
@@ -50,60 +48,73 @@ class FileUpload extends Component {
   }
 
   render = () => {
-    console.log(this.state.file)
-    console.log(this.state.filePath)
-    console.log(this.state.fileType)
+    // console.log(this.state.file)
+    // console.log(this.state.filePath)
+    // console.log(this.state.fileType)
+    const { uploading } = this.props
+    let items = []
+    if (uploading) {
+      items = [ { key: 0, component: loader() } ]
+    } else {
+      const { chosen, fileName, fileType, filePath, src } = this.state
+      items = [ { key: 0, component: chooser({ chosen, filePath, fileName, chooseFile: this.chooseFile }) } ]
+      if (chosen) {
+        items.push( { key: 1, component: uploader({ src, fileType, uploadFile: this.uploadFile }) } )
+      }
+    }
+
+    // fix transitions
     return (
-      <div className='view file-upload'>
-        {this.props.uploading &&
-          <div>
-            <p className='preview-text'>Your file is being uploaded.</p>
-            <Loader /> 
-          </div>
-        }
-        {!this.props.uploading &&
-          <div>
-            <Row>
-              <Col xl='3' lg='3' md='12' sm='12'>
-                <img className='option-img' src={plane} alt='paper airplane' />
-              </Col>
-              <Col xl='1' lg='1'></Col>
-              <Col xl='8' lg='8' md='12' sm='12'>
-                <div className='file-upload'>
-                  <h3 className='header'>Select a file to upload.</h3>
-                  <label htmlFor='file'>
-                    <Button
-                      cssLabel={this.state.chosen ? 'static' : 'submit'}
-                      label={this.state.chosen ? this.state.fileName : 'Choose File'}
-                      src={this.state.chosen ? success : upload}
-                      onClick={(event) => event.stopPropagation()}
-                    />
-                  </label>
-                  <input 
-                    id='file'
-                    name='file'
-                    type='file'
-                    className='hidden-input'
-                    value={this.state.filePath}
-                    onChange={this.chooseFile}
-                  />
-                  <div className='clear'></div>
-                  {this.state.chosen &&
-                    <span>
-                      {this.state.src && 
-                        <FileViewer filePath={this.state.src} fileType={this.state.fileType} />
-                      }
-                      <Button cssLabel='submit' label='Upload File' onClick={this.uploadFile} />
-                    </span>
-                  }
-                </div>
-              </Col>
-            </Row>
-          </div>
-        }
-      </div>
+      <Transition
+        items={items}
+        keys={item => item.key}
+        from={{ opacity: 0, height: 0, }}
+        enter={[{ opacity: 1, height: 'auto' }]}
+        leave={[{ opacity: 0, height: 0 }]}
+      >
+        {item => styles => <span style={styles} children={item.component} />}
+      </Transition>
     )
   }
 }
+
+const loader = () => (
+  <div className='table-view'>
+    <p className='preview-text'>Your file is being uploaded.</p>
+    <Loader /> 
+  </div>
+)
+
+const chooser = (props) => (
+  <span className='file-upload-chooser'>
+    <h3 className='header'>Select a file to upload.</h3>
+    <label htmlFor='file'>
+      <Button
+        cssLabel={props.chosen ? 'static' : 'submit'}
+        label={props.chosen ? props.fileName : 'Choose File'}
+        src={props.chosen ? success : upload}
+        onClick={(event) => event.stopPropagation()}
+      />
+    </label>
+    <input 
+      id='file'
+      name='file'
+      type='file'
+      className='hidden-input'
+      value={props.filePath}
+      onChange={props.chooseFile}
+    />
+    <div className='clear'></div>
+  </span>
+)
+
+const uploader = (props) => (
+  <span>
+    {props.src && 
+      <FileViewer filePath={props.src} fileType={props.fileType} />
+    }
+    <Button cssLabel='submit' label='Upload File' onClick={props.uploadFile} />
+  </span>
+)
 
 export default FileUpload

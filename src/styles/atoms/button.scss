@@ -30,7 +30,7 @@
   color: inherit;
 }
 
-.button.submit, .button.cancel, .button.static {
+.button.submit, .button.cancel, .button.reverse, .button.static {
   float: left;
   margin-left: 0;
   padding: 10px;
@@ -45,6 +45,14 @@
 
 .button.submit:hover {
   background-color: $primary-light;
+}
+
+.button.reverse {
+  background-color: $primary-light;
+}
+
+.button.reverse:hover {
+  background-color: $primary;
 }
 
 .button.cancel {

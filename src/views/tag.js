@@ -24,6 +24,7 @@ class Tag extends Component {
     const data = await this.props.fetcher.getTag(id)
     if (!data.success) { 
       this.props.sendMessage(data.messages[0], !data.success) 
+      this.setState({ loading: false })
     }
     else { 
       this.setState({ tag: data.data, loading: false })
@@ -42,7 +43,7 @@ class Tag extends Component {
     ] : []
   
     return (
-      <div>
+      <div className='table-view'>
         {loading &&
           <Loader /> 
         }

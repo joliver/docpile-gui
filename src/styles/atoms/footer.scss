@@ -3,15 +3,14 @@
 /* make responsive */
 
 .footer {
-  background-color: white;
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(255,255,255,.95);
   color: $primary;
   font-family: $variane;
   font-size: 2rem;
   text-align: center;
   width: 100%;
   padding: 2rem;
-}
-
-.footer-text {
-  margin-top: 7rem;
+  margin-top: 3rem;
 }

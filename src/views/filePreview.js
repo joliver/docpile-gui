@@ -5,7 +5,7 @@ import './../css/views/view.css'
 
 class FilePreview extends Component {
   state = {
-    preview: true
+    preview: false
   }
 
   togglePreview = () => {

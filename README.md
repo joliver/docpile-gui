@@ -6,7 +6,7 @@ A local version of this app can be run by cloning the repository, installing dep
 
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
-_Currently in progress: adding date/time support, adding file preview functionality, improving visual cohesion, improving upload experience. File upload has basic functionality, with file preview currently being debugged. Interactive list views are fully supported for documents, soon to be available for tags as well._
+_Currently in progress: fixing date/time support and file preview functionality for file upload. All user experience shows improved visual cohesion and transitions. Basic file upload functionality is supported, with date/time support and file preview functionality currently being debugged. Interactive list views are fully supported for documents, soon to be available for tags as well._
 
 
 ### Elements
@@ -16,8 +16,8 @@ _Currently in progress: adding date/time support, adding file preview functional
 - [X] Display individual elements metadata
 - [X] Forms/submission
 - [X] List/table view
-- [ ] Uploading assets _(Nov 25, 2018)_
-- [ ] Interactive tag manager _(Dec 2, 2018)_
+- [ ] Uploading assets _(Dec 9, 2018)_
+- [ ] Interactive tag manager _(Dec 9, 2018)_
 - [ ] Universal search UI _(Dec 16, 2018)_
 
 

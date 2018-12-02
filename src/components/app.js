@@ -11,17 +11,21 @@ class App extends Component {
   state = { 
     fetcher: new Fetcher(),
     data: null,
-    isError: false,
-    message: null,
-    messageVisible: false
+    messageKey: 0, // unique key to track individual messages
+    messages: [] // { key: 0, message: 'message', isError: true }
   }
 
   sendMessage = (message, isError=false) => {
-    this.setState({ message, isError, messageVisible: true })
+    let { messages, messageKey } = this.state
+    messages.push({ key: messageKey++, message, isError })
+    this.setState({ messages, messageKey })
   }
-  
-  handleMessage = () => {
-    this.setState({ messageVisible: false })
+
+  // this generates a closeMessage function for a message with a given key
+  makeMessageCloser = key => () => {
+    let { messages } = this.state
+    messages = messages.filter(msg => msg.key !== key)
+    this.setState({ messages })
   }
 
   render() {
@@ -33,11 +37,9 @@ class App extends Component {
             match={this.props.match}
             fetcher={this.state.fetcher}
             data={this.state.data}
-            message={this.state.message} 
-            messageVisible={this.state.messageVisible}
-            isError={this.state.isError}
-            handleMessage={this.handleMessage}
+            messages={this.state.messages}
             sendMessage={this.sendMessage}
+            makeMessageCloser={this.makeMessageCloser}
           />
           <Footer />
         </div>
