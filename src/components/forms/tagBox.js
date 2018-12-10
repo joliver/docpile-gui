@@ -32,12 +32,13 @@ class TagBox extends Component {
 
 // holds a collection of linked tags
 const Box = (props) => {
-  const aliases = props.tags.length === 0 // if there are no tags in props, these are aliases
+  const isAliasBox = props.tags.length === 0 // if there are no tags in props, these are aliases
   const tags = props.tagItems.map((tagItem, i) => {
-    let tagName = aliases ? tagItem.name : props.getTagName(tagItem) // tagItem is either an alias object or a tag id
-    let link = aliases ? '#' : `${props.path}/${tagItem}` // if a tag, link; if an alias, don't link
+    let css = isAliasBox ? 'formbox-link tag-alias' : 'formbox-link'
+    let tagName = isAliasBox ? tagItem.name : props.getTagName(tagItem) // tagItem will either be an alias object or a tag id
+    let link = isAliasBox ? '#' : `${props.path}/${tagItem}` // if a tag, add its link; if an alias, no link is needed
     return (
-      <span className="formbox-link" key={i}><Link to={link}>{tagName}</Link></span>
+      <span className={css} key={i}><Link to={link}>{tagName}</Link></span>
     )
   })
   return (
