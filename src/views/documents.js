@@ -205,6 +205,7 @@ class Documents extends Component {
         <span className='table-button'><Button src={doc} label='' link={`/documents/${row.value}`} /></span>
       ),
       filterable: false,
+      sortable: false,
       minWidth: 80
     },
     {
@@ -266,6 +267,7 @@ class Documents extends Component {
         <span className='table-button'><Button src={file} label='' link={`/files/${row.value}`} /></span>
       ),
       filterable: false,
+      sortable: false,
       width: 80
     },
     {
@@ -275,6 +277,7 @@ class Documents extends Component {
         <span className='table-button'><Button src={deleted} label='' onClick={() => this.showDeleteModal(row.value)} /></span>
       ),
       filterable: false,
+      sortable: false,
       width: 100
     }
   ]
@@ -337,15 +340,20 @@ class Documents extends Component {
               <div className='clear'></div>
             </div>
             <ReactTable
+              className='-highlight'
               data={documents}
               columns={columns}
               minRows={3}
               defaultPageSize={10}
-              filterable={true}
+              showPagination={documents.length > 10}
+              defaultSorted={[{ id: 'timestamp', desc: false }]}
+              filterable
               noDataText='There are no documents in this list.'
-              className='-highlight'
             />
           </span>
+        }
+        {!loading && !loaded &&
+          <p className='preview-text'>A list of documents could not be displayed.</p>
         }
       </div>
     )

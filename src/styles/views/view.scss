@@ -91,9 +91,9 @@
 
 /* ReactTable styles */
 
+// overall styles for page with table
 .table-view {
   position: relative;
-  top: 4rem;
   margin: 3% 8%;
 }
 
@@ -101,6 +101,7 @@
   margin: 3% 7%;
 }
 
+// sort option buttons above table
 .table-controls {
   border-radius: 5px;
   padding: 2%;
@@ -124,6 +125,7 @@
   margin-right: 0 !important;
 }
 
+// overall styles for table
 .ReactTable {
   border: none !important;
   font-family: $sans-serif;
@@ -140,6 +142,18 @@
   text-align: center;
 }
 
+// sorted column highlight bar on table header
+.rt-th.-sort-asc, .rt-td.-sort-asc {
+  -webkit-box-shadow: inset 0 3px 0 0 $primary-light !important;
+  box-shadow: inset 0 3px 0 0 $primary-light !important;
+}
+
+.rt-th.-sort-desc, .rt-td.-sort-desc {
+  -webkit-box-shadow: inset 0 -3px 0 0 $primary-light !important;
+  box-shadow: inset 0 -3px 0 0 $primary-light !important;
+}
+
+// pagination panel below table
 .-pagination {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -172,6 +186,7 @@
   color: $med-grey !important;
 }
 
+// button icons in a table column
 .table-button {
   text-align: center;
 }
@@ -181,6 +196,7 @@
   height: 30px;
 }
 
+// tags in a table column
 .table-tag {
   background-color: $primary-light;
   border-radius: 5px;
@@ -190,6 +206,22 @@
 .table-tag:hover {
   text-decoration: none !important;
   background-color: lighten($primary-light, 20);
+}
+
+// a subcomponent and its table row
+
+.table-subcomponent {
+  margin: 2rem;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.table-subcomponent .header {
+  margin-bottom: 2rem;
+}
+
+.table-subcomponent .sorted {
+
 }
 
 @media(min-width:992px) {

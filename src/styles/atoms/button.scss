@@ -30,13 +30,17 @@
   color: inherit;
 }
 
-.button.submit, .button.cancel, .button.reverse, .button.static {
+.button.submit, .button.cancel, .button.reverse, .button.static, button.right {
   float: left;
   margin-left: 0;
   padding: 10px;
   border-radius: 5px;
   color: white;
   font-weight: bold;
+}
+
+.button.right {
+  float: right !important;
 }
 
 .button.submit {

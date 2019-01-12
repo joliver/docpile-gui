@@ -6,7 +6,7 @@ A local version of this app can be run by cloning the repository, installing dep
 
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
-_Currently in progress: building interactive tag manager, improving date/time support, and debugging transitions and file preview for file upload. Interactive list and individual views are fully supported for documents._
+_Currently in progress: building universal search UI and debugging date/time support, tag handling, and file preview for file upload. Also building out final functionality for interactive tag manager and individual tag views. Improved overall visual transitions and message styling._
 
 
 ### Elements
@@ -16,10 +16,9 @@ _Currently in progress: building interactive tag manager, improving date/time su
 - [X] Display individual elements metadata
 - [X] Forms/submission
 - [X] List/table view
-- [ ] Interactive tag manager _(Dec 16, 2018)_
-- [ ] Uploading assets _(Dec 16, 2018)_
-- [ ] Universal search UI _(Dec 26, 2018)_
-
+- [X] Interactive tag manager
+- [ ] Universal search UI _(Jan 27, 2019)_
+- [ ] File upload _(Feb 17, 2019)_
 
 
 ### User Stories
@@ -46,8 +45,8 @@ _Currently in progress: building interactive tag manager, improving date/time su
 
 - Search
     - I can type criteria in a universal search box that will search documents and tags.
-    - I can see suggested tags or documents appear as I type in the search box
-    - If I click on a suggested tag, it will add it to the search criteria and clear the search box for a further refined search
+    - I can see suggested tags or documents appear as I type in the search box.
+    - If I click on a suggested tag, it will add it to the search criteria and clear the search box for a further refined search.
     - I can see a list of search results, including documents and tags.
     - I can sort the list of search results.
     - I can click on a tag to see a list of documents for that tag.

@@ -120,7 +120,7 @@ class Fetcher {
         const synonyms = []
         if (tag.synonyms) {
           for (let key in tag.synonyms) {
-            synonyms.push( { name: key, timestamp: tag.synonyms[key] } )
+            synonyms.push( { name: key, timestamp: tag.synonyms[key], tagId: tag.tag_id } )
           }
           tag.synonyms = synonyms
         }
@@ -147,13 +147,13 @@ class Fetcher {
       /*
         // standardize synonyms to an array of objects
         data.data.synonyms = [
-          { name: "name", timestamp: "2012-12-12T00:00:00Z" },
+          { name: "name", timestamp: "2012-12-12T00:00:00Z", tagId: 000 },
           { ... }
         ]
       */
       const synonyms = []
       for (let key in data.data.synonyms) {
-        synonyms.push( { name: key, timestamp: data.data.synonyms[key] } )
+        synonyms.push( { name: key, timestamp: data.data.synonyms[key], tagId: data.data.tag_id } )
       }
       data.data.synonyms = synonyms
     }
@@ -163,7 +163,7 @@ class Fetcher {
   async addTag (name) {
     const data = await this.fetchIt('/tags', 'PUT', { name })
     if (data.success) { 
-      data.messages = [ `Tag ${name} successfully created.` ]
+      data.messages = [ `Tag <strong>${name}</strong> successfully created.` ]
       data.data = { tag_id: data.data }
     }
     return data // { success: true, messages: [ 'success' ], data: { tag_id: 000 } }
@@ -173,7 +173,7 @@ class Fetcher {
     const route = `/tags/${tagId}/name`
     const data = await this.fetchIt(route, 'POST', { name: newName })
     if (data.success) { 
-      data.messages = [ `Tag successfully renamed to ${newName}.` ] 
+      data.messages = [ `Tag successfully renamed to <strong>${newName}</strong>.` ] 
       data.data = { tag_id: data.data }
     }
     return data // { success: true, messages: [ 'success' ], data: { tag_id: 000 } }
@@ -183,7 +183,7 @@ class Fetcher {
     const route = `/tags/${tagId}/name`
     const data = await this.fetchIt(route, 'PUT', { name: alias })
     if (data.success) {
-      data.messages = [ `Alias ${alias} successfully created.` ]
+      data.messages = [ `Alias <strong>${alias}</strong> successfully created.` ]
       data.data = { tag_id: data.data }
     }
     return data // { success: true, messages: [ 'success' ], data: { tag_id: 000 } }
@@ -193,7 +193,7 @@ class Fetcher {
     const route = `/tags/${tagId}/name`
     const data = await this.fetchIt(route, 'DELETE', { name: alias })
     if (data.success) {
-      data.messages = [ `Alias ${alias} successfully removed.` ]
+      data.messages = [ `Alias <strong>${alias}</strong> successfully removed.` ]
       data.data = { tag_id: data.data }
     }
     return data // { success: true, messages: [ 'success' ], data: { tag_id: 000 } }
@@ -203,7 +203,7 @@ class Fetcher {
     const route = `/tags/${tagId}`
     const data = await this.fetchIt(route, 'DELETE')
     if (data.success) { 
-      data.messages = [ `Tag ${data.data.tag_name} successfully deleted.` ] 
+      data.messages = [ `Tag <strong>${data.data.tag_name}</strong> successfully deleted.` ] 
       data.data = null
     }
     return data // { success: true, messages: [ 'success' ], data: null }

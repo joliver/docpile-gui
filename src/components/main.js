@@ -1,7 +1,6 @@
 import React from 'react'
 import { Transition, animated } from 'react-spring'
 import { Route, Switch } from 'react-router-dom'
-import MessageBox from './navigation/messageBox'
 import './../css/main/main.css'
 
 import Home from './../views/home'
@@ -17,7 +16,6 @@ import Tag from './../views/tag'
 
 const Main = (props) => (
   <div className='main'>
-    <MessageBox {...props} />
     <AnimatedRoute>
       {location => (
         <Switch location={location}>
@@ -44,9 +42,9 @@ const AnimatedRoute = ({ children }) => (
         native
         items={location}
         keys={location => location.pathname}
-        from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
-        enter={[{ opacity: 0 }, { opacity: 1, transform: 'translate3d(0,0px,0)' }]}
-        leave={{ opacity: 0, pointerEvents: 'none' }}
+        from={{ opacity: 0, zIndex: 0, transform: 'translate3d(0,-40px,0)' }}
+        enter={[{ opacity: 0 }, { opacity: 1, zIndex: 0, transform: 'translate3d(0,0px,0)' }]}
+        leave={{ opacity: 0, zIndex: 0, pointerEvents: 'none' }}
         trail={300}
       >
         {location => styles => <animated.div style={styles}>{children(location)}</ animated.div>}

@@ -4,6 +4,7 @@ import './../css/main/main.css'
 
 import Fetcher from './../tools/fetcher'
 import Navbar from './navigation/navbar'
+import MessageBox from './navigation/messageBox'
 import Main from './main'
 import Footer from './atoms/footer'
 
@@ -33,13 +34,15 @@ class App extends Component {
       <BrowserRouter>
         <div className='app'>
           <Navbar />
+          <MessageBox
+            messages={this.state.messages}
+            makeMessageCloser={this.makeMessageCloser}             
+          />
           <Main 
             match={this.props.match}
             fetcher={this.state.fetcher}
             data={this.state.data}
-            messages={this.state.messages}
             sendMessage={this.sendMessage}
-            makeMessageCloser={this.makeMessageCloser}
           />
           <Footer />
         </div>
