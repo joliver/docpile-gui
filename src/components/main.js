@@ -42,9 +42,9 @@ const AnimatedRoute = ({ children }) => (
         native
         items={location}
         keys={location => location.pathname}
-        from={{ opacity: 0, zIndex: 0, transform: 'translate3d(0,-40px,0)' }}
-        enter={[{ opacity: 0 }, { opacity: 1, zIndex: 0, transform: 'translate3d(0,0px,0)' }]}
-        leave={{ opacity: 0, zIndex: 0, pointerEvents: 'none' }}
+        from={{ opacity: 0, transform: 'translate3d(0,-40px,0)' }}
+        enter={[{ opacity: 0 }, { opacity: 1, transform: 'translate3d(0,0px,0)' }]}
+        leave={{ opacity: 0, pointerEvents: 'none' }}
         trail={300}
       >
         {location => styles => <animated.div style={styles}>{children(location)}</ animated.div>}

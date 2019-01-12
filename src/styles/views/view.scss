@@ -55,7 +55,7 @@
 }
 
 
-/* Specific Views */
+/* SPECIFIC VIEW STYLING */
 
 .file-upload {
   position: relative;
@@ -89,7 +89,8 @@
 }
 
 
-/* ReactTable styles */
+
+/* REACT-TABLE STYLING */
 
 // overall styles for page with table
 .table-view {
@@ -100,6 +101,7 @@
 .table-view.file-preview {
   margin: 3% 7%;
 }
+
 
 // sort option buttons above table
 .table-controls {
@@ -125,6 +127,7 @@
   margin-right: 0 !important;
 }
 
+
 // overall styles for table
 .ReactTable {
   border: none !important;
@@ -142,6 +145,12 @@
   text-align: center;
 }
 
+// don't display no-data text on react table
+.rt-noData {
+  display: none !important;
+}
+
+
 // sorted column highlight bar on table header
 .rt-th.-sort-asc, .rt-td.-sort-asc {
   -webkit-box-shadow: inset 0 3px 0 0 $primary-light !important;
@@ -152,6 +161,7 @@
   -webkit-box-shadow: inset 0 -3px 0 0 $primary-light !important;
   box-shadow: inset 0 -3px 0 0 $primary-light !important;
 }
+
 
 // pagination panel below table
 .-pagination {
@@ -186,6 +196,7 @@
   color: $med-grey !important;
 }
 
+
 // button icons in a table column
 .table-button {
   text-align: center;
@@ -195,6 +206,26 @@
   width: 30px;
   height: 30px;
 }
+
+
+// editing in a table column
+.table-edit-input {
+  float: left;
+  margin-left: 5%;
+  width: 70%;
+  color: $med-grey;
+  text-align: center;
+}
+
+.table-input-button {
+  float: right;
+  margin-right: 5%;
+}
+
+.table-input-button .button-image {
+  width: 2rem;
+}
+
 
 // tags in a table column
 .table-tag {
@@ -208,8 +239,8 @@
   background-color: lighten($primary-light, 20);
 }
 
-// a subcomponent and its table row
 
+// a subcomponent and its table row
 .table-subcomponent {
   margin: 2rem;
   border-radius: 5px;
@@ -220,9 +251,92 @@
   margin-bottom: 2rem;
 }
 
-.table-subcomponent .sorted {
 
+// add a row to a table
+.table-add-row {
+  margin-top: 2rem;
 }
+
+.documents-view .table-add-row {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.table-add-plus-button {
+  display: inline-block;
+  margin-left: .5rem;
+  margin-top: .6rem;
+}
+
+.table-add-plus-button .button-image {
+  width: 1.5rem;
+}
+
+.table-add-row-input {
+  display: inline-block;
+  width: 20rem;
+  margin-left: 2rem;
+  padding: .5rem;
+  color: $med-grey;
+  text-align: center;
+}
+
+.documents-view .table-add-row-input {
+  width: 40rem;
+}
+
+.table-add-check-button {
+  float: none;
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.table-add-check-button .button-image {
+  width: 2rem;
+}
+
+
+
+// add a row to a table subcomponent
+.subtable-add-row {
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+}
+
+.subtable-add-plus-button {
+  display: inline-block !important;
+  margin-left: .5rem;
+  margin-top: .6rem;
+  width: 2rem;
+}
+
+.subtable-add-plus-button .button-image {
+  width: 1.5rem;
+}
+
+.subtable-add-row-input {
+  display: inline-block !important;
+  width: 20rem;
+  margin-left: 2rem;
+  padding: .5rem;
+  color: $med-grey;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.subtable-add-check-button {
+  float: none;
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.subtable-add-check-button .button-image {
+  width: 2rem;
+}
+
+
+
+/* STYLING FOR NON-MOBILE VIEWS */
 
 @media(min-width:992px) {
   #home.view {

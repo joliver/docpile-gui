@@ -6,7 +6,7 @@ A local version of this app can be run by cloning the repository, installing dep
 
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
-_Currently in progress: building universal search UI and debugging date/time support, tag handling, and file preview for file upload. Also building out final functionality for interactive tag manager and individual tag views. Improved overall visual transitions and message styling._
+_Currently in progress: building universal search UI and debugging date/time support, tag handling, and file preview for file upload. Also building out final functionality for interactive tag manager and individual tag views. Improved document list and views. Improved overall visual transitions and message styling._
 
 
 ### Elements

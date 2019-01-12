@@ -6,9 +6,9 @@ const MessageBox = props => (
   <Transition
     items={props.messages.map(msg => Message(msg, props))}
     keys={msg => msg.key}
-    from={{ opacity: 0, zIndex: 200, transform: 'translate3d(0,-60px,0)' }}
-    enter={{ opacity: 1, zIndex: 200, transform: 'translate3d(0,0px,0)' }}
-    leave={{ opacity: 0, zIndex: 200, transform: 'translate3d(0,-60px,0)'}}
+    from={{ opacity: 0, transform: 'translate3d(0,-60px,0)' }}
+    enter={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
+    leave={{ opacity: 0, transform: 'translate3d(0,-60px,0)'}}
     trail={400}
   >
     {msg => styles =>

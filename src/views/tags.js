@@ -4,22 +4,46 @@ import ReactTable from 'react-table'
 import Button from '../components/atoms/button'
 import Loader from '../components/atoms/loader'
 import moment from 'moment'
-import deleted from '../assets/icons/delete.svg'
 import tag from '../assets/icons/tag.svg'
+import edit from '../assets/icons/edit.svg'
+import check from '../assets/icons/check.svg'
+import deleted from '../assets/icons/delete.svg'
+import plus from '../assets/icons/plus.svg'
 import 'react-table/react-table.css'
 import './../css/views/view.css'
 
 class Tags extends Component {
   state = {
+    // fetching data
     tags: null,
     loading: false,
+    expanded: {},
+
+    // add tag functionality
+    newTag: false,
+    newName: '',
+
+    // edit tag functionality
+    editId: null,
+    originalName: null,
+    editName: '',
+
+    // add alias functionality
+    newAliasTagId: null,
+    newAlias: '',
+
+    // delete tag and alias functionality
     showModal: false,
     deleteId: null,
     deleteAlias: null,
+
+    // table formatting
     relativeDates: false,
     filterDatesBy: 'month'
   }
-  
+
+  /* FETCHING DATA */
+
   componentDidMount () {
     this.fetchTags()
   }
@@ -35,6 +59,113 @@ class Tags extends Component {
     }
   }
 
+  /* ADD TAG FUNCTIONALITY */
+
+  toggleAddTag = () => {
+    this.setState({ newTag: !this.state.newTag, newName: '' })
+  }
+
+  handleNameChange = event => {
+    this.setState({ newName: event.target.value })
+  }
+
+  handleAddTag = () => {
+    const { newName } = this.state
+    if (!newName) {
+      this.setState({ newTag: false })
+    } else {
+      this.addTag(newName)
+    }
+  }
+
+  async addTag (name) {
+    this.setState({ loading: true })
+    const data = await this.props.fetcher.addTag(name)
+
+    this.setState({ loading: false })
+    this.props.sendMessage(data.messages[0], !data.success)
+
+    if (data.success) {
+      this.setState({ newTag: false, newName: '' })
+      await this.fetchTags()
+    }
+  }
+
+
+  /* EDIT TAG FUNCTIONALITY */
+
+  toggleEditTag = (tagId, name) => {
+    let { editId, editName, originalName } = this.state
+    editId = editId ? null : tagId
+    editName = editId ? '' : name
+    originalName = editId ? '' : name
+    this.setState({ editId, editName, originalName })
+  }
+
+  handleRenameChange = event => {
+    this.setState({ editName: event.target.value })
+  }
+
+  handleRename = () => {
+    const { editId, editName, originalName } = this.state
+    if (!editName || editName === originalName) {
+      this.setState({ editId: null, editName: null, originalName: null })
+    } else {
+      this.renameTag(editId, editName)
+    }
+  }
+
+  async renameTag (id, newName) {
+    this.setState({ loading: true })
+    const data = await this.props.fetcher.renameTag(id, newName)
+
+    this.setState({ loading: false })
+    this.props.sendMessage(data.messages[0], !data.success)
+
+    if (data.success) {
+      this.setState({ editId: null, editName: '' })
+      await this.fetchTags()
+    }
+  }
+
+
+  /* CREATE ALIAS FUNCTIONALITY */
+
+  toggleAddAlias = (rowIndex, tagId) => {
+    let { newAliasTagId } = this.state
+    newAliasTagId = newAliasTagId ? null : tagId
+    this.setState({ newAliasTagId, newAlias: '' })
+  }
+
+  handleAliasNameChange = event => {
+    this.setState({ newAlias: event.target.value })
+  }
+
+  handleAddAlias = () => {
+    const { newAliasTagId, newAlias } = this.state
+    if (!newAlias) {
+      this.setState({ newAliasId: null })
+    } else {
+      this.addAlias(newAliasTagId, newAlias)
+    }
+  }
+
+  async addAlias (tagId, alias) {
+    this.setState({ loading: true })
+    const data = await this.props.fetcher.addTagAlias(tagId, alias)
+
+    this.setState({ loading: false })
+    this.props.sendMessage(data.messages[0], !data.success)
+
+    if (data.success) {
+      this.setState({ newAliasTagId: null, newAlias: '' })
+      await this.fetchTags()
+    }
+  }
+
+
+  /* DELETE TAG AND ALIAS FUNCTIONALITY */
+
   closeModal = () => {
     this.setState({ showModal: false, deleteID: null, deleteAlias: null })
   }
@@ -46,6 +177,8 @@ class Tags extends Component {
   showDeleteAliasModal = alias => {
     this.setState({ showModal: true, deleteAlias: alias })
   }
+
+  closeButton = <Button label='&times;' onClick={this.closeModal} />
 
   handleDelete = () => {
       const { deleteAlias } = this.state
@@ -81,6 +214,9 @@ class Tags extends Component {
       await this.fetchTags()
     }
   }
+
+
+  /* TABLE DATE FORMATTING AND FILTERING */
 
   toggleDateRender = () => {
     this.setState({ relativeDates: !this.state.relativeDates })
@@ -123,6 +259,10 @@ class Tags extends Component {
     }
   }
 
+
+
+  /* TABLE TEXT AND NUMBER FILTERING */
+
   textFilter = (filter, row) => {
     return row[filter.id].indexOf(filter.value) > -1
   }
@@ -131,21 +271,14 @@ class Tags extends Component {
     return row[filter.id].toString().indexOf(filter.value).toString() > -1
   }
 
-  // adds or removes an alias from being selected for a given tag
-  toggleSelectAlias = name => {
-    let { selectedAliases } = this.state
-    if (selectedAliases.indexOf(name) > -1) {
-      selectedAliases = selectedAliases.filter(aliasName => aliasName !== name)
-    } else {
-      selectedAliases.push(name)
-    }
-    this.setState({ selectedAliases })
-  }
+
+
+  /* TABLE RENDERING AND FILTERING BY TAG */
 
   tagsRender = row => (
-    row.value.map(alias => (
-      <Button cssLabel='table-tag' key={alias.name} label={alias.name} onClick={() => this.toggleSelectAlias(alias.name)} src={null} />
-    ))
+    row.value ? row.value.map(alias => (
+      <Button cssLabel='table-tag' key={alias.name} label={alias.name} src={null} />
+    )) : ''
   )
 
   tagsFilter = (filter, row) => {
@@ -178,38 +311,22 @@ class Tags extends Component {
     return matches.length > 0
   }
 
-  aliasRender = ({ original }) => (
-    <div className='table-subcomponent'>
-      <h6 className='header'>Alias Manager</h6>
-      <ReactTable
-        className='-highlight'
-        data={original.synonyms}
-        columns={this.aliasColumns}
-        defaultSorted={[{ id: 'name', desc: false }]}
-        minRows={1}
-        showPagination={false}
-      />
-    </div>
-  )
-
-  // sets specific style to highlight an an expanded row with its alias manager subcomponent
-  setExpandedRowStyle = (state, rowInfo, _) => {
-    const rowExpanded = rowInfo && Object.keys(state.expanded).indexOf(rowInfo.index.toString()) > -1 ? state.expanded[rowInfo.index.toString()] : false
-    if (rowExpanded) { 
-      return {
-        style: {
-          margin: '5px 10px 30px 10px',
-          borderRadius: '10px',
-          backgroundColor: '#eee', // #f0fafa lightened $primary-light = $teal, hardcoded #e1f5f6
-          border: '.5px solid #ddd !important', // #d2f0f2
-          WebkitBoxShadow: '0 0 30px 0 #ddd', // #d2f0f2
-          boxShadow: '0 0 20px 0 #ddd' // #d2f0f2 $primary-light = $teal, hardcoded #6acfd6
-        }
-      }
+  /*
+  // adds or removes an alias from being selected
+  toggleSelectAlias = name => {
+    let { selectedAliases } = this.state
+    if (selectedAliases.indexOf(name) > -1) {
+      selectedAliases = selectedAliases.filter(aliasName => aliasName !== name)
     } else {
-      return {}
+      selectedAliases.push(name)
     }
+    this.setState({ selectedAliases })
   }
+  */
+
+
+
+  /* RENDERS THE ALIAS MANAGER SUBCOMPONENT TABLE */
 
   aliasColumns = [
     {
@@ -239,6 +356,57 @@ class Tags extends Component {
     }
   ]
 
+  aliasRender = row => (
+    <div className='table-subcomponent'>
+      <h6 className='header'>Alias Manager</h6>
+      <ReactTable
+        className='-highlight'
+        data={row.original.synonyms}
+        columns={this.aliasColumns}
+        defaultSorted={[{ id: 'name', desc: false }]}
+        minRows={0}
+        showPagination={false}
+      />
+      <div className='subtable-add-row'>
+        <Button cssLabel='subtable-add-plus-button' src={plus} onClick={() => this.toggleAddAlias(row.index, row.original.tag_id)} />
+        {this.state.newAliasTagId &&
+          <span>
+            <input 
+              className='subtable-add-row-input'
+              name='newAlias'
+              placeholder='enter a name for the new alias'
+              value={this.state.toggleAddAlias} 
+              onChange={this.handleAliasNameChange}
+            />
+            <Button cssLabel='subtable-add-check-button' src={check} onClick={this.handleAddAlias} />
+          </span>
+        }
+      </div>
+    </div>
+  )
+
+  // highlights an expanded row with its alias manager subcomponent
+  setExpandedRowStyle = (state, rowInfo, _) => {
+    const rowExpanded = rowInfo && Object.keys(state.expanded).indexOf(rowInfo.index.toString()) > -1 ? state.expanded[rowInfo.index.toString()] : false
+    if (rowExpanded) { 
+      return {
+        style: {
+          margin: '5px 10px 30px 10px',
+          borderRadius: '10px',
+          backgroundColor: '#eee',
+          border: '.5px solid #ddd !important',
+          WebkitBoxShadow: '0 0 30px 0 #ddd',
+          boxShadow: '0 0 20px 0 #ddd'
+        }
+      }
+    } else {
+      return {}
+    }
+  }
+
+
+  /* RENDERS THE BASIC TABLE COLUMNS AND DATA */
+
   columns = [
     {
       Header: 'View',
@@ -251,8 +419,33 @@ class Tags extends Component {
       minWidth: 80
     },
     {
+      Header: 'Edit',
+      accessor: 'tag_id',
+      Cell: row => (
+        <span className='table-button'><Button src={edit} label='' onClick={() => this.toggleEditTag(row.value, row.original.tag_name)} /></span>
+      ),
+      filterable: false,
+      sortable: false,
+      minWidth: 80
+    },
+    {
       Header: 'Name',
       accessor: 'tag_name',
+      Cell: row => (
+        // if this row has been set to be edited, display an edit UI
+        this.state.editId === row.original.tag_id ? 
+          <span>
+            <input 
+              className='table-edit-input'
+              name='rename'
+              placeholder='rename this tag'
+              value={this.state.editName} 
+              onChange={this.handleRenameChange}
+            />
+            <Button cssLabel='table-input-button' src={check} onClick={this.handleRename}></Button>
+          </span> :
+          <span>{row.value}</span>
+      ),
       filterMethod: this.textFilter,
       minWidth: 200
     },
@@ -282,11 +475,13 @@ class Tags extends Component {
     }
   ]
 
-  closeButton = <Button label='&times;' onClick={this.closeModal} />
   
+  /* RENDERS THE OVERALL VIEW AND MAIN TABLE */
+
   render () {
-    const { tags, loading, showModal, deleteId, deleteAlias, relativeDates, filterDatesBy } = this.state
+    const { tags, loading, newTag, newName, expanded, showModal, deleteId, deleteAlias, relativeDates, filterDatesBy } = this.state
     const loaded = tags ? true : false
+    
     return (
       <div className='table-view'>
         <Modal isOpen={showModal} backdrop={true} close={this.closeButton}>
@@ -329,10 +524,29 @@ class Tags extends Component {
               showPagination={tags.length > 10}
               defaultSorted={[{ id: 'timestamp', desc: false }]}
               filterable
-              noDataText='There are no tags in this list.'
+              expanded={expanded}
               getTrGroupProps={this.setExpandedRowStyle}
-              onExpandedChange={() => { this.forceUpdate() }}
+              onExpandedChange={(n, index, e) => {
+                expanded[index] = expanded[index] ? false : true
+                this.setState({ expanded })
+                this.forceUpdate()
+              }}
             />
+            <div className='table-add-row'>
+              <Button cssLabel='table-add-plus-button' src={plus} onClick={this.toggleAddTag} />
+              {newTag &&
+                <span>
+                  <input 
+                    className='table-add-row-input'
+                    name='newName'
+                    placeholder='enter a name for the new tag'
+                    value={newName} 
+                    onChange={this.handleNameChange}
+                  />
+                  <Button cssLabel='table-add-check-button' src={check} onClick={this.handleAddTag} />
+                </span>
+              }
+            </div>
           </span>
         }
         {!loading && !loaded &&

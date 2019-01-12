@@ -1,13 +1,16 @@
 @import './../main/variables.scss';
 
-.message-box {
-    position: absolute;
-    z-index: 200;
-    top: -8rem;
+.message-box-transition {
+    position: fixed;
+    top: 7rem;
     left: 0;
     right: 0;
     width: 90%;
     margin: auto;
+    z-index: 200;
+}
+
+.message-box {
     border-radius: 10px;
     padding: 35px;
 }
