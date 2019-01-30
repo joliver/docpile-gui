@@ -8,6 +8,7 @@ import doc from '../assets/icons/doc.svg'
 import file from '../assets/icons/file.svg'
 import deleted from '../assets/icons/delete.svg'
 import plus from '../assets/icons/plus.svg'
+import minus from '../assets/icons/minus.svg'
 import check from '../assets/icons/check.svg'
 import 'react-table/react-table.css'
 import './../css/views/view.css'
@@ -95,7 +96,7 @@ class Documents extends Component {
   }
 
   handleAddDocument = () => {
-    const { newDoc, newDocDesc } = this.state
+    const { newDocDesc } = this.state
     if (!newDocDesc) {
       this.setState({ newDoc: false })
     } else {
@@ -521,13 +522,14 @@ class Documents extends Component {
             />
             {this.props.fileId &&
               <div className='table-add-row'>
-                <Button cssLabel='table-add-plus-button' src={plus} onClick={this.toggleAddDocument} />
+                <Button cssLabel='table-add-plus-button' src={newDoc ? minus : plus} onClick={this.toggleAddDocument} />
+                {!newDoc && <span className='table-add-text'>Click here to add a document.</span>}
                 {newDoc &&
                   <span>
                     <input 
                       className='table-add-row-input'
                       name='newDocDesc'
-                      placeholder='to add a document, first enter a description for the new document'
+                      placeholder='to add a document, enter a description for the new document'
                       value={newDocDesc} 
                       onChange={this.handleDescriptionChange}
                     />

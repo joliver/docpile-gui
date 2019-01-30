@@ -76,10 +76,12 @@ class Fetcher {
       let response = null
       if (body) {
         if (isFile) {
+          const file = new FormData()
+          file.append('file', body)
           response = await fetch (urlRoute, {
             method: method.toUpperCase(),
             headers: { 'Origin': 'local' },
-            body: body
+            body: file
           })
         } else {
           response = await fetch (urlRoute, {

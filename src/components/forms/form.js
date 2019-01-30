@@ -10,15 +10,25 @@ class Form extends Component {
     values: {}
   }
 
+  componentDidMount() {
+    // set initial values in state
+    this.props.formboxes.forEach(formbox => {
+      let { label, value } = formbox
+      if (!value) { value = null }
+      this.handleChange({ label, value })
+    })
+  }
+
   // handles continuously updating the entered data
-  handleChange = (eventObj) => {
+  handleChange = formData => {
     const { values } = this.state
-    values[eventObj.label] = eventObj.value
+    values[formData.label] = formData.value
     this.setState({ submitted: false, values })
   }
 
   // sends values to the parent handleSubmit function
   async handleSubmit () {
+    console.log('handleSubmit inside the form', this.state.values)
     this.setState({ submitted: true })
     await this.props.handleSubmit(this.state.values)
   }
@@ -41,15 +51,6 @@ class Form extends Component {
         />
       )
     })
-    
-    // displays the submitted data (for development error checking)
-    let returnFormHeader = this.state.submitted ? <div className='return-form-header'></div> : ''
-    let returnFormData = []
-    for (let key in this.state.values) {
-      returnFormData.push(<div className='return-form-item' key={key}>{key}: {this.state.values[key]}</div>)
-    }
-    let returnForm = this.state.submitted ? returnFormData : ''
-
     return (
       <div className='form'>
         <Row>
@@ -65,10 +66,6 @@ class Form extends Component {
             {this.props.cancelable &&
               <Button cssLabel='cancel' label='Cancel' onClick={this.props.onCancel} />
             }
-            <div className='return-form'>
-              {returnFormHeader}
-              {returnForm}
-            </div>
           </Col>
         </Row>
       </div>

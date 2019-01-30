@@ -1,10 +1,24 @@
 @import './../main/variables.scss';
 
 .loader {
+  margin-top: 7rem;
   text-align: center;
 }
 
+.loader-side-img-1 {
+  width: 30%;
+  margin: 2rem;
+  margin-top: 7rem;
+}
+
+.loader-side-img-2 {
+  width: 30%;
+  margin: 2rem;
+  margin-bottom: 5rem;
+}
+
 .loader-img {
+  width: 20%;
   margin: auto;
   margin-top: 10%;
   margin-bottom: 15%;

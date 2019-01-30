@@ -1,1 +1,174 @@
-<svg width="109px"  height="109px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-double-ring" style="background: none;"><circle cx="50" cy="50" ng-attr-r="{{config.radius}}" ng-attr-stroke-width="{{config.width}}" ng-attr-stroke="{{config.c1}}" ng-attr-stroke-dasharray="{{config.dasharray}}" fill="none" stroke-linecap="round" r="40" stroke-width="8" stroke="#6c0f98" stroke-dasharray="62.83185307179586 62.83185307179586" transform="rotate(335.252 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="3s" begin="0s" repeatCount="indefinite"></animateTransform></circle><circle cx="50" cy="50" ng-attr-r="{{config.radius2}}" ng-attr-stroke-width="{{config.width}}" ng-attr-stroke="{{config.c2}}" ng-attr-stroke-dasharray="{{config.dasharray2}}" ng-attr-stroke-dashoffset="{{config.dashoffset2}}" fill="none" stroke-linecap="round" r="31" stroke-width="8" stroke="#6acfd6" stroke-dasharray="48.69468613064179 48.69468613064179" stroke-dashoffset="48.69468613064179" transform="rotate(-335.252 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;-360 50 50" keyTimes="0;1" dur="3s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg>
+<svg class="ldi-195rep" width="150px"  height="150px"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><!--?xml version="1.0" encoding="utf-8"?--><!--Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)--><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="transform-origin: 50px 50px 0px;" xml:space="preserve"><g style="transform-origin: 50px 50px 0px;"><g style="transform-origin: 50px 50px 0px; transform: scale(0.9);"><g style="transform-origin: 50px 50px 0px; animation-duration: 4.9s; animation-delay: -4.9s; animation-direction: normal;" class="ld ld-tremble-px"><g><style type="text/css" class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -5.3s; animation-direction: normal;">.st0{fill:#C7B299;stroke:#333333;stroke-width:6;stroke-miterlimit:10;} .st1{fill:#F5E169;} .st2{fill:#666666;} .st3{fill:#F5E6C8;} .st4{fill:#333333;} .st5{fill:#E0E0E0;} .st6{fill:#F8B26A;} .st7{fill:#FFFFFF;stroke:#000000;stroke-width:4;stroke-miterlimit:10;} .st8{fill:#F47E60;} .st9{fill:#ABBD81;} .st10{fill:#E15B64;} .st11{fill:#666666;stroke:#221E1F;stroke-width:4.5;stroke-linejoin:round;stroke-miterlimit:10;} .st12{fill:#FFFFFF;stroke:#221E1F;stroke-width:6;stroke-linejoin:round;stroke-miterlimit:10;} .st13{fill:#77A4BD;} .st14{fill:#FFDC6C;} .st15{fill:#FFFFFF;} .st16{fill:#353035;} .st17{fill:#E0E0E0;stroke:#000000;stroke-width:6;stroke-miterlimit:10;} .st18{fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-miterlimit:10;} .st19{fill:none;stroke:#000000;stroke-width:5;stroke-miterlimit:10;} .st20{fill:none;} .st21{fill:#666666;stroke:#221E1F;stroke-width:6;stroke-linejoin:round;stroke-miterlimit:10;} .st22{fill:#FFFFFF;stroke:#221E1F;stroke-width:4.5;stroke-linejoin:round;stroke-miterlimit:10;} .st23{fill:#333333;stroke:#221E1F;stroke-width:4.5;stroke-linejoin:round;stroke-miterlimit:10;} .st24{fill:#1BD112;} .st25{fill:#FFFFFF;stroke:#333333;stroke-width:8;stroke-miterlimit:10;} .st26{fill:none;stroke:#666666;stroke-width:8;stroke-miterlimit:10;} .st27{fill:#FFFFFF;stroke:#333333;stroke-miterlimit:10;} .st28{fill:none;stroke:#333333;stroke-miterlimit:10;} .st29{stroke:#333333;stroke-miterlimit:10;} .st30{fill:none;stroke:#000000;stroke-width:4;stroke-linecap:round;stroke-miterlimit:10;} .st31{fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:10;} .st32{fill:#C33737;} .st33{fill:#849B87;} .st34{fill:#66503A;} .st35{fill:none;stroke:#333333;stroke-width:6;stroke-miterlimit:10;} .st36{fill:none;stroke:#333333;stroke-width:4;stroke-miterlimit:10;} .st37{fill:#C59B6D;} .st38{fill:#E0E0E0;stroke:#221E1F;stroke-width:4.5;stroke-linejoin:round;stroke-miterlimit:10;} .st39{fill:#666666;stroke:#000000;stroke-width:3;stroke-miterlimit:10;} .st40{fill:#F5E6C8;stroke:#000000;stroke-width:3;stroke-miterlimit:10;} .st41{fill:#FFFFFF;stroke:#808080;stroke-width:4;stroke-miterlimit:10;} .st42{fill:#808080;stroke:#808080;stroke-width:4;stroke-miterlimit:10;} .st43{fill:#666666;stroke:#B3B3B3;stroke-width:12;stroke-linecap:round;stroke-miterlimit:10;} .st44{fill:#808080;} .st45{fill:#B3B3B3;} .st46{fill:#FFFF00;stroke:#E15B64;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} .st47{fill:none;stroke:#E15B64;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;} .st48{fill:#F5E6C8;stroke:#333333;stroke-width:4;stroke-miterlimit:10;}</style><g class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -4.92143s; animation-direction: normal;"><polygon class="st5" points="88.1,15 27.4,55.8 11.9,47.3 " fill="#71c2cc" style="fill: rgb(113, 194, 204);"></polygon></g><g class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -4.54286s; animation-direction: normal;"><polygon class="st5" points="88.1,15 71.2,80.1 51.5,69.1 39.4,85 39.4,62.5 " fill="#71c2cc" style="fill: rgb(113, 194, 204);"></polygon></g><g class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -4.16429s; animation-direction: normal;"><path class="st2" d="M29.8,56.5l7.7,18.7V62.5c0-0.5,0.2-1,0.6-1.4l33.4-32.6L29.8,56.5z" fill="#a9dfe6" style="fill: rgb(169, 223, 230);"></path></g><g class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -3.78571s; animation-direction: normal;"><path d="M90,14.8c0-0.2-0.1-0.4-0.1-0.5c0,0,0-0.1,0-0.1c0,0,0-0.1-0.1-0.1c-0.1-0.1-0.1-0.2-0.2-0.3c0,0,0,0,0,0 c-0.1-0.1-0.3-0.3-0.4-0.4c0,0,0,0,0,0c0,0,0,0,0,0c-0.2-0.1-0.4-0.2-0.5-0.2c0,0,0,0-0.1,0c-0.2,0-0.4,0-0.5,0c0,0-0.1,0-0.1,0 c-0.2,0-0.3,0.1-0.5,0.1L11.2,45.5c-0.7,0.3-1.1,0.9-1.2,1.7s0.3,1.4,1,1.8l14.8,8.2l11.8,28.5l0,0c0.2,0.5,0.6,0.9,1.2,1.1 c0.2,0.1,0.4,0.1,0.6,0.1c0.6,0,1.2-0.3,1.5-0.8l11-14.5l18.3,10.1c0.5,0.3,1.2,0.3,1.7,0.1c0.6-0.2,1-0.7,1.1-1.3l16.9-65 c0,0,0,0,0,0C90,15.3,90,15.1,90,14.8C90,14.9,90,14.9,90,14.8z M16.4,47.5l53.8-22.8L27.3,53.5L16.4,47.5z M38.1,61.1 c-0.4,0.4-0.6,0.9-0.6,1.4v12.7l-7.7-18.7l41.7-28L38.1,61.1z M41.4,65.8l7.2,4l-7.2,9.5V65.8z M70,77.1l-17.6-9.7L42.7,62 l41.8-40.8L70,77.1z" fill="#67aab3" style="fill: rgb(103, 170, 179);"></path></g><metadata xmlns:d="https://loading.io/stock/" class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -3.40714s; animation-direction: normal;">
+<d:name class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -3.02857s; animation-direction: normal;">paper plane</d:name>
+<d:tags class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -2.65s; animation-direction: normal;">fly,send,fire,take off,aviation,paper plane,web application</d:tags>
+<d:license class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -2.27143s; animation-direction: normal;">cc-by</d:license>
+<d:slug class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -1.89286s; animation-direction: normal;">195rep</d:slug>
+</metadata></g></g></g></g><style type="text/css" class="" style="transform-origin: 50px 50px 0px; animation-duration: 5.3s; animation-delay: -1.51429s; animation-direction: normal;">path,ellipse,circle,rect,polygon,polyline,line { stroke-width: 0; }@keyframes ld-tremble-px {
+  0% {
+    -webkit-transform: translate(1px, 1px);
+    transform: translate(1px, 1px);
+  }
+  5% {
+    -webkit-transform: translate(0, 1px);
+    transform: translate(0, 1px);
+  }
+  10% {
+    -webkit-transform: translate(1px, 2px);
+    transform: translate(1px, 2px);
+  }
+  15% {
+    -webkit-transform: translate(2px, 1px);
+    transform: translate(2px, 1px);
+  }
+  20% {
+    -webkit-transform: translate(3px, 0);
+    transform: translate(3px, 0);
+  }
+  25% {
+    -webkit-transform: translate(1px, 2px);
+    transform: translate(1px, 2px);
+  }
+  30% {
+    -webkit-transform: translate(1px, 3px);
+    transform: translate(1px, 3px);
+  }
+  35% {
+    -webkit-transform: translate(0, 1px);
+    transform: translate(0, 1px);
+  }
+  40% {
+    -webkit-transform: translate(1px, 1px);
+    transform: translate(1px, 1px);
+  }
+  45% {
+    -webkit-transform: translate(1px, 0);
+    transform: translate(1px, 0);
+  }
+  50% {
+    -webkit-transform: translate(2px, 1px);
+    transform: translate(2px, 1px);
+  }
+  55% {
+    -webkit-transform: translate(1px, 2px);
+    transform: translate(1px, 2px);
+  }
+  60% {
+    -webkit-transform: translate(3px, 1px);
+    transform: translate(3px, 1px);
+  }
+  65% {
+    -webkit-transform: translate(0, 2px);
+    transform: translate(0, 2px);
+  }
+  70% {
+    -webkit-transform: translate(3px, 0);
+    transform: translate(3px, 0);
+  }
+  75% {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  80% {
+    -webkit-transform: translate(2px, 3px);
+    transform: translate(2px, 3px);
+  }
+  85% {
+    -webkit-transform: translate(1px, 0);
+    transform: translate(1px, 0);
+  }
+  90% {
+    -webkit-transform: translate(0, 2px);
+    transform: translate(0, 2px);
+  }
+  95% {
+    -webkit-transform: translate(3px, 2px);
+    transform: translate(3px, 2px);
+  }
+}
+@-webkit-keyframes ld-tremble-px {
+  0% {
+    -webkit-transform: translate(1px, 1px);
+    transform: translate(1px, 1px);
+  }
+  5% {
+    -webkit-transform: translate(0, 1px);
+    transform: translate(0, 1px);
+  }
+  10% {
+    -webkit-transform: translate(1px, 2px);
+    transform: translate(1px, 2px);
+  }
+  15% {
+    -webkit-transform: translate(2px, 1px);
+    transform: translate(2px, 1px);
+  }
+  20% {
+    -webkit-transform: translate(3px, 0);
+    transform: translate(3px, 0);
+  }
+  25% {
+    -webkit-transform: translate(1px, 2px);
+    transform: translate(1px, 2px);
+  }
+  30% {
+    -webkit-transform: translate(1px, 3px);
+    transform: translate(1px, 3px);
+  }
+  35% {
+    -webkit-transform: translate(0, 1px);
+    transform: translate(0, 1px);
+  }
+  40% {
+    -webkit-transform: translate(1px, 1px);
+    transform: translate(1px, 1px);
+  }
+  45% {
+    -webkit-transform: translate(1px, 0);
+    transform: translate(1px, 0);
+  }
+  50% {
+    -webkit-transform: translate(2px, 1px);
+    transform: translate(2px, 1px);
+  }
+  55% {
+    -webkit-transform: translate(1px, 2px);
+    transform: translate(1px, 2px);
+  }
+  60% {
+    -webkit-transform: translate(3px, 1px);
+    transform: translate(3px, 1px);
+  }
+  65% {
+    -webkit-transform: translate(0, 2px);
+    transform: translate(0, 2px);
+  }
+  70% {
+    -webkit-transform: translate(3px, 0);
+    transform: translate(3px, 0);
+  }
+  75% {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  80% {
+    -webkit-transform: translate(2px, 3px);
+    transform: translate(2px, 3px);
+  }
+  85% {
+    -webkit-transform: translate(1px, 0);
+    transform: translate(1px, 0);
+  }
+  90% {
+    -webkit-transform: translate(0, 2px);
+    transform: translate(0, 2px);
+  }
+  95% {
+    -webkit-transform: translate(3px, 2px);
+    transform: translate(3px, 2px);
+  }
+}
+.ld.ld-tremble-px {
+  -webkit-animation: ld-tremble-px 1s infinite;
+  animation: ld-tremble-px 1s infinite;
+}
+</style></svg></svg>

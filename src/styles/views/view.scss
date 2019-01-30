@@ -66,6 +66,10 @@
   margin-bottom: 2rem;
 }
 
+.file-upload-image {
+  width: 80%;
+}
+
 .file-preview {
   font-family: $sans-serif;
   background-color: $light-grey;
@@ -74,6 +78,21 @@
   padding: 1rem;
   margin-top: 3rem;
   margin-bottom: 6rem;
+}
+
+.pg-viewer-wrapper {
+  height: auto !important;
+}
+
+.photo-viewer-container {
+  margin: 2rem 0;
+  height: auto !important;
+  width: 100% !important;
+}
+
+.photo-viewer-container img {
+  height: auto !important;
+  width: 100% !important;
 }
 
 .file-preview .button {
@@ -272,6 +291,14 @@
   width: 1.5rem;
 }
 
+.table-add-text {
+  display: inline-block;
+  margin-left: 2rem;
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
 .table-add-row-input {
   display: inline-block;
   width: 20rem;
@@ -359,6 +386,7 @@
   }
 }
 
+
 /* File Picker */
 
 .hidden-input {
@@ -370,10 +398,15 @@
 	z-index: -1;
 }
 
+
 /* File Viewer */
 .pdf-canvas canvas {
   width: 60%;
   height: 30%;
+}
+
+.pdf-viewer {
+  max-height: 20rem;
 }
 
 @media(min-width:1200px) {

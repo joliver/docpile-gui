@@ -9,6 +9,7 @@ import edit from '../assets/icons/edit.svg'
 import check from '../assets/icons/check.svg'
 import deleted from '../assets/icons/delete.svg'
 import plus from '../assets/icons/plus.svg'
+import minus from '../assets/icons/minus.svg'
 import 'react-table/react-table.css'
 import './../css/views/view.css'
 
@@ -368,7 +369,12 @@ class Tags extends Component {
         showPagination={false}
       />
       <div className='subtable-add-row'>
-        <Button cssLabel='subtable-add-plus-button' src={plus} onClick={() => this.toggleAddAlias(row.index, row.original.tag_id)} />
+        <Button
+          cssLabel='subtable-add-plus-button'
+          src={this.state.newAliasTagId ? minus : plus}
+          onClick={() => this.toggleAddAlias(row.index, row.original.tag_id)}
+        />
+        {!this.state.newAliasTagId && <span className='table-add-text'>Click here to add an alias.</span>}
         {this.state.newAliasTagId &&
           <span>
             <input 
@@ -533,7 +539,8 @@ class Tags extends Component {
               }}
             />
             <div className='table-add-row'>
-              <Button cssLabel='table-add-plus-button' src={plus} onClick={this.toggleAddTag} />
+              <Button cssLabel='table-add-plus-button' src={newTag ? minus : plus} onClick={this.toggleAddTag} />
+              {!newTag && <span className='table-add-text'>Click here to add a tag.</span>}
               {newTag &&
                 <span>
                   <input 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Transition } from 'react-spring'
+import { Row, Col } from 'reactstrap'
 import FileViewer from 'react-file-viewer'
 import Button from './../components/atoms/button'
 import Loader from './../components/atoms/loader'
+import flyer from './../assets/icons/flyer.svg'
 import upload from './../assets/icons/upload.svg'
 import success from './../assets/icons/success.svg'
 import './../css/views/view.css'
@@ -18,8 +20,11 @@ class FileUpload extends Component {
     loaded: false
   }
 
+  clearFile = () => {
+    this.setState({ file: '', filePath: '', fileName: '', src: '', chosen: false })
+  }
+
   chooseFile = (event) => {
-    // console.log(event.target.files[0])
     const filePath = event.target.value
     const file = event.target.files[0]
     const fileName = file.name
@@ -48,32 +53,37 @@ class FileUpload extends Component {
   }
 
   render = () => {
-    // console.log(this.state.file)
-    // console.log(this.state.filePath)
-    // console.log(this.state.fileType)
     const { uploading } = this.props
     let items = []
     if (uploading) {
       items = [ { key: 0, component: loader() } ]
     } else {
       const { chosen, fileName, fileType, filePath, src } = this.state
-      items = [ { key: 0, component: chooser({ chosen, filePath, fileName, chooseFile: this.chooseFile }) } ]
+      items = [ { key: 0, component: chooser({ chosen, filePath, fileName, chooseFile: this.chooseFile, clearFile: this.clearFile }) } ]
       if (chosen) {
         items.push( { key: 1, component: uploader({ src, fileType, uploadFile: this.uploadFile }) } )
       }
     }
-
-    // fix transitions
     return (
-      <Transition
-        items={items}
-        keys={item => item.key}
-        from={{ opacity: 0, height: 0, }}
-        enter={[{ opacity: 1, height: 'auto' }]}
-        leave={[{ opacity: 0, height: 0 }]}
-      >
-        {item => styles => <span style={styles} children={item.component} />}
-      </Transition>
+      <Row>
+        <Col xl='1' lg='1'></Col>
+        <Col xl='5' lg='5' md='4' sm='12'>
+          <img className='file-upload-image' src={flyer} alt='person flying a paper airplane' />
+        </Col>
+        <Col xl='5' lg='5' md='8' sm='12'>
+          <Transition
+            items={items}
+            keys={item => item.key}
+            from={{ opacity: 0 }}
+            enter={[{ opacity: 1 }]}
+            leave={[{ opacity: 0 }]}
+            trail={300}
+          >
+            {item => styles => <span style={styles} children={item.component} />}
+          </Transition>
+        </Col>
+        <Col xl='1' lg='1'></Col>
+      </Row>
     )
   }
 }
@@ -96,15 +106,27 @@ const chooser = (props) => (
         onClick={(event) => event.stopPropagation()}
       />
     </label>
-    <input 
-      id='file'
-      name='file'
-      type='file'
-      className='hidden-input'
-      value={props.filePath}
-      onChange={props.chooseFile}
-    />
-    <div className='clear'></div>
+    {props.filePath &&
+      <input
+        id='file'
+        name='file'
+        type='text'
+        className='hidden-input'
+        value={props.filePath}
+        readOnly
+        onClick={props.clearFile}
+      />
+    }
+    {!props.filePath &&
+      <input
+        id='file'
+        name='file'
+        type='file'
+        className='hidden-input'
+        value={props.filePath}
+        onChange={props.chooseFile}
+      />
+    }
   </span>
 )
 

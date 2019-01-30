@@ -21,23 +21,13 @@ $sans-serif: 'Alef', 'Trebuchet MS', sans-serif;
 
 /* Colors */
 
-$salmon: #fa8c80;
-$yellow: #f8fa81;
-$light-green: #bbfa81;
-$green: #81fa84;
-$med-green: #b4eb81;
-$sage: #a5cc80;
-$seafoam: #81fac0;
-$aqua: #4ce8fa; // #81f8fa
+$salmon: #eab7ba;
+$light-teal: #b7eace;
 $teal: #6acfd6;
-$dark-teal: #12bcaf; // used for for the check and plus icons
-
-$cause: #81bbfa;
-$periwinkle: #8481fa;
-
-$lime: #dbfa4c;
-$blue: #514893;
+$dark-teal: #12bcaf; // built into check and plus icons
 $light-blue: #827CAD;
+$periwinkle: #8481fa;
+$blue: #514893;
 
 $dark-grey: #444;
 $med-grey: #666;
@@ -52,7 +42,7 @@ $secondary-nav-highlight: $periwinkle;
 $ternary: $blue;
 $ternary-light: $light-blue;
 
-$success-light: $med-green;
+$success-light: $light-teal;
 $success-dark: white;
 $error-light: $salmon;
 $error-dark: white;

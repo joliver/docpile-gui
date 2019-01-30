@@ -14,16 +14,10 @@ class Upload extends Component {
     saving: false, // saving document (to server)
     saved: false // document saved
   }
-
-  testFileUpload = (filePath) => {
-    const uploaded = !this.state.uploaded
-    const fileId = this.state.fileId ? null : '123'
-    this.setState({ fileId, uploaded })
-  }
   
-  async uploadFile (filePath) {
+  async uploadFile (file) {
     this.setState({ uploading: true })
-    const data = await this.props.fetcher.uploadAsset(filePath)
+    const data = await this.props.fetcher.uploadAsset(file)
     this.setState({ uploading: false })
     this.props.sendMessage(data.messages[0], !data.success) 
     if (data.success) { 
@@ -53,7 +47,7 @@ class Upload extends Component {
     const { uploading, uploaded, saving, saved, fileId } = this.state
     let item = '';
     if (!uploaded && !saved) {
-      item = <FileUpload uploading={uploading} uploadFile={this.testFileUpload} />
+      item = <FileUpload uploading={uploading} uploadFile={this.uploadFile.bind(this)} />
     } else if (!saved && uploaded) {
       item = <DocDefine fileId={fileId} saving={saving} goBack={this.goBack} saveDocument={this.saveDocument.bind(this)} />
     } else if (uploaded && saved) {
@@ -63,9 +57,9 @@ class Upload extends Component {
       <div className='view'>
         <Transition
           items={item}
-          from={{ opacity: 0, height: 0, }}
-          enter={[{ opacity: 1, height: 'auto' }]}
-          leave={[{ opacity: 0, height: 0 }]}
+          from={{ opacity: 0 }}
+          enter={[{ opacity: 1 }]}
+          leave={[{ opacity: 0 }]}
         >
           {item => props => <div style={props} className="upload-transition" children={item} />}
         </Transition>

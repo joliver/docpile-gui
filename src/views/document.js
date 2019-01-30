@@ -5,7 +5,7 @@ import Form from './../components/forms/form'
 import Loader from '../components/atoms/loader'
 import Button from '../components/atoms/button'
 import moment from 'moment'
-import plane from './../assets/icons/flying-plane-lg.png'
+import flying from './../assets/icons/flying.svg'
 import success from './../assets/icons/success.svg'
 import './../css/views/view.css'
 
@@ -70,7 +70,7 @@ class Document extends Component {
             <p className='description'>View some information about a document.</p>
             <Row>
               <Col xl='2' lg='2' md='12' sm='12'>
-                <img className='option-img' src={plane} alt='paper airplane' />
+                <img className='option-img' src={flying} alt='flying paper airplane' />
               </Col>
               <Col xl='1' lg='1'></Col>
               <Col xl='8' lg='8' md='12' sm='12'>
