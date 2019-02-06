@@ -6,19 +6,19 @@ A local version of this app can be run by cloning the repository, installing dep
 
 This runs the app locally on a development server with live reloading. To generate a production build use `npm run build`.
 
-_Currently in progress: building universal search UI and debugging date/time support, tag handling, and file preview for file upload. Also building out final functionality for interactive tag manager and individual tag views. Improved document list and views. Improved overall visual transitions and message styling._
+_Currently in progress: building out universal search UI, improving individual tag views, debugging file preview and tag add functionality. Created seamless, intuitive file upload experience. Improved document interaction and views. Enhanced visual transitions and message logic._
 
 
 ### Elements
 
-- [X] Initial UI and Navigation
+- [X] Initial structure and navigation
 - [X] API integration
-- [X] Display individual elements metadata
-- [X] Forms/submission
-- [X] List/table view
-- [X] Interactive tag manager
-- [ ] Universal search UI _(Jan 27, 2019)_
-- [ ] File upload _(Feb 17, 2019)_
+- [X] Parse individual elements
+- [X] Submission and messaging scaffolding
+- [X] Interactive list views
+- [X] Intuitive tag management
+- [X] Cohesive file upload experience
+- [ ] Universal search UI _(Feb 17, 2019)_
 
 
 ### User Stories

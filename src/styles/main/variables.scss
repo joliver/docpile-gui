@@ -8,13 +8,12 @@ $sm: 576px;
 /* Fonts */
 
 @font-face {
-  font-family: 'Variane';
-  src: url('../../assets/fonts/variane.woff2') format('woff2'),
-       url('../../assets/fonts/variane.woff') format('woff'),
-       url('../../assets/fonts/variane.ttf') format('truetype');
+  font-family: 'Getaway-Car';
+  src: url('../../assets/fonts/getaway-car.woff') format('woff'),
+       url('../../assets/fonts/getaway-car.ttf') format('truetype');
 }
 
-$variane: 'Variane', 'Cambria', serif;
+$primary-font: 'Getaway-Car', 'Cambria', serif;
 $serif: 'Cambria', 'Georgia', serif;
 $sans-serif: 'Alef', 'Trebuchet MS', sans-serif;
 
@@ -33,6 +32,11 @@ $dark-grey: #444;
 $med-grey: #666;
 $light-grey: #ddd;
 
+$success-light: $light-teal;
+$success-dark: white;
+$error-light: $salmon;
+$error-dark: white;
+
 $primary: $blue;
 $primary-light: $teal;
 $primary-nav-main: $blue;
@@ -41,11 +45,6 @@ $secondary-nav-main: $blue;
 $secondary-nav-highlight: $periwinkle;
 $ternary: $blue;
 $ternary-light: $light-blue;
-
-$success-light: $light-teal;
-$success-dark: white;
-$error-light: $salmon;
-$error-dark: white;
 
 
 /* Functional Classes */

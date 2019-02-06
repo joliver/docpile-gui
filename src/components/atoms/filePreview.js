@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FileViewer from 'react-file-viewer'
-import Button from './../components/atoms/button'
-import './../css/views/view.css'
+import Button from './button'
+import './../../css/views/view.css'
 
 class FilePreview extends Component {
   state = {

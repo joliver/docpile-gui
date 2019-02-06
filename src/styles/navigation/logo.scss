@@ -9,11 +9,12 @@
 }
 
 .logo-title {
-  margin-top: 1rem;
+  margin-top: 0;
   margin-left: 1rem;
   color: $primary;
-  font-family: $variane;
-  font-size: 3rem;
+  font-family: $primary-font;
+  font-size: 5rem;
+  letter-spacing: .4rem;
 }
 
 .logo-title:hover {
@@ -24,6 +25,7 @@
 
 .logo-image {
   float: left;
+  margin-top: .5rem;
   width: 3rem;
 }
 
@@ -38,12 +40,12 @@
   }
   
   .logo-title {
-    margin-left: 1rem;
-    font-size: 4rem;
+    margin-left: 1.5rem;
+    // font-size: 4rem;
   }
   
   .logo-image {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     width: 4rem;
   }
 }

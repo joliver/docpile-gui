@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import Loader from '../components/atoms/loader'
-import FilePreview from './filePreview'
+import FilePreview from '../components/atoms/filePreview'
 import Documents from './documents'
-import DocDefine from './docDefine'
 import './../css/views/view.css'
 
 class File extends Component {
@@ -58,7 +58,9 @@ class File extends Component {
               <Documents {...this.props} fileId={id} />
             }
             {!saving && defining && 
-              <DocDefine fileId={id} saving={saving} saveDocument={this.saveDocument.bind(this)} />
+              'doc define here'
+              // FIX this
+              // <Define fileId={id} saving={saving} saveDocument={this.saveDocument.bind(this)} />
             }
             {saving &&
               <Loader /> 
@@ -73,4 +75,4 @@ class File extends Component {
   }
 }
 
-export default File
+export default withRouter(File)

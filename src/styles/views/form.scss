@@ -1,0 +1,95 @@
+@import './../main/variables.scss';
+
+
+/* FORM STYLING */
+
+.form {
+  color: $dark-grey;
+  margin: 3%;
+}
+
+.form .heading {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.form .body {
+  margin-left: 0px;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.form .main-img {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.formbox {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.formbox .label {
+  margin-bottom: 10px;
+}
+
+.formbox .input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: $light-grey;
+  color: $med-grey;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+}
+
+
+/* FORM INPUT STYLING */
+
+/*
+.formbox .button-label {
+  font-size: 1.2rem;
+}
+
+.formbox .button-label .label {
+  margin-bottom: 0;
+}
+
+.formbox .button {
+  float: left;
+  border-radius: 5px;
+  padding: .7rem;
+  padding-top: 1rem;
+  background-color: $primary;
+  color: white;
+}
+
+.formbox .button:hover {
+  background-color: $primary-light;
+}
+*/
+
+/*
+.formbox-link {
+  margin: 0 .2rem;
+}
+
+.formbox-link a {
+  background-color: $primary-light;
+  border-radius: 5px;
+  padding: 7px;
+  margin-top: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.formbox-link a:hover {
+  background-color: lighten($primary-light, 20);
+  color: darken($primary-light, 20);
+  text-decoration: none;
+  cursor: pointer;
+}
+*/
+

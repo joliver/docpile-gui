@@ -1,0 +1,261 @@
+@import './../main/variables.scss';
+
+
+/* REACT-TABLE STYLING */
+
+// sort option buttons above table
+.table-controls {
+  border-radius: 5px;
+  padding: 2%;
+  margin: 1rem 1rem;
+  margin-top: 0;
+}
+
+.table-controls-text {
+  font-family: $sans-serif;
+  font-size: 1.5rem;
+  color: $dark-grey;
+  float: left;
+  margin-right: 2%;
+}
+
+.table-controls-button {
+  margin: 0% 1rem !important;
+}
+
+.table-controls-button.button.float-right {
+  margin-right: 0 !important;
+}
+
+@media(max-width:992px) {
+  .table-controls-button {
+    margin: .5rem 1rem !important;
+  }  
+}
+
+
+// overall styles for table
+.ReactTable {
+  border: none !important;
+  font-family: $sans-serif;
+  color: $med-grey;
+  font-size: 1.5rem;
+}
+
+.rt-thead.-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.rt-td {
+  text-align: center;
+}
+
+// don't display no-data text on react table
+.rt-noData {
+  display: none !important;
+}
+
+
+// sorted column highlight bar on table header
+.rt-th.-sort-asc, .rt-td.-sort-asc {
+  -webkit-box-shadow: inset 0 3px 0 0 $primary-light !important;
+  box-shadow: inset 0 3px 0 0 $primary-light !important;
+}
+
+.rt-th.-sort-desc, .rt-td.-sort-desc {
+  -webkit-box-shadow: inset 0 -3px 0 0 $primary-light !important;
+  box-shadow: inset 0 -3px 0 0 $primary-light !important;
+}
+
+
+// pagination panel below table
+.-pagination {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.-pagination input, .-pagination select {
+  border: none !important;
+}
+
+.-pagination .-btn {
+  color: white !important;
+  background-color: $primary-light !important;
+}
+
+.-pagination .-btn:hover {
+  background-color: $primary-light;
+  cursor: pointer;
+}
+
+.-pageInfo {
+  color: $med-grey !important;
+}
+
+.-pageJump input {
+  color: $med-grey !important;
+}
+
+.-pageSizeOptions select, .-pageSizeOptions option {
+  color: $med-grey !important;
+}
+
+
+// button icons in a table column
+.table-button {
+  text-align: center;
+}
+
+.table-button img {
+  width: 30px;
+  height: 30px;
+}
+
+
+// editing in a table column
+.table-edit-input {
+  float: left;
+  margin-left: 5%;
+  width: 70%;
+  color: $med-grey;
+  text-align: center;
+}
+
+.table-input-button {
+  float: right;
+  margin-right: 5%;
+}
+
+.table-input-button .button-image {
+  width: 2rem;
+}
+
+
+// tags in a table column
+.table-tag {
+  background-color: $primary-light;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.table-tag:hover {
+  text-decoration: none !important;
+  background-color: lighten($primary-light, 20);
+}
+
+
+// a subcomponent and its table row
+.table-subcomponent {
+  margin: 2rem;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.table-subcomponent .header {
+  margin-bottom: 2rem;
+  transform: none;
+  font-size: 3.5rem;
+  letter-spacing: .4rem;
+}
+
+
+// add a row to a table
+.table-add-row {
+  margin-top: 2rem;
+}
+
+.documents-view .table-add-row {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.table-add-plus-button {
+  display: inline-block;
+  margin-left: .5rem;
+}
+
+.table-add-plus-button .button-image {
+  width: 1.5rem;
+  margin-bottom: .2rem;
+}
+
+.table-add-text {
+  display: inline-block;
+  margin-top: .5rem;
+  margin-left: 1.5rem;
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: $med-grey
+}
+
+.table-add-row-input {
+  display: inline-block;
+  width: 20rem;
+  margin-top: 1.2rem;
+  margin-left: 2rem;
+  margin-bottom: 0;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem;
+  background-color: $light-grey;
+  text-align: center;
+  color: $med-grey;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+}
+
+.documents-view .table-add-row-input {
+  width: 40rem;
+}
+
+.table-add-check-button {
+  float: none;
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.table-add-check-button .button-image {
+  width: 2rem;
+}
+
+
+
+// add a row to a table subcomponent
+.subtable-add-row {
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+}
+
+.subtable-add-plus-button {
+  display: inline-block !important;
+  margin-left: .5rem;
+  margin-top: .6rem;
+  width: 2rem;
+}
+
+.subtable-add-plus-button .button-image {
+  width: 1.5rem;
+}
+
+.subtable-add-row-input {
+  display: inline-block !important;
+  width: 20rem;
+  margin-left: 2rem;
+  padding: .5rem;
+  color: $med-grey;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.subtable-add-check-button {
+  float: none;
+  display: inline-block;
+  margin-left: 2rem;
+}
+
+.subtable-add-check-button .button-image {
+  width: 2rem;
+}

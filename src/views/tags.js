@@ -63,11 +63,18 @@ class Tags extends Component {
   /* ADD TAG FUNCTIONALITY */
 
   toggleAddTag = () => {
-    this.setState({ newTag: !this.state.newTag, newName: '' })
+    const { newTag } = this.state
+    this.setState({ newTag: !newTag, newName: '' })
   }
 
   handleNameChange = event => {
     this.setState({ newName: event.target.value })
+  }
+
+  handleNameKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.handleAddTag()
+    }
   }
 
   handleAddTag = () => {
@@ -107,6 +114,12 @@ class Tags extends Component {
     this.setState({ editName: event.target.value })
   }
 
+  handleReNameKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.handleRename()
+    }
+  }
+
   handleRename = () => {
     const { editId, editName, originalName } = this.state
     if (!editName || editName === originalName) {
@@ -132,7 +145,7 @@ class Tags extends Component {
 
   /* CREATE ALIAS FUNCTIONALITY */
 
-  toggleAddAlias = (rowIndex, tagId) => {
+  toggleAddAlias = tagId => {
     let { newAliasTagId } = this.state
     newAliasTagId = newAliasTagId ? null : tagId
     this.setState({ newAliasTagId, newAlias: '' })
@@ -140,6 +153,12 @@ class Tags extends Component {
 
   handleAliasNameChange = event => {
     this.setState({ newAlias: event.target.value })
+  }
+
+  handleAliasKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.handleAddAlias()
+    }
   }
 
   handleAddAlias = () => {
@@ -168,15 +187,15 @@ class Tags extends Component {
   /* DELETE TAG AND ALIAS FUNCTIONALITY */
 
   closeModal = () => {
-    this.setState({ showModal: false, deleteID: null, deleteAlias: null })
+    this.setState({ showModal: false, deleteId: null, deleteAlias: null })
   }
 
   showDeleteModal = id => {
     this.setState({ showModal: true, deleteId: id })
   }
 
-  showDeleteAliasModal = alias => {
-    this.setState({ showModal: true, deleteAlias: alias })
+  showDeleteAliasModal = (tagId, alias) => {
+    this.setState({ showModal: true, deleteId: tagId, deleteAlias: alias })
   }
 
   closeButton = <Button label='&times;' onClick={this.closeModal} />
@@ -278,7 +297,7 @@ class Tags extends Component {
 
   tagsRender = row => (
     row.value ? row.value.map(alias => (
-      <Button cssLabel='table-tag' key={alias.name} label={alias.name} src={null} />
+      <Button className='table-tag' key={alias.name} label={alias.name} src={null} />
     )) : ''
   )
 
@@ -349,17 +368,23 @@ class Tags extends Component {
       accessor: 'name',
       id: 'delete',
       Cell: row => (
-        <span className='table-button'><Button src={deleted} label='' onClick={() => this.showDeleteAliasModal(row.value)} /></span>
+        <span className='table-button'>
+          <Button
+            src={deleted}
+            label=''
+            onClick={() => this.showDeleteAliasModal(row.original.tag_id, row.value)}
+          />
+        </span>
       ),
       filterable: false,
       sortable: false,
-      width: 100
+      minWidth: 100
     }
   ]
 
   aliasRender = row => (
     <div className='table-subcomponent'>
-      <h6 className='header'>Alias Manager</h6>
+      <div className='header'>Alias Manager</div>
       <ReactTable
         className='-highlight'
         data={row.original.synonyms}
@@ -370,21 +395,31 @@ class Tags extends Component {
       />
       <div className='subtable-add-row'>
         <Button
-          cssLabel='subtable-add-plus-button'
+          className='subtable-add-plus-button'
           src={this.state.newAliasTagId ? minus : plus}
-          onClick={() => this.toggleAddAlias(row.index, row.original.tag_id)}
+          onClick={() => this.toggleAddAlias(row.original.tag_id)}
         />
-        {!this.state.newAliasTagId && <span className='table-add-text'>Click here to add an alias.</span>}
+        {!this.state.newAliasTagId && 
+          <span
+            className='table-add-text'
+            onClick={() => this.toggleAddAlias(row.original.tag_id)}
+          >
+            Click here to add an alias.
+          </span>
+        }
         {this.state.newAliasTagId &&
           <span>
             <input 
               className='subtable-add-row-input'
               name='newAlias'
               placeholder='enter a name for the new alias'
-              value={this.state.toggleAddAlias} 
+              value={this.state.toggleAddAlias}
               onChange={this.handleAliasNameChange}
+              onKeyPress={this.handleAliasKeyPress}
+              onFocus={event => event.target.select()}
+              autoFocus
             />
-            <Button cssLabel='subtable-add-check-button' src={check} onClick={this.handleAddAlias} />
+            <Button className='subtable-add-check-button' src={check} onClick={this.handleAddAlias} />
           </span>
         }
       </div>
@@ -447,8 +482,11 @@ class Tags extends Component {
               placeholder='rename this tag'
               value={this.state.editName} 
               onChange={this.handleRenameChange}
+              onKeyPress={this.handleReNameKeyPress}
+              onFocus={event => event.target.select()}
+              autoFocus
             />
-            <Button cssLabel='table-input-button' src={check} onClick={this.handleRename}></Button>
+            <Button className='table-input-button' src={check} onClick={this.handleRename}></Button>
           </span> :
           <span>{row.value}</span>
       ),
@@ -473,11 +511,13 @@ class Tags extends Component {
       Header: 'Delete',
       accessor: 'tag_id',
       Cell: row => (
-        <span className='table-button'><Button src={deleted} label='' onClick={() => this.showDeleteModal(row.value)} /></span>
+        <span className='table-button'>
+          <Button src={deleted} label='' onClick={() => this.showDeleteModal(row.value) } />
+        </span>
       ),
       filterable: false,
       sortable: false,
-      width: 100
+      minWidth: 100
     }
   ]
 
@@ -493,10 +533,10 @@ class Tags extends Component {
         <Modal isOpen={showModal} backdrop={true} close={this.closeButton}>
           <ModalBody>
             <p>Are you sure you want to delete this {deleteAlias ? 'alias' : 'tag'}?</p>
-            <Button cssLabel='submit' label='Delete' onClick={this.handleDelete} />
-            <Button cssLabel='cancel' label='Cancel' onClick={this.closeModal} />
+            <Button className='submit' label='Delete' onClick={this.handleDelete} />
+            <Button className='cancel' label='Cancel' onClick={this.closeModal} />
             {!deleteAlias && 
-              <Button cssLabel='reverse right' label='View Tag' link={`/tags/${deleteId}`} />
+              <Button className='reverse right' label='View Tag' link={`/tags/${deleteId}`} />
             }
           </ModalBody>
         </Modal>
@@ -509,12 +549,12 @@ class Tags extends Component {
             <div className='table-controls'>
               <span className='table-controls-text'>View Options:</span>
               <Button
-                cssLabel='reverse table-controls-button'
+                className='reverse table-controls-button'
                 label={relativeDates ? 'Using Relative Dates' : 'Using Absolute Dates'} 
                 onClick={this.toggleDateRender}
               />
               <Button
-                cssLabel='reverse table-controls-button'
+                className='reverse table-controls-button'
                 label={filterDatesBy === 'day' ? 'Dates Filtered by Day' : 'Dates Filtered by Month'}
                 onClick={this.toggleDateFilter}
               />
@@ -525,7 +565,7 @@ class Tags extends Component {
               data={tags}
               columns={this.columns}
               SubComponent={this.aliasRender}
-              minRows={3}
+              minRows={1}
               defaultPageSize={10}
               showPagination={tags.length > 10}
               defaultSorted={[{ id: 'timestamp', desc: false }]}
@@ -539,8 +579,8 @@ class Tags extends Component {
               }}
             />
             <div className='table-add-row'>
-              <Button cssLabel='table-add-plus-button' src={newTag ? minus : plus} onClick={this.toggleAddTag} />
-              {!newTag && <span className='table-add-text'>Click here to add a tag.</span>}
+              <Button className='table-add-plus-button' src={newTag ? minus : plus} onClick={this.toggleAddTag} />
+              {!newTag && <span className='table-add-text' onClick={this.toggleAddTag}>Click here to add a tag.</span>}
               {newTag &&
                 <span>
                   <input 
@@ -549,8 +589,11 @@ class Tags extends Component {
                     placeholder='enter a name for the new tag'
                     value={newName} 
                     onChange={this.handleNameChange}
+                    onKeyPress={this.handleNameKeyPress}
+                    onFocus={event => event.target.select()}
+                    autoFocus
                   />
-                  <Button cssLabel='table-add-check-button' src={check} onClick={this.handleAddTag} />
+                  <Button className='table-add-check-button' src={check} onClick={this.handleAddTag} />
                 </span>
               }
             </div>

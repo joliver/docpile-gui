@@ -38,8 +38,7 @@ class App extends Component {
             messages={this.state.messages}
             makeMessageCloser={this.makeMessageCloser}             
           />
-          <Main 
-            match={this.props.match}
+          <Main
             fetcher={this.state.fetcher}
             data={this.state.data}
             sendMessage={this.sendMessage}

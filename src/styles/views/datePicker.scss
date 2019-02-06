@@ -1,0 +1,66 @@
+@import './../main/variables.scss';
+@import './../../../node_modules/react-datepicker/dist/react-datepicker.css';
+
+/* DATEPICKER STYLING */
+
+.react-datepicker-wrapper, .react-datepicker__input-container {
+  width: 100%;
+}
+
+.react-datepicker {
+  border: none;
+  font-size: 1rem;
+}
+
+.react-datepicker-popper {
+  margin-top: 20px;
+}
+
+.react-datepicker__triangle {
+  margin-top: -15px;
+  border: 15px solid transparent;
+}
+
+.react-datepicker__header {
+  border: none;
+  padding: 1rem;
+}
+
+.react-datepicker__navigation {
+  top: 1.1rem;
+  border: .7rem solid transparent;
+}
+
+.react-datepicker__current-month {
+  font-size: 1.3rem;
+  color: $dark-grey !important;
+}
+
+.react-datepicker__day-name {
+  font-size: 1rem;
+  color: $med-grey !important;
+  margin: .5rem .8rem .1rem .8rem !important;
+}
+
+.react-datepicker__month {
+  margin: 1rem !important;
+}
+
+.react-datepicker__day {
+  width: 2rem !important;
+  color: $med-grey !important;
+  font-size: 1rem !important;
+  padding: .3rem !important;
+  margin: .3rem .5rem .3rem .5rem !important;
+}
+
+.react-datepicker__day--selected {
+  color: white !important;
+}
+
+.react-datepicker__today-button {
+  border: none !important;
+  padding: 1rem !important;
+  color: $dark-grey !important;
+  font-size: 1.2rem !important;
+}

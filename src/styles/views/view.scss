@@ -1,6 +1,8 @@
 @import './../main/variables.scss';
 
 
+/* GENERAL VIEW STYLING */
+
 .view {
   margin: 0 10%;
 }
@@ -10,7 +12,8 @@
 }
 
 .title, .welcome {
-  font-family: $variane;
+  font-family: $primary-font;
+  letter-spacing: .1rem;
   color: $light-grey;
 }
 
@@ -20,26 +23,36 @@
 
 .title {
   text-align: center;
-  margin-bottom: 2%;
+  transform: scale(1.5, 1);
+  margin-bottom: 1rem;
 }
 
 .welcome {
+  transform-origin: left top;
+  transform: scale(1.5, 1);
   margin-top: 2%;
   margin-bottom: 2%;
 }
 
 .header {
-  font-family: $variane;
+  font-family: $primary-font;
+  transform-origin: left top;
+  transform: scale(1.5, 1);
+  letter-spacing: .2rem;
   font-size: 3rem;
   color: $med-grey;
+}
+
+.secondary-header {
+  margin: 2rem 0;
+  letter-spacing: .1rem;
 }
 
 .description {
   color: $med-grey;
   font-size: 1.5rem;
-  font-style: italic;
-  margin-top: 1.5rem !important;
-  margin-bottom: 0 !important;
+  margin-top: 1.1rem !important;
+  margin-bottom: .5 !important;
 }
 
 .highlight-img, .option-img {
@@ -48,14 +61,44 @@
 }
 
 .preview-text {
-  font-family: $variane;
+  font-family: $sans-serif;
   color: $light-grey;
-  font-size: 3rem;
+  font-size: 1.5rem;
   margin: 20% 30%;
 }
 
 
+/* STYLING FOR NON-MOBILE VIEWS */
+
+@media(min-width:992px) {
+  #home.view {
+    margin: 0 18%;
+  }
+  
+  .highlight-img {
+    margin: 0 30%;
+    width: 40%;
+  }
+
+  .option-img {
+    margin: 0 10%;
+    margin-top: 6rem;
+    width: 100%;
+  }
+}
+
+@media(min-width:1200px) {
+  .highlight-img {
+    margin: 0 25%;
+    margin-left: 35%;
+    width: 36%;
+  }
+}
+
+
 /* SPECIFIC VIEW STYLING */
+
+// Upload Views
 
 .file-upload {
   position: relative;
@@ -80,38 +123,17 @@
   margin-bottom: 6rem;
 }
 
-.pg-viewer-wrapper {
-  height: auto !important;
+.hidden-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
-.photo-viewer-container {
-  margin: 2rem 0;
-  height: auto !important;
-  width: 100% !important;
-}
+// React Table Views
 
-.photo-viewer-container img {
-  height: auto !important;
-  width: 100% !important;
-}
-
-.file-preview .button {
-  margin-bottom: 1rem;
-}
-
-.file-preview.closed .button {
-  margin-bottom: 0;
-}
-
-.view-button.button.reverse {
-  margin-left: 2%;
-}
-
-
-
-/* REACT-TABLE STYLING */
-
-// overall styles for page with table
 .table-view {
   position: relative;
   margin: 3% 8%;
@@ -122,304 +144,9 @@
 }
 
 
-// sort option buttons above table
-.table-controls {
-  border-radius: 5px;
-  padding: 2%;
-  margin: 3% 1%;
-  margin-bottom: 1%;
-}
-
-.table-controls-text {
-  font-family: $sans-serif;
-  font-size: 1.5rem;
-  color: $dark-grey;
-  float: left;
-  margin-right: 2%;
-}
-
-.table-controls-button {
-  margin: 0% 1rem !important;
-}
-
-.table-controls-button.button.float-right {
-  margin-right: 0 !important;
-}
-
-
-// overall styles for table
-.ReactTable {
-  border: none !important;
-  font-family: $sans-serif;
-  color: $med-grey;
-  font-size: 1.5rem;
-}
-
-.rt-thead.-header {
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-
-.rt-td {
-  text-align: center;
-}
-
-// don't display no-data text on react table
-.rt-noData {
-  display: none !important;
-}
-
-
-// sorted column highlight bar on table header
-.rt-th.-sort-asc, .rt-td.-sort-asc {
-  -webkit-box-shadow: inset 0 3px 0 0 $primary-light !important;
-  box-shadow: inset 0 3px 0 0 $primary-light !important;
-}
-
-.rt-th.-sort-desc, .rt-td.-sort-desc {
-  -webkit-box-shadow: inset 0 -3px 0 0 $primary-light !important;
-  box-shadow: inset 0 -3px 0 0 $primary-light !important;
-}
-
-
-// pagination panel below table
-.-pagination {
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-.-pagination input, .-pagination select {
-  border: none !important;
-}
-
-.-pagination .-btn {
-  color: white !important;
-  background-color: $primary-light !important;
-}
-
-.-pagination .-btn:hover {
-  background-color: $primary-light;
-  cursor: pointer;
-}
-
-.-pageInfo {
-  color: $med-grey !important;
-}
-
-.-pageJump input {
-  color: $med-grey !important;
-}
-
-.-pageSizeOptions select, .-pageSizeOptions option {
-  color: $med-grey !important;
-}
-
-
-// button icons in a table column
-.table-button {
-  text-align: center;
-}
-
-.table-button img {
-  width: 30px;
-  height: 30px;
-}
-
-
-// editing in a table column
-.table-edit-input {
-  float: left;
-  margin-left: 5%;
-  width: 70%;
-  color: $med-grey;
-  text-align: center;
-}
-
-.table-input-button {
-  float: right;
-  margin-right: 5%;
-}
-
-.table-input-button .button-image {
-  width: 2rem;
-}
-
-
-// tags in a table column
-.table-tag {
-  background-color: $primary-light;
-  border-radius: 5px;
-  margin: 5px;
-}
-
-.table-tag:hover {
-  text-decoration: none !important;
-  background-color: lighten($primary-light, 20);
-}
-
-
-// a subcomponent and its table row
-.table-subcomponent {
-  margin: 2rem;
-  border-radius: 5px;
-  padding: 1rem;
-}
-
-.table-subcomponent .header {
-  margin-bottom: 2rem;
-}
-
-
-// add a row to a table
-.table-add-row {
-  margin-top: 2rem;
-}
-
-.documents-view .table-add-row {
-  margin-top: 1rem;
-  margin-left: 1rem;
-}
-
-.table-add-plus-button {
-  display: inline-block;
-  margin-left: .5rem;
-  margin-top: .6rem;
-}
-
-.table-add-plus-button .button-image {
-  width: 1.5rem;
-}
-
-.table-add-text {
-  display: inline-block;
-  margin-left: 2rem;
-  padding-top: 1rem;
-  font-size: 1.2rem;
-  font-style: italic;
-}
-
-.table-add-row-input {
-  display: inline-block;
-  width: 20rem;
-  margin-left: 2rem;
-  padding: .5rem;
-  color: $med-grey;
-  text-align: center;
-}
-
-.documents-view .table-add-row-input {
-  width: 40rem;
-}
-
-.table-add-check-button {
-  float: none;
-  display: inline-block;
-  margin-left: 2rem;
-}
-
-.table-add-check-button .button-image {
-  width: 2rem;
-}
-
-
-
-// add a row to a table subcomponent
-.subtable-add-row {
-  margin-top: .5rem;
-  margin-bottom: 1rem;
-}
-
-.subtable-add-plus-button {
-  display: inline-block !important;
-  margin-left: .5rem;
-  margin-top: .6rem;
-  width: 2rem;
-}
-
-.subtable-add-plus-button .button-image {
-  width: 1.5rem;
-}
-
-.subtable-add-row-input {
-  display: inline-block !important;
-  width: 20rem;
-  margin-left: 2rem;
-  padding: .5rem;
-  color: $med-grey;
-  text-align: center;
-  font-size: 1rem;
-}
-
-.subtable-add-check-button {
-  float: none;
-  display: inline-block;
-  margin-left: 2rem;
-}
-
-.subtable-add-check-button .button-image {
-  width: 2rem;
-}
-
-
-
-/* STYLING FOR NON-MOBILE VIEWS */
-
-@media(min-width:992px) {
-  #home.view {
-    margin: 0 18%;
-  }
-  
-  #side.view {
-    margin: 0 10%;
-  }
-
-  .highlight-img {
-    margin: 0 30%;
-    width: 40%;
-  }
-
-  .option-img {
-    margin: 0 10%;
-    margin-top: 6rem;
-    width: 100%;
-  }
-}
-
-
-/* File Picker */
-
-.hidden-input {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-
-
-/* File Viewer */
-.pdf-canvas canvas {
-  width: 60%;
-  height: 30%;
-}
-
-.pdf-viewer {
-  max-height: 20rem;
-}
-
-@media(min-width:1200px) {
-  .highlight-img {
-    margin: 0 25%;
-    margin-left: 35%;
-    width: 36%;
-  }
-}
-
-
-@media(max-width:992px) {
-  .table-controls-button {
-    margin: .5rem 1rem !important;
-  }  
-}
+// IMPORT ALL SPECIALIZED VIEW STYLING
+
+@import './datePicker.scss';
+@import './fileViewer.scss';
+@import './form.scss';
+@import './reactTable.scss';

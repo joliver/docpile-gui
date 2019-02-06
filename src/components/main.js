@@ -4,10 +4,9 @@ import { Route, Switch } from 'react-router-dom'
 import './../css/main/main.css'
 
 import Home from './../views/home'
-import Side from './../views/side'
-import NotYet from './../views/notyet'
-
 import Upload from '../views/upload'
+import Define from '../views/define'
+import Add from '../views/add'
 import File from '../views/file'
 import Documents from '../views/documents'
 import Document from './../views/document'
@@ -19,15 +18,15 @@ const Main = (props) => (
     <AnimatedRoute>
       {location => (
         <Switch location={location}>
-          <Route exact path='/' render={({ match }) => <Home {...props} match={match} />} />
-          <Route exact path='/upload' render={({ match }) => <Upload {...props} match={match} />} />
-          <Route exact path='/files/:id' render={({ match }) => <File {...props} match={match} />} />
-          <Route exact path='/documents' render={({ match }) => <Documents {...props} match={match} />} />
-          <Route path='/documents/:id' render={({ match }) => <Document {...props} match={match} />} />
-          <Route exact path='/tags' render={({ match }) => <Tags {...props} match={match} />} />
-          <Route path='/tags/:id' render={({ match }) => <Tag {...props} match={match} />} />
-          <Route exact path='/sidetest' render={({ match }) => <Side {...props} match={match} />} />
-          <Route path='/notyet' render={({ match }) => <NotYet {...props} match={match} />} />
+          <Route exact path='/' render={() => <Home {...props} />} />
+          <Route exact path='/upload' render={() => <Upload {...props} />} />
+          <Route exact path='/uploaded/:fileId' render={() => <Define {...props} />} />
+          <Route exact path='/defined/:fileId/:documentId' render={() => <Add {...props} />} />
+          <Route exact path='/files/:id' render={() => <File {...props} />} />
+          <Route exact path='/documents' render={() => <Documents {...props} />} />
+          <Route path='/documents/:id' render={() => <Document {...props} />} />
+          <Route exact path='/tags' render={() => <Tags {...props} />} />
+          <Route path='/tags/:id' render={() => <Tag {...props} />} />
         </Switch>
       )}
     </AnimatedRoute>      

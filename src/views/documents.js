@@ -88,8 +88,15 @@ class Documents extends Component {
   /* ADD DOCUMENT FUNCTIONALITY (FOR FILE VIEW ONLY) */
 
   toggleAddDocument = () => {
-    this.setState({ newDoc: !this.state.newDoc, newDocDesc: '' })
+    const { newDoc } = this.state
+    this.setState({ newDoc: !newDoc, newDocDesc: '' })
   }
+
+  handleDescriptionKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.handleAddDocument()
+    }
+  }  
 
   handleDescriptionChange = event => {
     this.setState({ newDocDesc: event.target.value })
@@ -104,7 +111,10 @@ class Documents extends Component {
     }
   }
 
+  // FIX
   async addDocument (description) {
+    // should redirect to the Define page with the description set
+
     this.setState({ loading: true })
     /* also need these values:
       	"asset_offset": 0,
@@ -216,17 +226,19 @@ class Documents extends Component {
   /* TABLE RENDERING AND FILTERING BY TAG */
 
   tagsRender = row => (
-    row.value.map(tagId => (
-      <Button cssLabel='table-tag' key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} src={null} />
-    ))
+    row.value ? row.value.map(tagId => (
+      <Button className='table-tag' key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} src={null} />
+    )) : ''
   )
+
+  // FIX (remove this)
 
   // later make its own component
   /*
   tagsRender = row => (
     row.value.map(tagId => (
       <span>
-        <Button cssLabel='table-tag' id={`table-tag-${tagId}`} key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} />
+        <Button className='table-tag' id={`table-tag-${tagId}`} key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} />
         {'synonyms' in this.getTagObject(tagId) &&
           <Tooltip placement="right" isOpen={true} target={`table-tag-${tagId}`}>
             {this.getTagObject(tagId).synonyms.map(alias => (
@@ -274,9 +286,11 @@ class Documents extends Component {
 
 
 
+  // FIX - use tagAdder
+
   /* TAG MANAGER SUBCOMPONENT */
 
-  // Some time when tags are allowed to be interactively added and removed from a document,
+  // If some time later tags are allowed to be interactively added and removed from a document,
   // add a tag manager sub component, similar to the alias manager subcomponent in the tags view.
 
   /* RENDERS THE TAG MANAGER SUBCOMPONENT TABLE */
@@ -323,7 +337,7 @@ class Documents extends Component {
         showPagination={false}
       />
       <div className='subtable-add-row'>
-        <Button cssLabel='subtable-add-plus-button' src={plus} onClick={() => this.toggleAddTag(original.tag_id)} />
+        <Button className='subtable-add-plus-button' src={plus} onClick={() => this.toggleAddTag(original.tag_id)} />
         {this.state.newAliasTagId &&
           <span>
             <input 
@@ -333,7 +347,7 @@ class Documents extends Component {
               value={this.state.toggleAddTag} 
               onChange={this.handleTagNameChange}
             />
-            <Button cssLabel='subtable-add-check-button' src={check} onClick={this.handleAddTag} />
+            <Button className='subtable-add-check-button' src={check} onClick={this.handleAddTag} />
           </span>
         }
       </div>
@@ -360,7 +374,7 @@ class Documents extends Component {
   }
 
   // This should render a modal and/or just create a new tag if a tag being added doesn't exist.
-  // It should potentially also suggest existing tags, similar to the search UI.
+  // It should also suggest existing tags, 
 
   */
 
@@ -469,9 +483,17 @@ class Documents extends Component {
   /* RENDERS THE OVERALL VIEW AND MAIN TABLE */
   
   render () {
-    const { documents, loading, newDoc, newDocDesc, showModal, deleteId, relativeDates, filterDatesBy } = this.state
-    const loaded = documents ? true : false
-
+    const {
+      documents,
+      loading,
+      newDoc,
+      newDocDesc,
+      showModal,
+      deleteId,
+      relativeDates,
+      filterDatesBy
+    } = this.state
+  
     // set title and columns based on whether this is all documents, documents by file, documents by tag
     let title = this.props.fileId ? 'Documents in this File' : 'All Documents'
     title = this.props.tagId ? 'Documents with this Tag' : title
@@ -484,26 +506,26 @@ class Documents extends Component {
         <Modal isOpen={showModal} toggle={this.toggleModal} backdrop={true} close={this.closeButton}>
           <ModalBody>
             <p>Are you sure you want to delete this document?</p>
-            <Button cssLabel='submit ml-1' label='View Document' link={`/documents/${deleteId}`} />
-            <Button cssLabel='submit ml-2' label='Delete' onClick={() => this.handleDelete(deleteId)} />
-            <Button cssLabel='cancel right' label='Cancel' onClick={this.toggleModal} />
+            <Button className='submit ml-1' label='View Document' link={`/documents/${deleteId}`} />
+            <Button className='submit ml-2' label='Delete' onClick={() => this.handleDelete(deleteId)} />
+            <Button className='cancel right' label='Cancel' onClick={this.toggleModal} />
           </ModalBody>
         </Modal>
         <h4 className={titleClass}>{title}</h4>
         {loading &&
           <Loader />
         }
-        {loaded &&
+        {!loading && documents &&
           <span>
             <div className='table-controls'>
               <span className='table-controls-text'>View Options:</span>
               <Button
-                cssLabel='reverse table-controls-button'
+                className='reverse table-controls-button'
                 label={relativeDates ? 'Using Relative Dates' : 'Using Absolute Dates'} 
                 onClick={this.toggleDateRender}
               />
               <Button
-                cssLabel='reverse table-controls-button'
+                className='reverse table-controls-button'
                 label={filterDatesBy === 'day' ? 'Dates Filtered by Day' : 'Dates Filtered by Month'}
                 onClick={this.toggleDateFilter}
               />
@@ -513,7 +535,7 @@ class Documents extends Component {
               className='-highlight'
               data={documents}
               columns={columns}
-              minRows={3}
+              minRows={1}
               defaultPageSize={10}
               showPagination={documents.length > 10}
               defaultSorted={[{ id: 'timestamp', desc: false }]}
@@ -522,25 +544,32 @@ class Documents extends Component {
             />
             {this.props.fileId &&
               <div className='table-add-row'>
-                <Button cssLabel='table-add-plus-button' src={newDoc ? minus : plus} onClick={this.toggleAddDocument} />
-                {!newDoc && <span className='table-add-text'>Click here to add a document.</span>}
+                <Button className='table-add-plus-button' src={newDoc ? minus : plus} onClick={this.toggleAddDocument} />
+                {!newDoc && 
+                  <span className='table-add-text' onClick={this.toggleAddDocument}>
+                    Click here to add a document.
+                  </span>
+                }
                 {newDoc &&
                   <span>
                     <input 
                       className='table-add-row-input'
                       name='newDocDesc'
                       placeholder='to add a document, enter a description for the new document'
-                      value={newDocDesc} 
+                      value={newDocDesc}
+                      onKeyPress={this.handleDescriptionKeyPress}
                       onChange={this.handleDescriptionChange}
+                      onFocus={event => event.target.select()}
+                      autoFocus        
                     />
-                    <Button cssLabel='table-add-check-button' src={check} onClick={this.handleAddDocument} />
+                    <Button className='table-add-check-button' src={check} onClick={this.handleAddDocument} />
                   </span>
                 }
               </div>
             }
           </span>
         }
-        {!loading && !loaded &&
+        {!loading && !documents &&
           <p className='preview-text'>A list of documents could not be displayed.</p>
         }
       </div>

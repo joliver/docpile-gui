@@ -97,10 +97,19 @@ class Fetcher {
         })
       }
       const code = response.status
-      const data = await response.json()
+
+      // this handles empty 200 responses from the server
+      let data = null
+      try {
+        data = await response.json()
+      } catch (data) { 
+        /* eslint-disable no-throw-literal */
+        if (code !== 200 && code !== 201) { throw { code, data } }
+      }
       
       /* eslint-disable no-throw-literal */
       if (code !== 200 && code !== 201) { throw { code, data } }
+
       return { success: true, messages: null, data }
       // { success: true, messages: null, data: { --- } }
              
@@ -122,7 +131,7 @@ class Fetcher {
         const synonyms = []
         if (tag.synonyms) {
           for (let key in tag.synonyms) {
-            synonyms.push( { name: key, timestamp: tag.synonyms[key], tagId: tag.tag_id } )
+            synonyms.push( { name: key, timestamp: tag.synonyms[key], tag_id: tag.tag_id } )
           }
           tag.synonyms = synonyms
         }
@@ -149,13 +158,13 @@ class Fetcher {
       /*
         // standardize synonyms to an array of objects
         data.data.synonyms = [
-          { name: "name", timestamp: "2012-12-12T00:00:00Z", tagId: 000 },
+          { name: "name", timestamp: "2012-12-12T00:00:00Z", tag_id: 000 },
           { ... }
         ]
       */
       const synonyms = []
       for (let key in data.data.synonyms) {
-        synonyms.push( { name: key, timestamp: data.data.synonyms[key], tagId: data.data.tag_id } )
+        synonyms.push( { name: key, timestamp: data.data.synonyms[key], tag_id: data.data.tag_id } )
       }
       data.data.synonyms = synonyms
     }
@@ -205,7 +214,7 @@ class Fetcher {
     const route = `/tags/${tagId}`
     const data = await this.fetchIt(route, 'DELETE')
     if (data.success) { 
-      data.messages = [ `Tag "${data.data.tag_name}" successfully deleted.` ] 
+      data.messages = [ `Tag successfully deleted.` ] 
       data.data = null
     }
     return data // { success: true, messages: [ 'success' ], data: null }

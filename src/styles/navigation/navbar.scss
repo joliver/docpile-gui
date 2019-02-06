@@ -112,22 +112,25 @@
   .navbar-spread {
     display: block;
     float: right;
-    margin-top: .5rem;
+    margin-top: 2rem;
     margin-right: 1rem;
+    font-family: $primary-font;
+    font-size: 3rem;
+    letter-spacing: .4rem;
   }
   
   .navbar-spread {
     .navlink {
       color: $primary-nav-main;
       float: right;
-      font-size: 1.2rem;
       border-radius: 5px;
-      padding: .5rem;
+      padding: .1rem 1rem .1rem 1rem;
       margin: .5rem;
       margin-top: 1rem;
     }
     
-    .navlink::after { /* protects positioning during hover-bold */
+    /*
+    .navlink::after { // protects positioning during hover-bold
       display: block;
       content: attr(label);
       font-weight: bold;
@@ -135,19 +138,20 @@
       overflow: hidden;
       visibility: hidden;
     }
+    */
     
     .navlink:hover,
     .navlink:focus {
       background-color: $primary-nav-highlight;
       color: white;
-      font-weight: bold;
+      // font-weight: bold;
     }
 
     .navlink:active,
     .navlink.active {
       background-color: $primary-nav-highlight;
       color: white;
-      font-weight: bold;
+      // font-weight: bold;
     }
   }
 }

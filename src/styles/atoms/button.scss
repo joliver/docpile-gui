@@ -88,6 +88,21 @@
   background-color: $light-grey;
 }
 
+.button.narrative {
+  background-color: $light-grey;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 15px;
+  padding-bottom: 10px;
+  margin: 2rem;
+  margin-left: 0;
+}
+
+.button.narrative:hover {
+  background-color: $primary-light;
+}
+
 .button.hover-bold:hover {
   font-weight: bold;
 }
