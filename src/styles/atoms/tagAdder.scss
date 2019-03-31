@@ -1,1 +1,11 @@
 @import './../main/variables.scss';
+
+.tag-adder-text {
+  margin-left: .5rem;
+  margin-bottom: .5rem;
+  border-top: 1px solid $med-grey;
+  padding-top: .5rem;
+  color: $med-grey;
+  font-size: 1rem;
+  font-style: italic;
+}

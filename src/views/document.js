@@ -66,7 +66,7 @@ class Document extends Component {
   
   render () {
     const { document, tags, loading } = this.state
-    console.log('document', document)
+    // console.log('document', document)
     return (
       <div className='table-view'>
         {loading &&

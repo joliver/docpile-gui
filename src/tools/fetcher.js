@@ -340,7 +340,37 @@ class Fetcher {
         "indexes": [ 0, 1, 2, 3 ] // where in the text it matches up
       }
     */
-    return data // { success: true, messages: null, data: [ { ---tag search response object--- }, ... ] }
+    
+    // mock response as currently tag search doesn't return results
+    if (!data.success) {
+      return data // { success: true, messages: null, data: [ { ---tag search response object--- }, ... ] }
+    }
+    return {
+      success: true,
+      messages: null,
+      data: [ 
+        { tag_id: 1549148639,
+          text: "alias",
+          synonym: true,
+          indexes: [0, 1, 2, 3]
+        },
+        { tag_id: 1549148639,
+          text: "testing",
+          synonym: false,
+          indexes: [2, 3]
+        },
+        { tag_id: 1549247562,
+          text: "add a tag",
+          synonym: false,
+          indexes: [6, 7, 8]
+        },
+        { tag_id: 1549247831,
+          text: "testingasdfjaklsdfjkl",
+          synonym: false,
+          indexes: [15, 16, 17]
+        },
+      ]
+    }
   }
 }
 

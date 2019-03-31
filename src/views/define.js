@@ -162,6 +162,7 @@ class Define extends Component {
                   )}
                   {this.inForm('tags', 
                     <TagAdder
+                      tags={document.tags}
                       fetcher={this.props.fetcher}
                       sendMessage={this.props.sendMessage}
                       updateTags={this.handleChangeTags}

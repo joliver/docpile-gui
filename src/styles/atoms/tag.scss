@@ -1,1 +1,21 @@
 @import './../main/variables.scss';
+
+.table-tag {
+  float: left;
+  padding: .5rem;
+  margin: .5rem;
+}
+
+.bold {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.tag-alias {
+  background-color: lighten($primary, 25);
+}
+
+.tag-alias:hover {
+  background-color: lighten($primary, 35);
+}
