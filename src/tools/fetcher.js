@@ -243,7 +243,10 @@ class Fetcher {
     const data = await this.fetchIt('/documents', 'GET')
     if (data.success) {
       const docs = data.data.filter(doc => {
-        return doc.tags.includes(tagId)
+        if (doc.tags) {
+          return doc.tags.includes(tagId)
+        }
+        return false
       })
       data.data = docs
     }

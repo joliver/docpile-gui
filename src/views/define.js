@@ -15,8 +15,8 @@ class Define extends Component {
     submitted: false,
     saving: false,
     document: {
-      fileId: this.props.match.params.fileId,
-      description: undefined,
+      fileId: this.props.match.params.fileId ? this.props.match.params.fileId : this.props.fileId,
+      description: this.props.description ? this.props.description : undefined,
       pageNumber: undefined,
       publishedDate: undefined,
       startDate: undefined,
@@ -61,7 +61,15 @@ class Define extends Component {
     this.props.sendMessage(data.messages[0], !data.success)
     if (data.success) { 
       this.setState({ saving: false })
-      this.props.history.push(`/defined/${fileId}/${data.data.document_id}`)
+
+      // if this is rendering inside the file view, trigger the parent to reload
+      if (this.props.fileView) {
+        this.props.postSave()
+
+      // if not, redirect to the newly created document
+      } else {
+        this.props.history.push(`/defined/${fileId}/${data.data.document_id}`)
+      }
     }
   }
 

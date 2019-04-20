@@ -39,6 +39,18 @@
 }
 
 
+// non-mobile form styling
+@media(min-width:992px) {
+  .form .heading {
+    font-size: 1.3rem;
+  }
+
+  .form .body {
+    font-size: 1.1rem;
+  }
+}
+
+
 /* FORM INPUT STYLING */
 
 /*

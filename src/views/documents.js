@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, ModalBody } from 'reactstrap'
 import ReactTable from 'react-table'
+import Define from './define'
 import Button from '../components/atoms/button'
 import Loader from '../components/atoms/loader'
 import moment from 'moment'
@@ -21,6 +22,7 @@ class Documents extends Component {
     loading: false,
 
     // add functionality (for file view only)
+    defining: false,
     newDoc: false,
     newDocDesc: '',
 
@@ -103,37 +105,18 @@ class Documents extends Component {
   }
 
   handleAddDocument = () => {
-    const { newDocDesc } = this.state
+    const { defining, newDocDesc } = this.state
     if (!newDocDesc) {
       this.setState({ newDoc: false })
-    } else {
-      this.addDocument(newDocDesc)
+    } else if (!defining) {
+      this.setState({ defining: true })
     }
   }
 
-  // FIX
-  async addDocument (description) {
-    // should redirect to the Define page with the description set
-
-    this.setState({ loading: true })
-    /* also need these values:
-      	"asset_offset": 0,
-  	    "published": "2012-12-12T00:00:00Z",
-  	    "period_min": "2012-12-12T00:00:00Z",
-      	"period_max": "2012-12-13T00:00:00Z",
-      	"tags": [ 000, ... ],
-    */
-    // const data = await this.props.fetcher.defineDocument(body)
-
-    this.setState({ loading: false })
-    this.props.sendMessage('test message new document', false) // data.messages[0], !data.success)
-
-    if (true) { // data.success) {
-      this.setState({ newDoc: false, newDocDesc: '' })
-      await this.fetchDocuments()
-    }
+  handleAddDocumentPostSave = () => {
+    this.setState({ defining: false, newDoc: false, newDocDesc: '' })
+    this.fetchDocuments()
   }
-
 
 
   /* DELETE DOCUMENT FUNCTIONALITY */
@@ -231,29 +214,6 @@ class Documents extends Component {
     )) : ''
   )
 
-  // FIX (remove this)
-
-  // later make its own component
-  /*
-  tagsRender = row => (
-    row.value.map(tagId => (
-      <span>
-        <Button className='table-tag' id={`table-tag-${tagId}`} key={tagId} label={this.getTagName(tagId)} link={`/tags/${tagId}`} />
-        {'synonyms' in this.getTagObject(tagId) &&
-          <Tooltip placement="right" isOpen={true} target={`table-tag-${tagId}`}>
-            {this.getTagObject(tagId).synonyms.map(alias => (
-              <span>
-                <div className='tooltip-list-title'>Aliases:</div>
-                <div className='tooltip-list-item'>{alias.name}</div>
-              </span>
-            ))}
-          </Tooltip>
-        }
-      </span>
-    ))
-  )
-  */
-
   tagsFilter = (filter, row) => {
     const typed = filter.value
     const rowTagIds = row[filter.id]
@@ -284,102 +244,7 @@ class Documents extends Component {
     return matches.length > 0
   }
 
-
-
-  // FIX - use tagAdder
-
-  /* TAG MANAGER SUBCOMPONENT */
-
-  // If some time later tags are allowed to be interactively added and removed from a document,
-  // add a tag manager sub component, similar to the alias manager subcomponent in the tags view.
-
-  /* RENDERS THE TAG MANAGER SUBCOMPONENT TABLE */
-
-  /*
-
-  tagColumns = [
-    {
-      Header: 'Name',
-      accessor: 'name',
-      id: 'name',
-      filterMethod: this.textFilter,
-      minWidth: 200
-    },
-    {
-      Header: 'Created',
-      accessor: 'timestamp',
-      Cell: this.dateRender,
-      filterMethod: this.dateFilter,
-      minWidth: 170
-    },
-    {
-      Header: 'Remove',
-      accessor: 'name',
-      id: 'delete',
-      Cell: row => (
-        <span className='table-button'><Button src={deleted} label='' onClick={() => this.removeTag(row.value)} /></span>
-      ),
-      filterable: false,
-      sortable: false,
-      width: 100
-    }
-  ]
-
-  tagManagerRender = ({ original }) => (
-    <div className='table-subcomponent'>
-      <h6 className='header'>Tag Manager</h6>
-      <ReactTable
-        className='-highlight'
-        data={original.tags}
-        columns={this.tagColumns}
-        defaultSorted={[{ id: 'name', desc: false }]}
-        minRows={0}
-        showPagination={false}
-      />
-      <div className='subtable-add-row'>
-        <Button className='subtable-add-plus-button' src={plus} onClick={() => this.toggleAddTag(original.tag_id)} />
-        {this.state.newAliasTagId &&
-          <span>
-            <input 
-              className='subtable-add-row-input'
-              name='newTag'
-              placeholder='enter a name for the new tag'
-              value={this.state.toggleAddTag} 
-              onChange={this.handleTagNameChange}
-            />
-            <Button className='subtable-add-check-button' src={check} onClick={this.handleAddTag} />
-          </span>
-        }
-      </div>
-    </div>
-  )
-
-  // highlights an expanded row with its tag manager subcomponent
-  setExpandedRowStyle = (state, rowInfo, _) => {
-    const rowExpanded = rowInfo && Object.keys(state.expanded).indexOf(rowInfo.index.toString()) > -1 ? state.expanded[rowInfo.index.toString()] : false
-    if (rowExpanded) { 
-      return {
-        style: {
-          margin: '5px 10px 30px 10px',
-          borderRadius: '10px',
-          backgroundColor: '#eee',
-          border: '.5px solid #ddd !important',
-          WebkitBoxShadow: '0 0 30px 0 #ddd',
-          boxShadow: '0 0 20px 0 #ddd'
-        }
-      }
-    } else {
-      return {}
-    }
-  }
-
-  // This should render a modal and/or just create a new tag if a tag being added doesn't exist.
-  // It should also suggest existing tags, 
-
-  */
-
-
-
+  
   /* RENDERS THE BASIC TABLE COLUMNS AND DATA */
 
   columns = [
@@ -486,6 +351,7 @@ class Documents extends Component {
     const {
       documents,
       loading,
+      defining,
       newDoc,
       newDocDesc,
       showModal,
@@ -511,12 +377,15 @@ class Documents extends Component {
             <Button className='cancel right' label='Cancel' onClick={this.toggleModal} />
           </ModalBody>
         </Modal>
-        <h4 className={titleClass}>{title}</h4>
         {loading &&
-          <Loader />
-        }
-        {!loading && documents &&
           <span>
+            <h4 className={titleClass}>{title}</h4>
+            <Loader />
+          </span>
+        }
+        {!loading && documents && !defining &&
+          <span>
+            <h4 className={titleClass}>{title}</h4>
             <div className='table-controls'>
               <span className='table-controls-text'>View Options:</span>
               <Button
@@ -542,10 +411,10 @@ class Documents extends Component {
               filterable
               noDataText='There are no documents in this list.'
             />
-            {this.props.fileId &&
+            {this.props.fileId && !defining &&
               <div className='table-add-row'>
                 <Button className='table-add-plus-button' src={newDoc ? minus : plus} onClick={this.toggleAddDocument} />
-                {!newDoc && 
+                {!newDoc &&
                   <span className='table-add-text' onClick={this.toggleAddDocument}>
                     Click here to add a document.
                   </span>
@@ -568,6 +437,17 @@ class Documents extends Component {
               </div>
             }
           </span>
+        }
+        {this.props.fileId && defining && 
+          <div className='sub-segment'>
+            <Define
+              fileId={this.props.fileId}
+              fileView={true}
+              description={newDocDesc}
+              postSave={this.handleAddDocumentPostSave}
+              {...this.props}
+            />
+          </div>
         }
         {!loading && !documents &&
           <p className='preview-text'>A list of documents could not be displayed.</p>

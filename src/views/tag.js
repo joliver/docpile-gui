@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Row, Col } from 'reactstrap'
-import DatePicker from 'react-datepicker'
+import moment from 'moment'
 import Loader from '../components/atoms/loader'
 import Button from '../components/atoms/button'
 import Documents from './documents'
-import flying from './../assets/icons/flying.svg'
 import './../css/views/view.css'
 
 class Tag extends Component {
@@ -68,45 +66,18 @@ class Tag extends Component {
           <div>
             <div className='table-view'>
               <h4 className='header'>Tag: {tag.tag_name}</h4>
-              <p className='description'>View some this.inFormation about a tag and its documents.</p>
+              <p className='description'>View some information about a tag and its documents.</p>
             </div>
-            <Row>
-              <Col xl='1' lg='1'></Col>
-              <Col xl='2' lg='2' md='12' sm='12'>
-                <img className='option-img' src={flying} alt='flying paper airplane' />
-              </Col>
-              <Col xl='1' lg='1'></Col>
-              <Col xl='7' lg='7' md='12' sm='12'>
-                <div className='form'>
-                  {this.inForm('tag number',
-                    <input
-                      className='input'
-                      value={tag.tag_id}
-                      disabled
-                    />
-                  )}
-                  {this.inForm('description',
-                    <div
-                      className='input'
-                      value={tag.tag_name}
-                      placeholder={`the tag's name`}
-                      disabled
-                    />
-                  )}
-                  {this.inForm('date created',
-                    <DatePicker
-                      className='input'
-                      selected={tag.timestamp}
-                      disabled
-                    />
-                  )}
-                  {this.inForm('aliases', 'test aliases')}
-                </div>
-                <Button className='reverse view-button' label='Rename Tag' />
-                <Button className='reverse view-button' label='Delete Tag' />
-                <Button className='reverse view-button' label='Remove Selected Aliases' />
-              </Col>
-            </Row>
+            <Button className='reverse' label='Rename Tag' />
+            <Button className='reverse' label='Delete Tag' />
+            <Button className='reverse' label='Remove Selected Aliases' />
+            {this.inForm('date created',
+              <input
+                className='input'
+                value={moment(tag.timestamp).format('MM/DD/YYYY h:mm:ss a')}
+                disabled
+              />
+            )}
             <Documents {...this.props} tagId={tag.tag_id} />
           </div>
         }

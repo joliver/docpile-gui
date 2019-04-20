@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Transition } from 'react-spring'
-import { Row, Col } from 'reactstrap'
-import FileViewer from 'react-file-viewer'
+import { Document, Page } from 'react-pdf'
 import Button from './../components/atoms/button'
 import Loader from './../components/atoms/loader'
 import flyer from './../assets/icons/flyer.svg'
@@ -108,8 +106,19 @@ class Upload extends Component {
   
   uploader = props => (
     <span>
-      {props.src && 
-        <FileViewer filePath={props.src} fileType={props.fileType} />
+      {props.fileType === 'pdf' && props.src &&
+        <Document file={props.src}>
+          <Page pageNumber={1}
+            height={500}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        </Document>
+      }
+      {props.fileType !== 'pdf' &&
+        <div className='description'>
+          Preview only supported for .pdf files.
+        </div>
       }
       <Button className='submit' label='Upload File' onClick={props.uploadFile} />
     </span>
@@ -117,36 +126,23 @@ class Upload extends Component {
 
   render = () => {
     const { uploading } = this.state
-    let items = []
+    const items = []
     if (uploading) {
-      items = [ { key: 0, component: this.loader() } ]
+      items.push(this.loader())
     } else {
       const { chosen, fileName, fileType, filePath, src } = this.state
-      items = [ { key: 0, component: this.chooser({ chosen, filePath, fileName, chooseFile: this.chooseFile, clearFile: this.clearFile }) } ]
+      items.push(this.chooser({ chosen, filePath, fileName, chooseFile: this.chooseFile, clearFile: this.clearFile }))
       if (chosen) {
-        items.push( { key: 1, component: this.uploader({ src, fileType, uploadFile: this.handleUpload }) } )
+        items.push(this.uploader({ src, fileType, uploadFile: this.handleUpload }))
       }
     }
     return (
-      <Row>
-        <Col xl='2' lg='1'></Col>
-        <Col xl='3' lg='4' md='4' sm='12'>
-          <img className='file-upload-image' src={flyer} alt='person flying a paper airplane' />
-        </Col>
-        <Col xl='5' lg='6' md='8' sm='12'>
-          <Transition
-            items={items}
-            keys={item => item.key}
-            from={{ opacity: 0 }}
-            enter={[{ opacity: 1 }]}
-            leave={[{ opacity: 0 }]}
-            trail={300}
-          >
-            {item => styles => <span style={styles} children={item.component} />}
-          </Transition>
-        </Col>
-        <Col xl='2' lg='1'></Col>
-      </Row>
+      <Fragment>
+        <img className='side-img' src={flyer} alt='person flying a paper airplane' />
+        <div className='segment'>
+          {items}
+        </div>
+      </Fragment>
     )
   }
 }

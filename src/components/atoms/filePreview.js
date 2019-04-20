@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FileViewer from 'react-file-viewer'
+import { Document, Page } from 'react-pdf'
 import Button from './button'
 import './../../css/views/view.css'
 
@@ -21,7 +21,9 @@ class FilePreview extends Component {
         <div className={previewClass}>
           <Button label='Preview File' onClick={this.togglePreview} />
           {this.state.preview &&
-            <FileViewer type='png' file={this.props.file} />
+            <Document file={this.props.file}>
+              <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+            </Document>
           }
           <div className='clear'></div>
         </div>

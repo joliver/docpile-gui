@@ -21,25 +21,9 @@ class File extends Component {
   async loadFile () {
     this.setState({ loading: true })
 
-    // pull the file preview here
-    // pull linked documents here
-
+    // pull the file preview here (not yet supported by API)
+    
     this.setState({ loading: false })
-  }
-
-  async saveDocument (document) {
-    this.setState({ saving: true })
-    const data = await this.props.fetcher.defineDocument(document)
-    this.setState({ saving: false })
-    this.props.sendMessage(data.messages[0], !data.success)
-    if (data.success) { 
-      this.setState({ defining: false })
-      await this.loadDocuments()
-    }
-  }
-
-  addDocument = () => {
-    this.setState({ defining: true })
   }
     
   render () {
@@ -56,11 +40,6 @@ class File extends Component {
             <FilePreview fileId={id} file={file} />
             {!saving && !defining &&
               <Documents {...this.props} fileId={id} />
-            }
-            {!saving && defining && 
-              'doc define here'
-              // FIX this
-              // <Define fileId={id} saving={saving} saveDocument={this.saveDocument.bind(this)} />
             }
             {saving &&
               <Loader /> 
