@@ -114,7 +114,7 @@ class Tags extends Component {
     this.setState({ editName: event.target.value })
   }
 
-  handleReNameKeyPress = event => {
+  handleRenameKeyPress = event => {
     if (event.key === 'Enter') {
       this.handleRename()
     }
@@ -123,7 +123,7 @@ class Tags extends Component {
   handleRename = () => {
     const { editId, editName, originalName } = this.state
     if (!editName || editName === originalName) {
-      this.setState({ editId: null, editName: null, originalName: null })
+      this.setState({ editId: null, editName: '', originalName: '' })
     } else {
       this.renameTag(editId, editName)
     }
@@ -137,7 +137,7 @@ class Tags extends Component {
     this.props.sendMessage(data.messages[0], !data.success)
 
     if (data.success) {
-      this.setState({ editId: null, editName: '' })
+      this.setState({ editId: null, editName: '', originalName: '' })
       await this.fetchTags()
     }
   }
@@ -482,7 +482,7 @@ class Tags extends Component {
               placeholder='rename this tag'
               value={this.state.editName} 
               onChange={this.handleRenameChange}
-              onKeyPress={this.handleReNameKeyPress}
+              onKeyPress={this.handleRenameKeyPress}
               onFocus={event => event.target.select()}
               autoFocus
             />

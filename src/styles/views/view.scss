@@ -41,17 +41,23 @@
   letter-spacing: .2rem;
   font-size: 3rem;
   color: $med-grey;
+  max-width: 70%;
 }
 
 .secondary-header {
   letter-spacing: .1rem;
 }
 
-.description {
+.description, .description-2 {
   color: $med-grey;
   font-size: 1.5rem;
   margin-top: 1.1rem !important;
   margin-bottom: .5 !important;
+}
+
+.description-2 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .highlight-img, .option-img {
@@ -59,7 +65,7 @@
   width: 40%;
 }
 
-.side-img {
+.side-img, .side-img-2 {
   display: block;
   margin: 15%;
   width: 60%;
@@ -71,11 +77,61 @@
   margin-left: 15%;
 }
 
+.segment-2 {
+  float: right;
+  width: 60%;
+  margin-bottom: 3rem;
+}
+
+.segment-3 {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
 .preview-text {
   font-family: $sans-serif;
   color: $light-grey;
   font-size: 1.5rem;
   margin: 20% 30%;
+}
+
+.plus-text-1, .plus-text-2 {
+  display: inline-block;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: .4rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #666;
+}
+
+.plus-text-2 {
+  margin-top: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.minus-text-1, .minus-text-2 {
+  display: inline-block;
+  min-width: 80%;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.minus-text-2 {
+  margin-bottom: 1rem;
+}
+
+.minus-text-input {
+  float: left;
+  margin-left: 5%;
+  width: 70%;
+  background-color: $light-grey;
+  color: $med-grey;
+  border: none;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: .2rem;
 }
 
 .input {
@@ -92,10 +148,10 @@
 /* STYLING FOR RESPONSIVE VIEWS */
 
 @media(min-width:800px) {
-  .side-img {
+  .side-img, .side-img-2 {
     display: inline-block;
     margin: 0;
-    margin-left: 15%;
+    margin-left: 10%;
     width: 30%;
     vertical-align: top;
   }
@@ -128,13 +184,23 @@
     max-width: 20%;
   }
 
+  .side-img-2 {
+    max-width: 30%;
+    margin-left: 10%;
+  }  
+
   .title, .header, .welcome {
     font-size: 2.5rem;
   }
 
-  .preview-text, .description {
+  .preview-text, .description, .description-2 {
     font-size: 1.2rem;
   }
+
+  .description-2 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }  
 
   .input {
     font-size: 1.1rem;
@@ -148,8 +214,17 @@
     width: 36%;
   }
 
+  .side-img-2 {
+    max-width: 20%;
+  }
+
   .segment {
     vertical-align: middle;
+  }
+
+  .segment-2 {
+    margin-left: 2%;
+    max-width: 95%;
   }
 }
 

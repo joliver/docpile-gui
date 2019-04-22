@@ -30,7 +30,8 @@
     "react-spring": "^6.1.10",
     "react-table": "^6.8.6",
     "reactstrap": "^6.2.0",
-    "sass": "^1.8.0"
+    "sass": "^1.8.0",
+    "semantic-ui-react": "^0.86.0"
   },
   "scripts": {
     "watch-css": "npm run build-css && node-sass-chokidar src/styles -o src/css --watch --recursive",
@@ -41,5 +42,11 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -145,6 +145,17 @@
   background-color: lighten($primary-light, 20);
 }
 
+// selected tags on the tag detail page
+.selected-tag {
+  background-color: $primary;
+  color: white;
+}
+
+.selected-tag:hover {
+  background-color: lighten($primary, 20);
+  color: white;
+}
+
 
 // a subcomponent and its table row
 .table-subcomponent {
